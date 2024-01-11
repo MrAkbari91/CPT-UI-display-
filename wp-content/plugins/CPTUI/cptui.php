@@ -13,6 +13,21 @@
 */
 
 /* Custom Post Type Start */
+
+// createing a plugin for custom post type business term. this is a code for this plugin. in setting-business-terms.php file i have a function for display settings. i want a from with select menu.  grid, list, thumbnail. same as create from for grid, list, thumbnail. if user select grid, grid div will be display. if user select list, list div will be display. if user select thumbnail, thumbnail div will be display. on submit save it in database using ajax. default any option is selected display that section. on submit only selected option will save in database.
+
+function enqueue_my_plugin_styles() {
+    wp_enqueue_style('cptui-styles', plugin_dir_url(__FILE__) . 'css/style.css', array(), '1.0.0');
+
+    wp_localize_script('cptui-plugin-script', 'ajax_object', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce'    => wp_create_nonce('ajax_nonce'),
+    ));
+}
+add_action('wp_enqueue_scripts', 'enqueue_my_plugin_styles');
+
+
+
 function create_business_terms_post_type()
 {
     $supports = array(
@@ -90,7 +105,7 @@ add_action('init', 'create_business_terms_taxonomy');
 // Add Settings Page
 
 include_once plugin_dir_path(__FILE__)  . 'setting-business-terms.php';
-
+include_once plugin_dir_path(__FILE__)  . 'display_shortcodes.php';
 
 // Hook the settings page function to the admin_menu action
 add_action('admin_menu', 'business_terms_settings_menu');
@@ -104,4 +119,21 @@ function business_terms_settings_menu() {
         'business_terms_settings',           // Menu slug
         'business_terms_settings_page'       // Callback function
     );
+}
+
+// AJAX handler for saving settings
+add_action('wp_ajax_save_business_terms_settings', 'save_business_terms_settings');
+
+function save_business_terms_settings() {
+    check_ajax_referer('business_terms_settings_nonce', 'nonce');
+
+    // Retrieve and sanitize data
+    $displayType = sanitize_text_field($_POST['displayType']);
+    // Add additional settings retrieval here
+
+    // Save settings to the database (replace with your database update logic)
+    update_option('business_terms_display_type', $displayType);
+    // Save additional settings here
+
+    wp_die(); // This is required to terminate immediately and return a proper response
 }

@@ -1,36 +1,30 @@
 <?php
-// Add Settings Page
 function business_terms_settings_page()
 {
-    ob_start();
     ?>
-    <div>
-        <h1>Settings Page</h1>
-        <div>
-            <div class="box">
-                <h2>display settings</h2>
-                <form action="post">
-                    <div>
-                        <div>
-                            <input type="radio" name="display" value="grid"> box
-                        </div>
-                        <p>Display terms per row </p>
-                        <input type="number" name="display" value="4">
+    <div class="wrap">
+        <h1>Business Terms Settings</h1>
+        <form id="business-terms-settings-form">
+            <label for="display-type">Display Type:</label>
+            <select id="display-type" name="display-type">
+                <option value="grid_view">Grid</option>
+                <option value="list_view">List</option>
+                <option value="carousel_view" selected>Carousel</option>
+            </select>
+        </form>
 
-                    </div>
-                    <div>
-                        <input type="radio" name="display" value="list"> list
-                    </div>
-                    <div>
-                        <input type="radio" name="display" value="card"> card
-                    </div>
-                    <input type="submit" value="save">
-                </form>
-            </div>
+        <div>
+            <form action="" id="display-settings-form">
+                <div id="display-settings">
+                    <!-- Add display settings fields here -->
+                </div>
+                <input type="submit" class="button-primary" value="Save Settings">
+            </form>
         </div>
     </div>
+    <script src="<?php echo plugins_url('js/script.js', __FILE__); ?>"></script>
     <?php
 }
-
-
-
+add_shortcode('business-terms-grid', 'business_terms_grid_function');
+add_shortcode('business-terms-list', 'business_terms_list_function');
+add_shortcode('business-terms-thumbnail', 'business_terms_thumbnail_function');

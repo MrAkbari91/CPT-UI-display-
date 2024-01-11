@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f4e6883-059d-45ea-a284-eb318704facd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/single-business-terms.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/single-business-terms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/template-business-terms.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/template-business-terms.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/cptui.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/cptui.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/setting-business-terms.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/setting-business-terms.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +19,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2akodeBtM9CtHYcgJvA498WwOkb" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -41,7 +40,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -61,6 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1704872030931</updated>
       <workItem from="1704872032280" duration="15534000" />
+      <workItem from="1704944215525" duration="3866000" />
     </task>
     <servers />
   </component>

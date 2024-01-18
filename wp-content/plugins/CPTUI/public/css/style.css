@@ -12,6 +12,23 @@
 /*    grid-template-columns: repeat(3, minmax(0, 1fr));*/
 /*    gap: 20px;*/
 /*}*/
+@media screen and (max-width: 1024px) {
+    .business-terms-grid-view .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .business-terms-grid-view .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .business-terms-grid-view .grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
 
 #business-terms-wrapper a {
     text-decoration: none;
@@ -28,6 +45,7 @@
     opacity, box-shadow, transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 #business-terms-wrapper .card:hover {
@@ -63,6 +81,21 @@
     text-align: center;
 }
 
+.post-description {
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.5;
+    height: 3.75rem;
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
 .page-numbers {
     display: inlist-block;
     text-decoration: none;
@@ -96,12 +129,13 @@
 }
 
 .business-terms-list-view article img {
-    width: 300px;
+    width: 250px;
+    max-width: 250px;
     height: 200px;
     object-fit: cover;
 }
 
-@media (max-width: 779px) {
+@media (max-width: 600px) {
 
     .business-terms-list-view article {
         flex-direction: column;
@@ -115,210 +149,139 @@
 
 
 /* list business-terms-carousel-wrapper */
-main .cptui-carousel {
-    height: 85vh;
+
+.terms-slide {
+    background: #fff;
+    margin: 20px 15px 20px;
+    border-radius: 15px;
+    padding-top: 1px;
+    box-shadow: 0px 14px 22px -9px #bbcbd8;
+}
+
+.terms-slide .post-img {
     position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: -12px 15px 8px 15px;
+    margin-left: -10px;
+}
+
+.terms-slide .post-img img {
     width: 100%;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    height: 14rem;
+    object-fit: cover;
+    transform: scale(1, 1);
+    transition: transform 0.2s linear;
+}
 
-    .cptui-item {
-        width: 200px;
-        height: 300px;
-        list-style-type: none;
-        position: absolute;
-        top: 50%;
-        transform: translate(60px, -50%);
-        z-index: 1;
-        border: 1px solid #a5a2a2;
-        background-position: center;
-        background-size: cover;
-        border-radius: 20px;
-        box-shadow: 0 20px 30px rgba(255, 255, 255, 0.3) inset;
-        transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+.terms-slide:hover .post-img img {
+    transform: scale(1.1, 1.1);
+}
 
-        &:nth-child(1),
-        &:nth-child(2) {
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            transform: none;
-            border-radius: 0;
-            box-shadow: none;
-            opacity: 1;
-        }
+.terms-slide .post-content {
+    background: #fff;
+    padding: 2px 20px 40px;
+    border-radius: 15px;
+}
 
-        &:nth-child(3) {
-            left: 50%;
-        }
+.terms-slide .post-title a {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+}
 
-        &:nth-child(4) {
-            left: calc(50% + 220px);
-        }
+.terms-slide .post-title a:hover {
+    text-decoration: none;
+    color: #3498db;
+}
 
-        &:nth-child(5) {
-            left: calc(50% + 440px);
-        }
+.terms-slide .post-description {
+    line-height: 24px;
+    color: #808080;
+    margin-bottom: 25px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
 
-        &:nth-child(6) {
-            left: calc(50% + 660px);
-        }
+.terms-slide .post-date {
+    color: #a9a9a9;
+    font-size: 14px;
+}
 
-        &:nth-child(n + 7) {
-            opacity: 0;
-        }
-    }
+.terms-slide .post-date i {
+    font-size: 20px;
+    margin-right: 8px;
+    color: #cfdace;
+}
 
-    .cptui-content {
-        width: min(50vw, 520px);
-        position: absolute;
-        top: 50%;
-        left: 3rem;
-        transform: translateY(-50%);
-        font: 400 0.85rem helvetica, sans-serif;
-        color: white;
-        display: none;
-        background: #bfbfbf6e;
-        padding: 20px;
-        border-radius: 16px;
-        border: 1px solid #817f7f8f;
+.terms-slide .read-more {
+    padding: 7px 20px;
+    float: right;
+    font-size: 12px;
+    position: absolute;
+    background: var(--ast-global-color-1);
+    color: #ffffff;
+    box-shadow: 0px 10px 20px -10px var(--ast-global-color-1);
+    border-radius: 25px;
+    text-transform: uppercase;
+    text-decoration: none;
+    bottom: -7px;
+    right: 30px;
+}
 
-        & .cptui-title {
-            font-family: 'arial-black';
-            text-transform: uppercase;
-            color: #000;
-        }
+.terms-slide .read-more:hover {
+    background: #3498db;
+    text-decoration: none;
+    color: #fff;
+}
 
-        & p {
-            line-height: 1.7;
-            margin: 1rem 0 1.5rem;
-            font-size: 0.8rem;
-        }
+.owl-controls .owl-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
 
-        & button {
-            width: fit-content;
-            background-color: rgba(0, 0, 0, 0.1);
-            color: white;
-            border: 2px solid white;
-            border-radius: 0.25rem;
-            padding: 0.75rem;
-            cursor: pointer;
-        }
-    }
+.owl-controls .owl-buttons .owl-prev {
+    background: #fff;
+    position: absolute;
+    top: 40%;
+    left: 15px;
+    padding: 0 18px 0 15px;
+    border-radius: 50px;
+    box-shadow: 3px 14px 25px -10px #92b4d0;
+    transition: background 0.5s ease 0s;
+}
 
-    .cptui-item:nth-of-type(2) .cptui-content {
-        display: block;
-        animation: show 0.75s ease-in-out 0.3s forwards;
-    }
+.owl-controls .owl-buttons .owl-next {
+    background: #fff;
+    position: absolute;
+    top: 40%;
+    right: 15px;
+    padding: 0 15px 0 18px;
+    border-radius: 50px;
+    box-shadow: -3px 14px 25px -10px #92b4d0;
+    transition: background 0.5s ease 0s;
+}
 
-    @keyframes show {
-        0% {
-            filter: blur(5px);
-            transform: translateY(calc(-50% + 75px));
-        }
+.owl-controls .owl-buttons .owl-prev:after,
+.owl-controls .owl-buttons .owl-next:after {
+    content: "\f104";
+    font-family: FontAwesome;
+    color: #333;
+    font-size: 30px;
+}
 
-        100% {
-            opacity: 1;
-            filter: blur(0);
-        }
-    }
+.owl-controls .owl-buttons .owl-next:after {
+    content: "\f105";
+}
 
-    .cptui-nav {
-        position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 5;
-        user-select: none;
-
-        & .btn {
-            background-color: rgba(255, 255, 255, 0.5);
-            color: rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(0, 0, 0, 0.6);
-            margin: 0 0.25rem;
-            padding: 0.75rem;
-            border-radius: 50%;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.3);
-            }
-        }
-    }
-
-    @media (width > 650px) and (width < 900px) {
-        .cptui-content {
-            & .title {
-                font-size: 1rem;
-            }
-
-            & .description {
-                font-size: 0.7rem;
-            }
-
-            & button {
-                font-size: 0.7rem;
-            }
-        }
-
-        .cptui-item {
-            width: 160px;
-            height: 270px;
-
-            &:nth-child(3) {
-                left: 50%;
-            }
-
-            &:nth-child(4) {
-                left: calc(50% + 170px);
-            }
-
-            &:nth-child(5) {
-                left: calc(50% + 340px);
-            }
-
-            &:nth-child(6) {
-                left: calc(50% + 510px);
-                opacity: 0;
-            }
-        }
-    }
-
-    @media (width < 650px) {
-        .cptui-content {
-            & .title {
-                font-size: 0.9rem;
-            }
-
-            & .description {
-                font-size: 0.65rem;
-            }
-
-            & button {
-                font-size: 0.7rem;
-            }
-        }
-
-        .cptui-item {
-            width: 130px;
-            height: 220px;
-
-            &:nth-child(3) {
-                left: 50%;
-            }
-
-            &:nth-child(4) {
-                left: calc(50% + 140px);
-            }
-
-            &:nth-child(5) {
-                left: calc(50% + 280px);
-            }
-
-            &:nth-child(6) {
-                left: calc(50% + 420px);
-                opacity: 0;
-            }
-        }
+@media only screen and (max-width: 1280px) {
+    .terms-slide .post-content {
+        padding: 0px 15px 45px 15px;
     }
 }

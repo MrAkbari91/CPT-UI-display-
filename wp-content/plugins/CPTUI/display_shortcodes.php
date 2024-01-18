@@ -32,6 +32,21 @@ function business_terms_grid_function($atts)
                 grid-template-columns: repeat(<?php echo $grid_value['column']; ?>, minmax(0, 1fr));
                 gap: 20px;
             }
+            @media screen and (max-width: 1024px) {
+                .business-terms-grid-view .grid {
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                }
+            }
+            @media screen and (max-width: 768px) {
+                .business-terms-grid-view .grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+            @media screen and (max-width: 480px) {
+                .business-terms-grid-view .grid {
+                    grid-template-columns: repeat(1, minmax(0, 1fr));
+                }
+            }
         </style>
 
         <div id="business-terms-wrapper" class="business-terms-grid-view">
@@ -47,7 +62,9 @@ function business_terms_grid_function($atts)
                                 <h2 class="title">
                                     <?php the_title(); ?>
                                 </h2>
+                                <div class="post-description">
                                 <?php the_excerpt(); ?>
+                                </div>
                             </div>
                         </a>
                     </article>
@@ -85,7 +102,6 @@ function business_terms_list_function($atts)
     $atts = shortcode_atts(
         array(
             'posts_per_page' => $list_value['display_terms'],
-
         ),
         $atts,
         'custom_post_type'
@@ -150,60 +166,56 @@ function business_terms_list_function($atts)
 //  carousel view shortcode
 add_shortcode('business_terms_carousel', 'business_terms_carousel_function');
 
-function business_terms_carousel_function($atts)
+function business_terms_carousel_function()
 {
     $carousel_value = get_option('business_terms_display_carousel');
-    $atts = shortcode_atts(
-        array(
-            'posts_per_page' => $carousel_value['display_terms'],
-        ),
-        $atts,
-        'custom_post_type'
-    );
 
     $args = array(
         'post_type' => 'business-terms',
-        'posts_per_page' => $atts['posts_per_page'],
+        'posts_per_page' => $carousel_value['display_terms'],
+        'orderby' => 'date', // Order by date to get the latest posts
+        'order' => 'DESC',  // Order in descending order
     );
 
-    $custom_query = new WP_Query($args);
+    $business_terms_posts = get_posts($args);
 
     ob_start();
 
-    if ($custom_query->have_posts()):
+    if ($business_terms_posts) {
         ?>
-
-        <div id="business-terms-wrapper" class="business-terms-carousel-view">
-            <main class="cptui-carousel">
-                <ul class='cptui-slider'>
-                    <?php
-                    while ($custom_query->have_posts()):
-                        $custom_query->the_post();
-                        ?>
-                        <li class='cptui-item'
-                            style="background-image: url('<?php echo get_the_post_thumbnail_url(); ?>')">
-                            <div class='cptui-content'>
-                                <h2 class='cptui-title'><?php the_title(); ?></h2>
-                                <?php the_excerpt(); ?>
-                                <button><a href='<?php the_permalink(); ?>'>Read More</a></button>
-                            </div>
-                        </li>
-                    <?php
-                    endwhile;
-                    ?>
-                </ul>
-                <nav class='cptui-nav'>
-                    <span class='btn prev' name="arrow-back-outline"><<</span>
-                    <span class='btn next' name="arrow-forward-outline">>></span>
-                </nav>
-            </main>
+        <div id="owl-carousel-slider" class="owl-carousel">
+            <?php
+            foreach ($business_terms_posts as $post) {
+                $post_permalink = get_permalink($post->ID);
+                $post_title = $post->post_title;
+                $post_excerpt = $post->post_excerpt;
+                $post_thumbnail = get_the_post_thumbnail_url($post->ID);
+                ?>
+                <div class="terms-slide">
+                    <div class="post-img">
+                        <img src="<?php echo $post_thumbnail; ?>" alt=""/>
+                    </div>
+                    <div class="post-content">
+                        <a href="<?php echo $post_permalink; ?>">
+                            <h3 class="post-title">
+                                <?php echo $post_title; ?>
+                            </h3>
+                        </a>
+                        <p class="post-description">
+                            <?php echo $post_excerpt; ?>
+                        </p>
+                        <a href="<?php echo $post_permalink; ?>" class="read-more">read more</a>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
         </div>
         <?php
-
         wp_reset_postdata(); // Reset post data to the main query
-    else:
+    } else {
         echo 'No custom posts found.';
-    endif;
+    }
 
     return ob_get_clean();
 }

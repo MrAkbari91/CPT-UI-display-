@@ -8,12 +8,7 @@ function my_admin_scripts()
 {
     wp_enqueue_style('cptui-admin-styles', plugin_dir_url(__FILE__) . 'admin/css/style.css', array(), '1.0.0');
 
-    // wp_enqueue_script('jquery');
-    wp_enqueue_script('custom-script', get_stylesheet_directory_uri() . 'admin/js/script.js', array('jquery'), '1.0.0', true);
-    wp_localize_script('custom-script', 'ajax_object', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'ajax_nonce' => wp_create_nonce('ajax_nonce'),
-    ));
+    wp_enqueue_script('custom-script', plugin_dir_url(__FILE__) . 'admin/js/script.js', array(), '1.0.0', true);
 }
 
 
@@ -22,6 +17,7 @@ add_action('wp_enqueue_scripts', 'enqueue_my_plugin_styles');
 function enqueue_my_plugin_styles()
 {
     wp_enqueue_style('cptui-styles', plugin_dir_url(__FILE__) . 'public/css/style.css', array(), '1.0.0');
+    wp_enqueue_script('cptui-plugin-script', plugin_dir_url(__FILE__) . 'public/js/script.js', array(), '1.0.0', true);
     wp_localize_script('cptui-plugin-script', 'ajax_object', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('ajax_nonce'),
@@ -41,5 +37,3 @@ function add_settings_link($links)
     array_unshift($links, $settings_link);
     return $links;
 }
-
-

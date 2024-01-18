@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f4e6883-059d-45ea-a284-eb318704facd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/admin/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/admin/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/admin/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/admin/js/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/cptui.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/cptui.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/display_shortcodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/display_shortcodes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/save_setting_function.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/save_setting_function.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/setting-business-terms.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/setting-business-terms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/logo.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +57,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -89,7 +90,7 @@
       <workItem from="1704944215525" duration="3866000" />
       <workItem from="1705395720165" duration="606000" />
       <workItem from="1705400847945" duration="1581000" />
-      <workItem from="1705469623152" duration="26801000" />
+      <workItem from="1705469623152" duration="33432000" />
     </task>
     <servers />
   </component>

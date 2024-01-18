@@ -22,7 +22,7 @@
     cursor: pointer;
 }
 
-#display-settings form div {
+#display-settings form > div {
     display: grid;
     margin: 15px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -34,4 +34,30 @@
     padding: 5px;
     font-size: 14px;
     letter-spacing: 1px;
+}
+
+.message-success {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid green;
+    border-radius: 8px;
+    color: green;
+    background: #00800038;
+}
+
+.message-error {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid red;
+    border-radius: 8px;
+    color: red;
+    background: #ff000038;
 }

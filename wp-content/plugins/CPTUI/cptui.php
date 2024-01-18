@@ -22,7 +22,6 @@ include_once plugin_dir_path(__FILE__) . 'create-business-post-type.php';
 register_activation_hook(__FILE__, 'plugin_activate');
 register_deactivation_hook(__FILE__, 'plugin_deactivate');
 
-
 /**
  * add settings link at installed plugin list
  * */
@@ -31,7 +30,9 @@ register_deactivation_hook(__FILE__, 'plugin_deactivate');
 
 // add settings page for plugin
 include_once plugin_dir_path(__FILE__) . 'setting-business-terms.php';
+include_once plugin_dir_path(__FILE__) . 'save_setting_function.php';
 //shortcode page
 include_once plugin_dir_path(__FILE__) . 'display_shortcodes.php';
 // include uninstall page
 include_once plugin_dir_path(__FILE__) . 'uninstall.php';
+?>

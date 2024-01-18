@@ -1,0 +1,37 @@
+#display-settings {
+    display: grid;
+}
+
+#grid-view-setting,
+#list-view-setting,
+#carousel-view-setting {
+    margin: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 5px 12px #dbdbdb;
+}
+
+#display-settings form {
+    width: 600px;
+    font-size: 14px;
+}
+
+#display-settings form .cptui-shortcode {
+    text-align: center;
+    cursor: pointer;
+}
+
+#display-settings form div {
+    display: grid;
+    margin: 15px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#display-settings form div .save-display-setting {
+    width: fit-content;
+    text-align: center;
+    padding: 5px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}

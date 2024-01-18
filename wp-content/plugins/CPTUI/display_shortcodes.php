@@ -1,6 +1,8 @@
 <?php
 
 //  grid view shortcode
+add_shortcode('business_terms_grid', 'business_terms_grid_function');
+
 function business_terms_grid_function($atts)
 {
     $atts = shortcode_atts(
@@ -25,12 +27,11 @@ function business_terms_grid_function($atts)
     if ($custom_query->have_posts()):
         ?>
 
-        <div id="business-terms-grid-wrapper">
-            <div class="grid">
+        <div id="business-terms-wrapper" class="business-terms-grid-view">
+            <div class="grid" style="">
                 <?php
                 while ($custom_query->have_posts()):
                     $custom_query->the_post();
-                    // Your HTML structure for each post
                     ?>
                     <article class="card">
                         <a href="<?php the_permalink(); ?>">
@@ -43,23 +44,21 @@ function business_terms_grid_function($atts)
                             </div>
                         </a>
                     </article>
-                    <?php
+                <?php
                 endwhile;
-
                 ?>
-
             </div>
         </div>
         <?php
 
         // Pagination
         echo "<div class='pagination'>" . paginate_links(
-            array(
-                'total' => $custom_query->max_num_pages,
-                'prev_text' => __('« Previous'),
-                'next_text' => __('Next »'),
-            )
-        ) . "</div>";
+                array(
+                    'total' => $custom_query->max_num_pages,
+                    'prev_text' => __('« Previous'),
+                    'next_text' => __('Next »'),
+                )
+            ) . "</div>";
 
         wp_reset_postdata(); // Reset post data to the main query
     else:
@@ -68,15 +67,17 @@ function business_terms_grid_function($atts)
 
     return ob_get_clean();
 }
-add_shortcode('business_terms_grid', 'business_terms_grid_function');
 
 
 //  list view shortcode
+add_shortcode('business_terms_list', 'business_terms_list_function');
+
 function business_terms_list_function($atts)
 {
+    $list_value = get_option('business_terms_display_list');
     $atts = shortcode_atts(
         array(
-            'posts_per_page' => 2,
+            'posts_per_page' => $list_value['post'],
         ),
         $atts,
         'custom_post_type'
@@ -96,15 +97,14 @@ function business_terms_list_function($atts)
     if ($custom_query->have_posts()):
         ?>
 
-        <div id="business-terms-list-wrapper">
+        <div id="business-terms-list-wrapper" class="business-terms-list-view">
             <div class="list">
                 <?php
                 while ($custom_query->have_posts()):
                     $custom_query->the_post();
-                    // Your HTML structure for each post
                     ?>
                     <article class="card">
-                        <a href="<?php the_permalink(); ?>"><img src="<?php echo get_the_post_thumbnail_url(); ?>" /></a>
+                        <a href="<?php the_permalink(); ?>"><img src="<?php echo get_the_post_thumbnail_url(); ?>"/></a>
                         <div class="content">
                             <a href="<?php the_permalink(); ?>">
                                 <h2 class="title">
@@ -114,7 +114,7 @@ function business_terms_list_function($atts)
                             <?php the_excerpt(); ?>
                         </div>
                     </article>
-                    <?php
+                <?php
                 endwhile;
                 ?>
             </div>
@@ -123,12 +123,12 @@ function business_terms_list_function($atts)
 
         // Pagination
         echo "<div class='pagination'>" . paginate_links(
-            array(
-                'total' => $custom_query->max_num_pages,
-                'prev_text' => __('« Previous'),
-                'next_text' => __('Next »'),
-            )
-        ) . "</div>";
+                array(
+                    'total' => $custom_query->max_num_pages,
+                    'prev_text' => __('« Previous'),
+                    'next_text' => __('Next »'),
+                )
+            ) . "</div>";
 
         wp_reset_postdata(); // Reset post data to the main query
     else:
@@ -137,10 +137,11 @@ function business_terms_list_function($atts)
 
     return ob_get_clean();
 }
-add_shortcode('business_terms_list', 'business_terms_list_function');
 
 
-//  list view shortcode
+//  carousel view shortcode
+add_shortcode('business_terms_carousel', 'business_terms_carousel_function');
+
 function business_terms_carousel_function($atts)
 {
     $atts = shortcode_atts(
@@ -163,27 +164,28 @@ function business_terms_carousel_function($atts)
     if ($custom_query->have_posts()):
         ?>
 
-        <div id="business-terms-wrapper carousel-view">
+        <div id="business-terms-wrapper" class="business-terms-carousel-view">
             <div id="slider-container">
                 <span onclick="slideRight()" class="btn"></span>
                 <div id="carousel-slider">
                     <?php
                     while ($custom_query->have_posts()):
                         $custom_query->the_post();
-                        // Your HTML structure for each post
                         ?>
-                        <article class="slide card">
-                            <img src="<?php echo get_the_post_thumbnail_url(); ?>" />
-                            <div class="content">
-                                <a href="<?php the_permalink(); ?>">
-                                    <h2 class="title">
-                                        <?php the_title(); ?>
-                                    </h2>
-                                </a>
-                                <?php the_excerpt(); ?>
+                        <article class="slide">
+                            <div class="card">
+                                <img src="<?php echo get_the_post_thumbnail_url(); ?>"/>
+                                <div class="content">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <h2 class="title">
+                                            <?php the_title(); ?>
+                                        </h2>
+                                    </a>
+                                    <?php the_excerpt(); ?>
+                                </div>
                             </div>
                         </article>
-                        <?php
+                    <?php
                     endwhile;
                     ?>
                 </div>
@@ -199,6 +201,6 @@ function business_terms_carousel_function($atts)
 
     return ob_get_clean();
 }
-add_shortcode('business_terms_carousel', 'business_terms_carousel_function');
 
 
+?>

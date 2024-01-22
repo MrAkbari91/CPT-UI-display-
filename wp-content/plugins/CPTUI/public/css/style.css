@@ -318,7 +318,8 @@
     position: sticky;
     top: 0;
     background: #fff;
-    box-shadow: 0 10px 10px 0 rgb(0 0 0 / 10%);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .3)
 }
 
 #navbar ul {
@@ -373,7 +374,7 @@
     justify-content: center;
     align-items: center;
     font-size: 32px !important;
-    color: var(--ast-global-color-0)!important;
+    color: var(--ast-global-color-0) !important;
     font-weight: 700;
 }
 
@@ -388,4 +389,91 @@
 .alphabate-section p {
     font-size: 15px;
     line-height: 30px;
+}
+
+
+/*alphabate section navbar*/
+
+
+#navbar:not(.jsfied) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#navbar .hidden {
+    display: none;
+}
+
+#navbar a,
+#navbar button {
+    width: 100%;
+    height: 100%;
+    display: block;
+    font-size: 1em;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: center;
+    color: #000;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#navbar .primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+#navbar .primary .more > button span {
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+#navbar.show-secondary .primary .more > button span {
+    transform: rotate(180deg);
+}
+
+#navbar .secondary {
+    max-width: 100%;
+    padding: 0;
+    min-width: 10em;
+    background: #fff;
+    border-radius: 0  0 10px 10px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+    right: 0;
+    box-shadow: 0 0.3em 0.5em rgba(0, 0, 0, 0.3);
+    -webkit-animation: nav-secondary 0.2s;
+    animation: nav-secondary 0.2s;
+}
+
+#navbar .secondary a{
+    padding: 0.8em 1em;
+}
+#navbar .secondary a.nav-link {
+    padding: 10px;
+}
+#navbar  button{
+    padding: 0;
+}
+
+#navbar.show-secondary .secondary {
+    display: block;
+}
+
+#navbar ul li {
+    list-style: none;
+}
+
+#navbar ul li:last-child {
+    border-right: none;
+}
+
+#navbar ul li a {
+    text-decoration: none;
+    padding: 10px;
+    display: block;
 }

@@ -291,6 +291,7 @@ function business_terms_carousel_function()
                 <?php
             }
             ?>
+            <script type="text/javascript" src="<?php echo plugin_dir_url(__FILE__); ?>public/js/owl.carousel.min.js "></script>
         </div>
         <?php
         wp_reset_postdata(); // Reset post data to the main query
@@ -378,7 +379,7 @@ function display_alphabet_navbar()
 {
 
     $sections = business_terms_fetch_alphabets();
-    echo '<nav id="navbar"><ul class="alphabate-navbar">';
+    echo '<nav id="navbar" class="tabs"><ul class="alphabate-navbar primary">';
     foreach ($sections as $letter => $section_posts) {
         echo '<li><a class="nav-link" href="#' . $letter . '">' . $letter . '</a></li>';
     }

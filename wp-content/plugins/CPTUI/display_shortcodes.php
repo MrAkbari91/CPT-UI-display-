@@ -118,7 +118,6 @@ function business_terms_grid_function($atts)
     else:
         echo 'No custom posts found.';
     endif;
-
     return ob_get_clean();
 }
 
@@ -321,14 +320,11 @@ function business_terms_fetch_alphabets()
     );
     $posts = new WP_Query($args);
 
-
     // Initialize an array to store the alphabet sections
-
     $sections = array();
 
     // Iterate through each post and categorize them by alphabet
     if ($posts->have_posts()) {
-
         while ($posts->have_posts()):
             $posts->the_post();
             $first_char = strtoupper(substr(get_the_title(), 0, 1));
@@ -370,14 +366,9 @@ function display_terms_by_alphabet()
         // Output the post cards within the alphabet section
         echo '<div class="terms-card-grid" >';
         foreach ($section_posts as $post) {
-            echo '<div>
-                    <a href="' . $post['link'] . '"><h3 class="term-name">' . $post['name'] . ' ›</h3></a>
-                    <p>' . $post['excerpt'] . '</p>
-                    </div>';
+            echo '<div><a href="' . $post['link'] . '"><h3 class="term-name">' . $post['name'] . ' ›</h3></a><p>' . $post['excerpt'] . '</p></div>';
         }
-        echo '</div>
-                <div>
-                </section>';
+        echo '</div></div></section>';
     }
 }
 

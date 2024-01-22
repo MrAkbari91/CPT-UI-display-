@@ -1,17 +1,16 @@
 
-jQuery(document).ready(function () {
-    jQuery("#owl-carousel-slider").owlCarousel({
-        items: 4,
+$(document).ready(function () {
+    $("#owl-carousel-slider").owlCarousel({
+        items: 3,
         itemsDesktop: [1199, 3],
         itemsDesktopSmall: [767, 2],
         itemsMobile: [600, 1],
         navigation: true,
         navigationText: ["", ""],
         pagination: true,
-        autoPlay: true
+        autoPlay: true,
     });
 });
-
 
 jQuery(document).ready(function () {
     // Add active class on click
@@ -65,7 +64,6 @@ primary.insertAdjacentHTML(
     `<li class="more">
         <button type="button" aria-haspopup="true" aria-expanded="false">
            <i class="fa fa-bars"></i>
-
         </button>
         <ul class="secondary">
             ${primary.innerHTML}
@@ -124,19 +122,3 @@ const doAdapt = () => {
 
 doAdapt(); // adapt immediately on load
 window.addEventListener("resize", doAdapt); // adapt on window resize
-
-// hide Secondary on the outside click
-
-document.addEventListener("click", (e) => {
-    let el = e.target;
-    while (el) {
-        if (window.CP.shouldStopExecution(0)) break;
-        if (el === secondary || el === moreBtn) {
-            return;
-        }
-        el = el.parentNode;
-    }
-    window.CP.exitedLoop(0);
-    container.classList.remove("show-secondary");
-    moreBtn.setAttribute("aria-expanded", false);
-});

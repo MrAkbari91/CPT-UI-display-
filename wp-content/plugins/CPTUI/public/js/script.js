@@ -1,6 +1,6 @@
 
-$(document).ready(function () {
-    $("#owl-carousel-slider").owlCarousel({
+jQuery(document).ready(function () {
+    jQuery("#owl-carousel-slider").owlCarousel({
         items: 3,
         itemsDesktop: [1199, 3],
         itemsDesktopSmall: [767, 2],

@@ -13,7 +13,7 @@ function my_admin_scripts()
     wp_enqueue_style('owl-carousel', plugin_dir_url(__FILE__) . 'public/css/owl.carousel.min.css', array(), '1.0.0');
     wp_enqueue_style('font-awesome', plugin_dir_url(__FILE__) . 'public/css/font-awesome.min.css', array(), '1.0.0');
 
-    wp_enqueue_script('jquery-script', plugin_dir_url(__FILE__) . 'public/js/jquery.min.js', array(), '1.0.0', true);
+//    wp_enqueue_script('jquery-script', plugin_dir_url(__FILE__) . 'public/js/jquery.min.js', array(), '1.0.0', true);
     wp_enqueue_script('cptui-plugin-script', plugin_dir_url(__FILE__) . 'public/js/script.js', array(), '1.0.0', true);
     wp_enqueue_script('owl-carousel', plugin_dir_url(__FILE__) . 'public/js/owl.carousel.min.js', array(), '1.0.0', true);
 }

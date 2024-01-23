@@ -291,8 +291,8 @@ function business_terms_carousel_function()
                 <?php
             }
             ?>
-            <script type="text/javascript" src="<?php echo plugin_dir_url(__FILE__); ?>public/js/owl.carousel.min.js "></script>
         </div>
+        <script type="text/javascript" src="<?php echo plugin_dir_url(__FILE__); ?>public/js/owl.carousel.min.js "></script>
         <?php
         wp_reset_postdata(); // Reset post data to the main query
     } else {

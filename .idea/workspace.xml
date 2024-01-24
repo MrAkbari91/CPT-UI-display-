@@ -6,9 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="9f4e6883-059d-45ea-a284-eb318704facd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/cptui.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/cptui.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/display_shortcodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/display_shortcodes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/public/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/public/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/losangekes_themansion_01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/losangekes_themansion_06.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/losangekes_themansion_07.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/losangekes_themansion_11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/page-header-bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/pexels-danne-516541.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +40,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
   <component name="ProjectColorInfo">{
@@ -97,5 +112,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

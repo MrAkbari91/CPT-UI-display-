@@ -3,7 +3,7 @@
 *
 * Plugin Name: CPT UI
 * Description: CPT UI is a plugin for managing custom post types. list a custom post type, add new custom post type, edit custom post type, delete custom post type. Display custom post type in admin dashboard. admin can edit a view of custom post type. like, grid, thumbnail, list.
-* Version: 1.0
+* Version: 1.2
 * Author: Dhruv Akbari
 * License: GPLv2
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html

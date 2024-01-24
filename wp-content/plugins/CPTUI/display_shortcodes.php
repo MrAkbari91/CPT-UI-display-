@@ -5,59 +5,71 @@ add_shortcode('business_terms_grid', 'business_terms_grid_function');
 
 function business_terms_grid_function($atts)
 {
+    include 'vendor/autoload.php';
+    // Initialize and load PDF Parser library
+    $parser = new \Smalot\PdfParser\Parser();
+
     $grid_value = get_option('business_terms_display_grid');
     $total_posts = $grid_value['column'] * $grid_value['rows'];
 
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
     // Shortcode attributes
     $category = isset($atts['category']) ? $atts['category'] : ''; // Category slug
     $category_id = isset($atts['category_id']) ? $atts['category_id'] : ''; // Category ID
 
-    $args = array(
-        'post_type' => 'business-terms',
-        'posts_per_page' => $total_posts,
-        'paged' => $paged,
-        'post_status' => 'publish',
-        'order' => 'ASC'
-    );
-
     // Add category slug filter if provided in shortcode
-    if (!empty($category)) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'business-category',
-                'field' => 'slug',
-                'terms' => $category,
-            ),
+    if (isset($_GET['search_keyword']) && !empty($_GET['search_keyword'])) {
+        $args = array(
+            'post_type' => 'business-terms',
+            'post_status' => 'publish',
+            'order' => 'ASC',
         );
-    }
+    } else {
+        $args = array(
+            'post_type' => 'business-terms',
+            'posts_per_page' => $total_posts,
+            'paged' => $paged,
+            'post_status' => 'publish',
+            'order' => 'ASC'
+        );
 
-    // Add category ID filter if provided in shortcode
-    if (!empty($category_id)) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'business-category', // Corrected taxonomy parameter
-                'field' => $category_id, // Corrected field parameter
-                'terms' => $category_id,
-            ),
-        );
+        if (!empty($category)) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'business-category',
+                    'field' => 'slug',
+                    'terms' => $category,
+                ),
+            );
+        }
+
+        // Add category ID filter if provided in shortcode
+        if (!empty($category_id)) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'business-category',
+                    'field' => 'term_id',
+                    'terms' => $category_id,
+                ),
+            );
+        }
     }
 
     $custom_query = new WP_Query($args);
 
     ob_start();
 
-    if ($custom_query->have_posts()):
+    if ($custom_query->have_posts()) {
         ?>
         <style>
             :root {
                 --grid-column: <?php echo $grid_value['column']; ?>;
                 --grid-row: <?php echo $grid_value['rows']; ?>;
             }
+
             .business-terms-grid-view .grid {
-                display: grid;
                 grid-template-columns: repeat(<?php echo $grid_value['column']; ?>, minmax(0, 1fr));
-                gap: 20px;
             }
 
             @media screen and (max-width: 1024px) {
@@ -78,47 +90,91 @@ function business_terms_grid_function($atts)
                 }
             }
         </style>
+        <form class="cptui-search-box">
+            <input type="text" id="search_keyword" placeholder="Search..." name="search_keyword">
+        </form>
 
         <div id="business-terms-wrapper" class="business-terms-grid-view">
             <div class="grid">
                 <?php
-                while ($custom_query->have_posts()):
-                    $custom_query->the_post();
-                    ?>
-                    <article class="card">
-                        <a href="<?php the_permalink(); ?>">
-                            <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="url">
-                            <div class="content">
-                                <h2 class="title">
-                                    <?php the_title(); ?>
-                                </h2>
-                                <div class="post-description">
-                                    <?php the_excerpt(); ?>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-                <?php
-                endwhile;
+                if (isset($_GET['search_keyword']) && !empty($_GET['search_keyword'])) {
+
+                    $post_ids = array(); // Initialize outside the loop
+
+                    foreach ($custom_query->get_posts() as $post) {
+
+                        setup_postdata($post);
+                        $post_id = $post->ID;
+                        $pdf_file = get_field('pdf_file', $post_id);
+
+                        if ($pdf_file) {
+                            $pdf = $parser->parseFile($pdf_file['url']);
+                            $textContent = $pdf->getText();
+                            $pdfText = nl2br($textContent);
+
+                            $pdfText = strtolower($pdfText);
+
+                            $search_keyword = strtolower(str_replace("+", "&nbsp", $_GET['search_keyword']));
+
+                            if (str_contains($pdfText, $search_keyword)) {
+                                $post_ids[] = $post_id;
+                            }
+                        }
+                    }
+
+                    foreach ($post_ids as $post_id) {
+                        display_post_content($post_id);
+                    }
+                } else {
+                    foreach ($custom_query->get_posts() as $post) {
+                        display_post_content($post->ID);
+                    }
+                }
+
+                wp_reset_postdata(); // Reset post data to the main query
                 ?>
             </div>
+            <?php
+            if (!isset($_GET['search_keyword'])) {
+                // Pagination
+                echo "<div class='pagination'>" . paginate_links(
+                        array(
+                            'total' => $custom_query->max_num_pages,
+                            'prev_text' => __('« Previous'),
+                            'next_text' => __('Next »'),
+                        )
+                    ) . "</div>";
+            }
+            ?>
         </div>
         <?php
+    }
 
-        // Pagination
-        echo "<div class='pagination'>" . paginate_links(
-                array(
-                    'total' => $custom_query->max_num_pages,
-                    'prev_text' => __('« Previous'),
-                    'next_text' => __('Next »'),
-                )
-            ) . "</div>";
-
-        wp_reset_postdata(); // Reset post data to the main query
-    else:
-        echo 'No custom posts found.';
-    endif;
     return ob_get_clean();
+}
+
+// Function to display post content
+function display_post_content($post_id)
+{
+    $post_title = get_the_title($post_id);
+    $post_permalink = get_permalink($post_id);
+    $post_thumbnail = get_the_post_thumbnail_url($post_id);
+    $excerpt = get_the_excerpt($post_id);
+    ?>
+    <article class="card">
+        <a href="<?php echo esc_url($post_permalink); ?>">
+            <img src="<?php echo esc_url($post_thumbnail); ?>" alt="url">
+            <div class="content">
+                <h2 class="title">
+                    <?php echo esc_html($post_title); ?>
+                </h2>
+                <div class="post-description">
+                    <?php echo wp_kses_post($excerpt); ?>
+                </div>
+            </div>
+        </a>
+    </article>
+    <?php
 }
 
 
@@ -183,7 +239,8 @@ function business_terms_list_function($atts)
                     $custom_query->the_post();
                     ?>
                     <article class="card">
-                        <a href="<?php the_permalink(); ?>"><img src="<?php echo get_the_post_thumbnail_url(); ?>"/></a>
+                        <a href="<?php the_permalink(); ?>"><img
+                                    src="<?php echo get_the_post_thumbnail_url(); ?>"/></a>
                         <div class="content">
                             <a href="<?php the_permalink(); ?>">
                                 <h2 class="title">
@@ -292,7 +349,8 @@ function business_terms_carousel_function()
             }
             ?>
         </div>
-        <script type="text/javascript" src="<?php echo plugin_dir_url(__FILE__); ?>public/js/owl.carousel.min.js "></script>
+        <script type="text/javascript"
+                src="<?php echo plugin_dir_url(__FILE__); ?>public/js/owl.carousel.min.js "></script>
         <?php
         wp_reset_postdata(); // Reset post data to the main query
     } else {
@@ -349,8 +407,14 @@ add_shortcode('terms_by_alphabet', 'display_terms_by_alphabet');
 function display_terms_by_alphabet()
 {
     $sections = business_terms_fetch_alphabets();
+    echo do_shortcode('[alphabet_navbar]');
+    ?>
+    <form class="cptui-search-box">
+        <input type="text" name="keyword" id="search_keyword" placeholder="Search..."/>
+    </form>
 
-    echo do_shortcode( '[alphabet_navbar]' );
+    <?php
+
     // Render the alphabet sections and posts
     foreach ($sections as $letter => $section_posts) {
         // Check if the section index is even
@@ -358,19 +422,37 @@ function display_terms_by_alphabet()
 
         // Set the background color for even sections
         $section_style = ($is_even_section) ? 'background-color: #232323;' : '';
+        ob_start();
         // Output the alphabet section ID
-        echo '<section id="' . $letter . '" class="alphabate-section section" style="' . $section_style . '"><div class="container">';
+        ?>
+        <section id=" <?php echo $letter; ?> " class="alphabate-section section"
+                 style="<?php echo $section_style; ?>">
+            <div class="container">
 
-        // Output the alphabet section content
-        echo '<div class="alphabate">' . $letter . '</div>';
+                <div class="alphabate"><?php echo $letter; ?></div>
+                <div class="terms-card-grid">
+                    <?php
+                    foreach ($section_posts as $post) {
+                        ?>
+                        <div>
+                            <a href="<?php echo $post['link']; ?>">
+                                <h3 class="term-name"><?php echo $post['name']; ?> </h3>
+                            </a>
+                            <p><?php echo $post['excerpt']; ?></p>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </section>
+        <!--        <script src="https://code.jquery.com/jquery-3.6.4.min.js" type="text/javascript"></script>-->
 
-        // Output the post cards within the alphabet section
-        echo '<div class="terms-card-grid" >';
-        foreach ($section_posts as $post) {
-            echo '<div><a href="' . $post['link'] . '"><h3 class="term-name">' . $post['name'] . ' ›</h3></a><p>' . $post['excerpt'] . '</p></div>';
-        }
-        echo '</div></div></section>';
+        <?php
     }
+    wp_reset_postdata();
+    return ob_get_clean();
+
 }
 
 add_shortcode('alphabet_navbar', 'display_alphabet_navbar');

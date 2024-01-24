@@ -1,17 +1,14 @@
 /* grid business-terms-wrapper  */
 #business-terms-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 20px;
     margin: 20px 0;
 }
 
-/*.business-terms-grid-view .grid {*/
-/*    display: grid;*/
-/*    grid-template-columns: repeat(3, minmax(0, 1fr));*/
-/*    gap: 20px;*/
-/*}*/
+.business-terms-grid-view .grid {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
 @media screen and (max-width: 1024px) {
     .business-terms-grid-view .grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -100,7 +97,6 @@
     display: inlist-block;
     text-decoration: none;
     padding: 5px 10px;
-    color: #000;
     border-radius: 5px;
     -webkit-transition: background-color 0.3s;
     transition: background-color 0.3s;
@@ -315,6 +311,7 @@
     padding: 1rem;
     position: sticky;
     top: 0;
+    z-index: 2;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .3)
@@ -473,4 +470,14 @@
     text-decoration: none;
     padding: 10px;
     display: block;
+}
+
+
+/*search form*/
+.cptui-search-box {
+    position: relative;
+    max-width: 95%;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
 }

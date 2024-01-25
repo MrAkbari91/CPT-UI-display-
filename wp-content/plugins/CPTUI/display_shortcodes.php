@@ -226,9 +226,12 @@ function business_terms_list_function($atts)
     }
 
     $custom_query = new WP_Query($args);
-
     ob_start();
-
+    ?>
+    <form class="cptui-search-box">
+        <input type="text" id="search_keyword" placeholder="Search..." name="search_keyword">
+    </form>
+    <?php
     if ($custom_query->have_posts()):
         ?>
 

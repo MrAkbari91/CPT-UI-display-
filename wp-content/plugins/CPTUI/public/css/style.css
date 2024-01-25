@@ -9,6 +9,7 @@
     gap: 20px;
     padding: 20px;
 }
+
 @media screen and (max-width: 1024px) {
     .business-terms-grid-view .grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -125,10 +126,11 @@
 }
 
 .business-terms-list-view article img {
-    width: 250px;
-    max-width: 250px;
+    width: 300px;
+    max-width: 300px;
     height: 200px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 @media (max-width: 600px) {
@@ -143,6 +145,9 @@
     }
 }
 
+#business-terms-list-wrapper h2 {
+    font-size: 25px;
+}
 
 /* list business-terms-carousel-wrapper */
 
@@ -433,7 +438,7 @@
     max-width: 100%;
     padding: 0;
     background: #fff;
-    border-radius: 0  0 10px 10px;
+    border-radius: 0 0 10px 10px;
     display: none;
     position: absolute;
     top: 100%;
@@ -444,13 +449,15 @@
     animation: nav-secondary 0.2s;
 }
 
-#navbar .secondary a{
+#navbar .secondary a {
     padding: 0.8em 1em;
 }
+
 #navbar .secondary a.nav-link {
     padding: 10px;
 }
-#navbar  button{
+
+#navbar button {
     padding: 0;
 }
 

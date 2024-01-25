@@ -1,0 +1,440 @@
+@font-face {
+	font-family: 'eaicon';
+	src:  url('../fonts/eaicon.eot?pbdto8');
+	src:  url('../fonts/eaicon.eot?pbdto8#iefix') format('embedded-opentype'),
+	url('../fonts/eaicon.ttf?pbdto8') format('truetype'),
+	url('../fonts/eaicon.woff?pbdto8') format('woff'),
+	url('../fonts/eaicon.svg?pbdto8#eaicon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+[class^="eaicon-"],
+[class*=" eaicon-"] {
+	font-family: "eaicon" !important;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	speak: none;
+}
+
+.eaicon-easyjobs:before {
+	content: "\e952";
+}
+.eaicon-reviewx:before {
+	content: "\e951";
+}
+.eaicon-login:before {
+	content: "\e900";
+}
+.eaicon-advance-tooltip:before {
+	content: "\e901";
+}
+.eaicon-advanced-accordion:before {
+	content: "\e902";
+}
+.eaicon-advanced-data-table:before {
+	content: "\e903";
+}
+.eaicon-advanced-google-maps:before {
+	content: "\e904";
+}
+.eaicon-advanced-menu:before {
+	content: "\e905";
+}
+.eaicon-advanced-tabs:before {
+	content: "\e906";
+}
+.eaicon-badge:before {
+	content: "\e907";
+}
+.eaicon-betterdocs-category-box:before {
+	content: "\e908";
+}
+.eaicon-betterdocs-category-grid:before {
+	content: "\e909";
+}
+.eaicon-betterdocs-search-form:before {
+	content: "\e90a";
+}
+.eaicon-caldera-forms:before {
+	content: "\e90b";
+}
+.eaicon-call-to-action:before {
+	content: "\e90c";
+}
+.eaicon-contact-form-7:before {
+	content: "\e90d";
+}
+.eaicon-content-ticker:before {
+	content: "\e90e";
+}
+.eaicon-content-timeline:before {
+	content: "\e90f";
+}
+.eaicon-content-toggle:before {
+	content: "\e910";
+}
+.eaicon-countdown:before {
+	content: "\e911";
+}
+.eaicon-counter:before {
+	content: "\e912";
+}
+.eaicon-creative-button:before {
+	content: "\e913";
+}
+.eaicon-data-table:before {
+	content: "\e914";
+}
+.eaicon-divider:before {
+	content: "\e915";
+}
+.eaicon-dual-color-heading:before {
+	content: "\e916";
+}
+.eaicon-duplicator:before {
+	content: "\e917";
+}
+.eaicon-dynamic-gallery:before {
+	content: "\e918";
+}
+.eaicon-embedpress:before {
+	content: "\e919";
+}
+.eaicon-event-calendar:before {
+	content: "\e91a";
+}
+.eaicon-facebook-feed-carousel:before {
+	content: "\e91b";
+}
+.eaicon-facebook-feed:before {
+	content: "\e91c";
+}
+.eaicon-fancy-text:before {
+	content: "\e91d";
+}
+.eaicon-feature-list:before {
+	content: "\e91e";
+}
+.eaicon-filterable-gallery:before {
+	content: "\e91f";
+}
+.eaicon-flip-box:before {
+	content: "\e920";
+}
+.eaicon-flip-carousel:before {
+	content: "\e921";
+}
+.eaicon-fluent-forms:before {
+	content: "\e922";
+}
+.eaicon-formstack:before {
+	content: "\e923";
+}
+.eaicon-gravity-form:before {
+	content: "\e924";
+}
+.eaicon-image-accrodion:before {
+	content: "\e925";
+}
+.eaicon-image-comparison:before {
+	content: "\e926";
+}
+.eaicon-image-hotspots:before {
+	content: "\e927";
+}
+.eaicon-image-scroller:before {
+	content: "\e928";
+}
+.eaicon-info-box:before {
+	content: "\e929";
+}
+.eaicon-instagram-feed:before {
+	content: "\e92a";
+}
+.eaicon-interactive-cards:before {
+	content: "\e92b";
+}
+.eaicon-interactive-promo:before {
+	content: "\e92c";
+}
+.eaicon-learndash:before {
+	content: "\e92d";
+}
+.eaicon-lightbox-modal:before {
+	content: "\e92e";
+}
+.eaicon-logo-carousel:before {
+	content: "\e92f";
+}
+.eaicon-logo:before {
+	content: "\e930";
+}
+.eaicon-mailchimp:before {
+	content: "\e931";
+}
+.eaicon-ninja-forms:before {
+	content: "\e932";
+}
+.eaicon-offcanvas:before {
+	content: "\e933";
+}
+.eaicon-one-page-navigaton:before {
+	content: "\e934";
+}
+.eaicon-parallax-effects:before {
+	content: "\e935";
+}
+.eaicon-particle-effects:before {
+	content: "\e936";
+}
+.eaicon-post-block:before {
+	content: "\e937";
+}
+.eaicon-post-carousel:before {
+	content: "\e938";
+}
+.eaicon-post-grid:before {
+	content: "\e939";
+}
+.eaicon-post-timeline:before {
+	content: "\e93a";
+}
+.eaicon-price-menu:before {
+	content: "\e93b";
+}
+.eaicon-pricing-table:before {
+	content: "\e93c";
+}
+.eaicon-product-grid:before {
+	content: "\e93d";
+}
+.eaicon-progress-bar:before {
+	content: "\e93e";
+}
+.eaicon-protected-content:before {
+	content: "\e93f";
+}
+.eaicon-reading-progress-bar:before {
+	content: "\e940";
+}
+.eaicon-smart-post-list:before {
+	content: "\e941";
+}
+.eaicon-static-product:before {
+	content: "\e942";
+}
+.eaicon-sticky-video:before {
+	content: "\e943";
+}
+.eaicon-table-of-content:before {
+	content: "\e944";
+}
+.eaicon-team-mamber:before {
+	content: "\e945";
+}
+.eaicon-team-member-carousel:before {
+	content: "\e946";
+}
+.eaicon-testimonial-slider:before {
+	content: "\e947";
+}
+.eaicon-testimonial:before {
+	content: "\e948";
+}
+.eaicon-tooltip:before {
+	content: "\e949";
+}
+.eaicon-twitter-feed-carousel:before {
+	content: "\e94a";
+}
+.eaicon-twitter-feed:before {
+	content: "\e94b";
+}
+.eaicon-weforms:before {
+	content: "\e94c";
+}
+.eaicon-woo-product-collections:before {
+	content: "\e94d";
+}
+.eaicon-wpforms:before {
+	content: "\e94e";
+}
+.eaicon-woo-checkout:before {
+	content: "\e94f";
+}
+.eaicon-typeform:before {
+	content: "\e950";
+}
+.eaicon-product-compare:before {
+	content: "\e953";
+}
+
+.eaicon-product-carousel:before {
+	font-size: 40px;
+	content: "\e954";
+}
+
+.eaicon-crowdfundly-campaign:before {
+	content: "\e955";
+}
+
+.eaicon-crowdfundly-organization:before {
+	content: "\e956";
+}
+
+.eaicon-crowdfundly-single-campaign:before {
+	content: "\e957";
+}
+
+.eaicon-product-slider:before {
+	font-size: 39px;
+	content: "\e958";
+}
+
+.eaicon-simple-menu:before {
+	content: "\e959";
+}
+
+.eaicon-product-gallery:before {
+	content: "\e95a";
+}
+
+.eaicon-interactive-circle:before {
+	content: "\e95c";
+}
+
+.eaicon-woo-cart:before {
+	content: "\e95b";
+}
+
+.eaicon-advanced-search:before {
+	content: "\e95d";
+}
+
+.eaicon-better-payment:before {
+	content: "\e95e";
+}
+
+.eaicon-eye-solid:before {
+	content: "\e95f";
+}
+
+.eaicon-eye-slash-solid:before {
+	content: "\e960";
+}
+
+.eaicon-ban-solid:before {
+	content: "\e961";
+}
+
+.eaicon-dice-six-solid:before {
+	content: "\e962";
+}
+
+.eaicon-dice-one-solid:before {
+	content: "\e963";
+}
+
+.eaicon-equals-solid:before {
+	content: "\e964";
+}
+
+.eaicon-not-equal-solid:before {
+	content: "\e965";
+}
+
+.eaicon-folder-open-solid:before {
+	content: "\e966";
+}
+
+.eaicon-folder-open-regular:before {
+	content: "\e967";
+}
+
+.eaicon-user-solid:before {
+	content: "\e968";
+}
+
+.eaicon-user-slash-solid:before {
+	content: "\e969";
+}
+.eaicon-xmark-solid:before {
+	content: "\e96a";
+}
+.eaicon-check-solid:before {
+	content: "\e96b";
+}
+.eaicon-users-solid:before {
+	content: "\e96c";
+}
+.eaicon-user-plus-solid:before {
+	content: "\e96d";
+}
+.eaicon-nft-gallery:before {
+	content: "\e96e";
+}
+.eaicon-business-reviews:before {
+	content: "\e96f";
+}
+.eaicon-svg-draw:before {
+	content: "\e970";
+}
+.eaicon-thank-you:before {
+	content: "\e971";
+}
+.eaicon-woo-cross-sells:before {
+	content: "\e972";
+}
+.eaicon-account:before {
+	content: "\e973";
+}
+.eaicon-dashboard-fill:before {
+	content: "\e974";
+}
+.eaicon-checkbox-circle:before {
+	content: "\e975";
+}
+.eaicon-download-fill:before {
+	content: "\e976";
+}
+.eaicon-download:before {
+	content: "\e977";
+}
+.eaicon-edit-fill:before {
+	content: "\e978";
+}
+.eaicon-eye-line:before {
+	content: "\e979";
+}
+.eaicon-infinity-line:before {
+	content: "\e97a";
+}
+.eaicon-login-box:before {
+	content: "\e97b";
+}
+.eaicon-map-2:before {
+	content: "\e97c";
+}
+.eaicon-not-alowed:before {
+	content: "\e97d";
+}
+.eaicon-orders:before {
+	content: "\e97e";
+}
+.eaicon-woo-account-dashboard:before {
+	content: "\e97f";
+}
+.eaicon-fancy-chart:before {
+	content: "\e980";
+}
+.eaicon-woo-product-list:before {
+	content: "\e981";
+	font-size: 40px;
+}

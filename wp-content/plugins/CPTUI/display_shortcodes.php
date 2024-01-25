@@ -213,7 +213,7 @@ function business_terms_list_function($atts)
             ),
         );
     }
- 
+
     // Add category ID filter if provided in shortcode
     if (!empty($category_id)) {
         $args['tax_query'] = array(

@@ -1,0 +1,238 @@
+.eael-warning {
+	font-size: 13px;
+	line-height: 18px;
+	background-color: #f3f0ca;
+	color: #886726;
+	padding: 10px;
+	border-radius: 3px;
+}
+
+.elementor-panel .pro-feature,
+.elementor-panel .pro-feature a {
+	color: #a4afb7;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.8;
+	font-style: normal;
+}
+
+.elementor-panel .pro-feature a {
+	text-decoration: underline;
+	color: #f54 !important;
+}
+.elementor-control .eael-static-product-layout-two-dependency-error,
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-title.elementor-panel-heading-title,
+.elementor-panel .elementor-control-eael_section_pro .elementor-panel-heading-toggle,
+.elementor-control-data_table_header_colspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_header_img_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_rowspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_colspan_pro_alert .elementor-control-title,
+.elementor-control-data_table_content_template_pro_alert .elementor-control-title {
+	color: #f54;
+}
+
+.elementor-panel .elementor-control-eael_control_get_pro .elementor-control-field {
+	display: none !important;
+}
+
+.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title,
+.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title,
+.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title,
+.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title,
+.elementor-control-eael_ticker_type_pro_alert .elementor-control-title,
+.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title a,
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title,
+.elementor-control-eael_adv_data_table_pro_enable_warning .elementor-control-title a,
+.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title a{
+	color: #f54 !important;
+}
+
+.elementor-control-eael_pricing_table_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_section_countdown_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_fancy_text_style_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_section_data_table_enabled_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_img_accordion_type_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_ticker_type_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_event_calendar_pro_enable_warning .elementor-control-title a:hover,
+.elementor-control-eael_team_members_preset_pro_alert .elementor-control-title a:hover,
+.elementor-control-eael_adv_data_table_pro_enable_warning .elementor-control-title a:hover,
+.elementor-control-eael_woo_checkout_pro_enable_warning .elementor-control-title a:hover{
+	color: #f54;
+}
+
+.ea-dialog-buttons-action {
+	display: block;
+	text-align: center;
+}
+
+.ea-dialog-buttons-action:not([style="display: none;"]) + button {
+	display: none;
+}
+
+.elementor-element-wrapper .icon {
+	max-height: 28px;
+	box-sizing: content-box;
+}
+
+.elementor-element-wrapper:not(.elementor-element--promotion) [class^="eaicon-"]:after,
+.elementor-element-wrapper:not(.elementor-element--promotion) [class*=" eaicon-"]:after {
+	content: "\e907";
+	font-family: "eaicon" !important;
+	speak: none;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	color: #cdcfd2;
+}
+
+#elementor-panel__editor__help__link[href^="https://essential-addons.com/elementor/docs"]:before {
+	content: "\e930";
+	font-family: "eaicon" !important;
+	font-size: 190%;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-right: 5px;
+}
+
+/* section heading */
+.elementor-section-title [class^="eaicon-"],
+.elementor-section-title [class*=" eaicon-"] {
+	font-size: 13px;
+	position: relative;
+	top: 1px;
+}
+
+/* nerd box */
+.ea-nerd-box {
+	padding: 15px;
+	text-align: center;
+}
+.ea-nerd-box-icon img {
+	max-width: 120px !important;
+}
+.ea-nerd-box-title {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.4;
+	margin-top: 20px;
+}
+.ea-nerd-box-message {
+	line-height: 1.8;
+	font-size: 11px;
+	margin-top: 5px;
+}
+.ea-nerd-box .elementor-button.ea-nerd-box-link {
+	background-color: #d30c5c;
+	color: #fff;
+	padding: 7px 25px;
+	margin-top: 20px;
+	border: none;
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+}
+.ea-nerd-box .elementor-button.ea-nerd-box-link:hover {
+	background-color: #f22074;
+}
+.elementor-control-ea_woo_checkout_notices_border_color {
+    display: none;
+}
+/*hide popup reset button for login register general control as they are used only for grouping controls*/
+.elementor-control-gen_lgn_content_po_toggle .elementor-control-popover-toggle-reset-label,
+.elementor-control-gen_reg_content_po_toggle .elementor-control-popover-toggle-reset-label, 
+.elementor-control-gen_lostpassword_content_po_toggle .elementor-control-popover-toggle-reset-label {
+    display: none !important;
+}
+.elementor-control-gen_lgn_content_po_toggle .elementor-control-popover-toggle-toggle:checked + .elementor-control-popover-toggle-toggle-label,
+.elementor-control-gen_reg_content_po_toggle .elementor-control-popover-toggle-toggle:checked + .elementor-control-popover-toggle-toggle-label, 
+.elementor-control-gen_lostpassword_content_po_toggle .elementor-control-popover-toggle-toggle:checked + .elementor-control-popover-toggle-toggle-label {
+    color: inherit !important;
+}
+/* post block */
+.elementor-control-eael_post_block_tiled_preset_1_note .elementor-control-title,
+.elementor-control-eael_post_block_tiled_preset_5_note .elementor-control-title,
+.elementor-control-eael_post_block_tiled_preset_2_note .elementor-control-title,
+.elementor-control-eael_post_block_tiled_preset_4_note .elementor-control-title {
+	background-color: transparent;
+	padding: 15px;
+	border-left: 3px solid #71d7f7;
+	position: relative;
+	font-size: 12px !important;
+	font-weight: 300 !important;
+	font-style: italic;
+	line-height: 1.5 !important;
+	text-align: left;
+	-webkit-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+	-webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
+}
+
+.elementor-control.eael-pro-control::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 99;
+	background: transparent;
+}
+
+.elementor-control.eael-pro-control .eael-pro-label {
+	color: red;
+	font-weight: bold;
+	font-size: 11px;
+}
+.elementor-control.eael-pro-control .eicon-pro-icon:before {
+	color:#b4b5b7;
+	margin-left: 4px;
+	font-size: 14px;
+}
+.elementor-control-eael_cl_logics [data-setting="user_role_operand_multi"] + .select2 ul.select2-selection__rendered > li:nth-child(2).select2-search--inline > input.select2-search__field {
+	width: auto !important;
+}
+.elementor-control-eael_cl_logics .elementor-control-dynamic_field label.elementor-control-title,
+.elementor-control-eael_cl_logics .elementor-control-dynamic_field input[data-setting="dynamic_field"] {
+	pointer-events: none;
+	touch-action: none;
+}
+
+/*Hide repeater duplicate and remove options*/
+
+.elementor-control-ea_billing_fields_list.elementor-control-type-repeater .elementor-repeater-row-tools .elementor-repeater-tool-duplicate,
+.elementor-control-ea_shipping_fields_list.elementor-control-type-repeater .elementor-repeater-row-tools .elementor-repeater-tool-duplicate,
+.elementor-control-ea_billing_fields_list.elementor-control-type-repeater .elementor-repeater-row-tools .elementor-repeater-tool-remove,
+.elementor-control-ea_shipping_fields_list.elementor-control-type-repeater .elementor-repeater-row-tools .elementor-repeater-tool-remove,
+.elementor-control-ea_billing_fields_list.elementor-control-type-repeater .elementor-repeater-add,
+.elementor-control-ea_shipping_fields_list.elementor-control-type-repeater .elementor-repeater-add {
+	display: none !important;
+}
+.elementor-context-menu-list__item.elementor-context-menu-list__item-ea_copy_all,
+.elementor-context-menu-list__item.elementor-context-menu-list__item-ea_paste_all {
+	padding-right: 10px;
+}
+.elementor-control-unit-2[data-setting="eael_evergreen_counter_hours"],
+.elementor-control-unit-2[data-setting="eael_evergreen_counter_minutes"],
+.elementor-control-unit-2[data-setting="eael_evergreen_counter_recurring_restart_after"] {
+	width: 70px;
+}

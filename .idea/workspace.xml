@@ -5,102 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f4e6883-059d-45ea-a284-eb318704facd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-config.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/cache/wp-rocket/localhost/wp-cptui/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/cache/wp-rocket/localhost/wp-cptui/index.html_gzip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/display_shortcodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/display_shortcodes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/public/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/public/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/3D Designer Portfolio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/App &amp; SaaS.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Art Museum.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Baby Sleep Consultant.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Barbershop.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Basketball Academy.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Beauty Salon.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Black Friday.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Blog Wireframe 1.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Bread Bakery.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Business Consulting.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Business Growth Advisor Blog.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Ceramic Decor Shop.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Ceramic Studio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Child Daycare.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Christmas.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Classic Car Restoration Company.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Clinical Psychologist.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Construction Company.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Dance Studio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Delivery Company.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Dental Clinic.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Design Conference.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Digital Marketing Agency.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Digital Marketing Studio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Digital and Technology Design School.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Eco Shop.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Eco-Friendly Water Bottles.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Ecommerce Wireframe 1.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/English Pub.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Environmental Organization.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Event DJ.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Family Doctor.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Fashion Stylist Portfolio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Flooring Company.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Flower Shop.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Food Blog.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Gym.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Halloween.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Handmade Ceramics Shop.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Handmade Cupcakes.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Handmade Kids Shop.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Handyman.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Health &amp; Beauty Spa.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Health &amp; Mindfulness Blog.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Health and Fitness eBook.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Industrial Design Portfolio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Interior Design Firm.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Italian Restaurant.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Japanese Restaurant &amp; Bar.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Landscape Photography Portfolio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Law Firm.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Life Coach.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Local Brand Wireframe 1.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Local Services Wireframe 1.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Luxury Hotel.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Luxury Real Estate Agency.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Makeup Artist.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Moving and Storage Company.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Music Band.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Music Festival.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Nature &amp; Wildlife Photography.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Non-Governmental Organization.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Nonprofit.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Online Magazine.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Online Marketing Courses 2.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Online Marketing Courses.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Painting Company.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Personal Chef.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Personal Trainer.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Pet Care Company.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Portfolio Wireframe 1.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Private Tours.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Private Tutor.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Shared Workspace.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Skate Shop.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Speech-Language Therapist.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Sports Blog.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Tattoo Studio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Technology Conference.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Tennis Academy.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Travel Blog.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/UX UI Designer Portfolio.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Urban Clothing Shop.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/VR Headsets &amp; Gaming Equipment.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Valentine's Day.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Veterinary Clinic.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Virtual Assistant.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Wedding Photographer.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Wedding Planner.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/upgrade/Kit-Library/Kit Library/Yoga Studio.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/Kit-Library-1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/Kit-Library.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +97,7 @@
       <workItem from="1705400847945" duration="1581000" />
       <workItem from="1705469623152" duration="66622000" />
       <workItem from="1705894477036" duration="11155000" />
-      <workItem from="1706154209054" duration="3078000" />
+      <workItem from="1706154209054" duration="6848000" />
     </task>
     <servers />
   </component>

@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f4e6883-059d-45ea-a284-eb318704facd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/cache/wp-rocket/localhost/wp-cptui/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/cache/wp-rocket/localhost/wp-cptui/index.html_gzip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/display_shortcodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/display_shortcodes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/Kit-Library-1.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/uploads/2024/01/Kit-Library.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/CPTUI/setting-business-terms.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/CPTUI/setting-business-terms.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/elementor/css/post-1651.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/uploads/elementor/css/post-1651.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/uploads/elementor/css/post-1957.css" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/uploads/elementor/css/post-1957.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-login.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-login.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +80,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-php-predefined-ba97393d7c68-b4dcf6bb9de9-com.jetbrains.php.sharedIndexes-PS-233.13135.108" />
+        <option value="bundled-php-predefined-ba97393d7c68-6f8e3395a2b4-com.jetbrains.php.sharedIndexes-PS-233.14015.96" />
       </set>
     </attachedChunks>
   </component>
@@ -97,7 +98,8 @@
       <workItem from="1705400847945" duration="1581000" />
       <workItem from="1705469623152" duration="66622000" />
       <workItem from="1705894477036" duration="11155000" />
-      <workItem from="1706154209054" duration="6848000" />
+      <workItem from="1706154209054" duration="9783000" />
+      <workItem from="1706502380803" duration="9264000" />
     </task>
     <servers />
   </component>

@@ -424,14 +424,13 @@ function display_terms_by_alphabet()
         $is_even_section = (array_search($letter, array_keys($sections)) % 2 === 0);
 
         // Set the background color for even sections
-        $section_style = ($is_even_section) ? 'background-color: #232323;' : '';
+        $section_style = ($is_even_section) ? 'background-color: #4e4e4e;' : '';
         ob_start();
         // Output the alphabet section ID
         ?>
         <section id=" <?php echo $letter; ?> " class="alphabate-section section"
                  style="<?php echo $section_style; ?>">
             <div class="container">
-
                 <div class="alphabate"><?php echo $letter; ?></div>
                 <div class="terms-card-grid">
                     <?php
@@ -449,8 +448,6 @@ function display_terms_by_alphabet()
                 </div>
             </div>
         </section>
-        <!--        <script src="https://code.jquery.com/jquery-3.6.4.min.js" type="text/javascript"></script>-->
-
         <?php
     }
     wp_reset_postdata();
@@ -462,7 +459,6 @@ add_shortcode('alphabet_navbar', 'display_alphabet_navbar');
 
 function display_alphabet_navbar()
 {
-
     $sections = business_terms_fetch_alphabets();
     echo '<nav id="navbar" class="tabs"><ul class="alphabate-navbar primary">';
     foreach ($sections as $letter => $section_posts) {

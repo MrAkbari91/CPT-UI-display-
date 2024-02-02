@@ -4,11 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
+class ComposerStaticInit442e1bed2aa18b86bf336ec7d585e591
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -16,19 +16,13 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         array (
             'WPForms\\Tests\\Unit\\' => 19,
             'WPForms\\Tests\\Integration\\' => 26,
+            'WPForms\\Scoper\\' => 15,
             'WPForms\\' => 8,
-        ),
-        'T' => 
-        array (
-            'TrueBV\\' => 7,
-            'TijsVerkoyen\\CssToInlineStyles\\' => 31,
         ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Iconv\\' => 23,
-            'Symfony\\Component\\CssSelector\\' => 30,
-            'Stripe\\' => 7,
         ),
     );
 
@@ -41,18 +35,14 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         array (
             0 => __DIR__ . '/../..' . '/tests/integration',
         ),
+        'WPForms\\Scoper\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/../.php-scoper',
+        ),
         'WPForms\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
             1 => __DIR__ . '/../..' . '/src',
-        ),
-        'TrueBV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/true/punycode/src',
-        ),
-        'TijsVerkoyen\\CssToInlineStyles\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -62,19 +52,13 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-iconv',
         ),
-        'Symfony\\Component\\CssSelector\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/css-selector',
-        ),
-        'Stripe\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
-        ),
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'WPForms\\Vendor\\Stripe\\Account' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Account.php',
         'WPForms\\Vendor\\Stripe\\AccountLink' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/AccountLink.php',
+        'WPForms\\Vendor\\Stripe\\AccountSession' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/AccountSession.php',
         'WPForms\\Vendor\\Stripe\\ApiOperations\\All' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/ApiOperations/All.php',
         'WPForms\\Vendor\\Stripe\\ApiOperations\\Create' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/ApiOperations/Create.php',
         'WPForms\\Vendor\\Stripe\\ApiOperations\\Delete' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/ApiOperations/Delete.php',
@@ -103,6 +87,9 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\CashBalance' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/CashBalance.php',
         'WPForms\\Vendor\\Stripe\\Charge' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Charge.php',
         'WPForms\\Vendor\\Stripe\\Checkout\\Session' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Checkout/Session.php',
+        'WPForms\\Vendor\\Stripe\\Climate\\Order' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Climate/Order.php',
+        'WPForms\\Vendor\\Stripe\\Climate\\Product' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Climate/Product.php',
+        'WPForms\\Vendor\\Stripe\\Climate\\Supplier' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Climate/Supplier.php',
         'WPForms\\Vendor\\Stripe\\Collection' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Collection.php',
         'WPForms\\Vendor\\Stripe\\CountrySpec' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/CountrySpec.php',
         'WPForms\\Vendor\\Stripe\\Coupon' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Coupon.php',
@@ -160,6 +147,7 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\Issuing\\CardDetails' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Issuing/CardDetails.php',
         'WPForms\\Vendor\\Stripe\\Issuing\\Cardholder' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Issuing/Cardholder.php',
         'WPForms\\Vendor\\Stripe\\Issuing\\Dispute' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Issuing/Dispute.php',
+        'WPForms\\Vendor\\Stripe\\Issuing\\Token' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Issuing/Token.php',
         'WPForms\\Vendor\\Stripe\\Issuing\\Transaction' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Issuing/Transaction.php',
         'WPForms\\Vendor\\Stripe\\LineItem' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/LineItem.php',
         'WPForms\\Vendor\\Stripe\\LoginLink' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/LoginLink.php',
@@ -169,6 +157,8 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\PaymentIntent' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/PaymentIntent.php',
         'WPForms\\Vendor\\Stripe\\PaymentLink' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/PaymentLink.php',
         'WPForms\\Vendor\\Stripe\\PaymentMethod' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/PaymentMethod.php',
+        'WPForms\\Vendor\\Stripe\\PaymentMethodConfiguration' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/PaymentMethodConfiguration.php',
+        'WPForms\\Vendor\\Stripe\\PaymentMethodDomain' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/PaymentMethodDomain.php',
         'WPForms\\Vendor\\Stripe\\Payout' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Payout.php',
         'WPForms\\Vendor\\Stripe\\Person' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Person.php',
         'WPForms\\Vendor\\Stripe\\Plan' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Plan.php',
@@ -190,6 +180,7 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\Service\\AbstractServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/AbstractServiceFactory.php',
         'WPForms\\Vendor\\Stripe\\Service\\AccountLinkService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/AccountLinkService.php',
         'WPForms\\Vendor\\Stripe\\Service\\AccountService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/AccountService.php',
+        'WPForms\\Vendor\\Stripe\\Service\\AccountSessionService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/AccountSessionService.php',
         'WPForms\\Vendor\\Stripe\\Service\\ApplePayDomainService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/ApplePayDomainService.php',
         'WPForms\\Vendor\\Stripe\\Service\\ApplicationFeeService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/ApplicationFeeService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Apps\\AppsServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Apps/AppsServiceFactory.php',
@@ -202,6 +193,10 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\Service\\ChargeService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/ChargeService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Checkout\\CheckoutServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Checkout/CheckoutServiceFactory.php',
         'WPForms\\Vendor\\Stripe\\Service\\Checkout\\SessionService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Checkout/SessionService.php',
+        'WPForms\\Vendor\\Stripe\\Service\\Climate\\ClimateServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Climate/ClimateServiceFactory.php',
+        'WPForms\\Vendor\\Stripe\\Service\\Climate\\OrderService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Climate/OrderService.php',
+        'WPForms\\Vendor\\Stripe\\Service\\Climate\\ProductService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Climate/ProductService.php',
+        'WPForms\\Vendor\\Stripe\\Service\\Climate\\SupplierService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Climate/SupplierService.php',
         'WPForms\\Vendor\\Stripe\\Service\\CoreServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/CoreServiceFactory.php',
         'WPForms\\Vendor\\Stripe\\Service\\CountrySpecService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/CountrySpecService.php',
         'WPForms\\Vendor\\Stripe\\Service\\CouponService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/CouponService.php',
@@ -226,11 +221,14 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\Service\\Issuing\\CardholderService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Issuing/CardholderService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Issuing\\DisputeService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Issuing/DisputeService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Issuing\\IssuingServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Issuing/IssuingServiceFactory.php',
+        'WPForms\\Vendor\\Stripe\\Service\\Issuing\\TokenService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Issuing/TokenService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Issuing\\TransactionService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Issuing/TransactionService.php',
         'WPForms\\Vendor\\Stripe\\Service\\MandateService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/MandateService.php',
         'WPForms\\Vendor\\Stripe\\Service\\OAuthService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/OAuthService.php',
         'WPForms\\Vendor\\Stripe\\Service\\PaymentIntentService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/PaymentIntentService.php',
         'WPForms\\Vendor\\Stripe\\Service\\PaymentLinkService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/PaymentLinkService.php',
+        'WPForms\\Vendor\\Stripe\\Service\\PaymentMethodConfigurationService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/PaymentMethodConfigurationService.php',
+        'WPForms\\Vendor\\Stripe\\Service\\PaymentMethodDomainService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/PaymentMethodDomainService.php',
         'WPForms\\Vendor\\Stripe\\Service\\PaymentMethodService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/PaymentMethodService.php',
         'WPForms\\Vendor\\Stripe\\Service\\PayoutService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/PayoutService.php',
         'WPForms\\Vendor\\Stripe\\Service\\PlanService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/PlanService.php',
@@ -259,6 +257,7 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\Service\\TaxCodeService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TaxCodeService.php',
         'WPForms\\Vendor\\Stripe\\Service\\TaxRateService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TaxRateService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Tax\\CalculationService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Tax/CalculationService.php',
+        'WPForms\\Vendor\\Stripe\\Service\\Tax\\RegistrationService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Tax/RegistrationService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Tax\\SettingsService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Tax/SettingsService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Tax\\TaxServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Tax/TaxServiceFactory.php',
         'WPForms\\Vendor\\Stripe\\Service\\Tax\\TransactionService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Tax/TransactionService.php',
@@ -268,8 +267,10 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\Service\\Terminal\\ReaderService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Terminal/ReaderService.php',
         'WPForms\\Vendor\\Stripe\\Service\\Terminal\\TerminalServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/Terminal/TerminalServiceFactory.php',
         'WPForms\\Vendor\\Stripe\\Service\\TestHelpers\\CustomerService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TestHelpers/CustomerService.php',
+        'WPForms\\Vendor\\Stripe\\Service\\TestHelpers\\Issuing\\AuthorizationService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TestHelpers/Issuing/AuthorizationService.php',
         'WPForms\\Vendor\\Stripe\\Service\\TestHelpers\\Issuing\\CardService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TestHelpers/Issuing/CardService.php',
         'WPForms\\Vendor\\Stripe\\Service\\TestHelpers\\Issuing\\IssuingServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TestHelpers/Issuing/IssuingServiceFactory.php',
+        'WPForms\\Vendor\\Stripe\\Service\\TestHelpers\\Issuing\\TransactionService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TestHelpers/Issuing/TransactionService.php',
         'WPForms\\Vendor\\Stripe\\Service\\TestHelpers\\RefundService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TestHelpers/RefundService.php',
         'WPForms\\Vendor\\Stripe\\Service\\TestHelpers\\Terminal\\ReaderService' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TestHelpers/Terminal/ReaderService.php',
         'WPForms\\Vendor\\Stripe\\Service\\TestHelpers\\Terminal\\TerminalServiceFactory' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Service/TestHelpers/Terminal/TerminalServiceFactory.php',
@@ -316,6 +317,7 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
         'WPForms\\Vendor\\Stripe\\TaxRate' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/TaxRate.php',
         'WPForms\\Vendor\\Stripe\\Tax\\Calculation' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Tax/Calculation.php',
         'WPForms\\Vendor\\Stripe\\Tax\\CalculationLineItem' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Tax/CalculationLineItem.php',
+        'WPForms\\Vendor\\Stripe\\Tax\\Registration' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Tax/Registration.php',
         'WPForms\\Vendor\\Stripe\\Tax\\Settings' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Tax/Settings.php',
         'WPForms\\Vendor\\Stripe\\Tax\\Transaction' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Tax/Transaction.php',
         'WPForms\\Vendor\\Stripe\\Tax\\TransactionLineItem' => __DIR__ . '/../..' . '/vendor_prefixed/stripe/stripe-php/lib/Tax/TransactionLineItem.php',
@@ -443,9 +445,9 @@ class ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitb4819db6ac3adf440bb861aadbfcbf60::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit442e1bed2aa18b86bf336ec7d585e591::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit442e1bed2aa18b86bf336ec7d585e591::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit442e1bed2aa18b86bf336ec7d585e591::$classMap;
 
         }, null, ClassLoader::class);
     }

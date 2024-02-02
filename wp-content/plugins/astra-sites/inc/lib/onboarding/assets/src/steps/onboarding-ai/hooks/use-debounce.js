@@ -33,3 +33,35 @@ export const useDebounce = ( value, delay, callback = null ) => {
 
 	return useMemo( () => debouncedValue, [ debouncedValue ] );
 };
+
+export const useDebounceWithCancel = ( value, delay, callback = null ) => {
+	const [ debouncedValue, setDebouncedValue ] = useState( value );
+	let handler = null;
+
+	const debouncedCallback = useCallback(
+		( _value ) => {
+			if ( callback && typeof callback === 'function' ) {
+				callback( _value );
+			}
+			setDebouncedValue( _value );
+		},
+		[ callback ]
+	);
+
+	useEffect( () => {
+		handler = setTimeout( () => {
+			debouncedCallback( value );
+		}, delay );
+
+		// Cleanup logic to clear the timer when the component unmounts or the value/delay changes
+		return () => {
+			clearTimeout( handler );
+		};
+	}, [ value, delay, debouncedCallback ] );
+
+	const cancel = () => {
+		clearTimeout( handler );
+	};
+
+	return [ debouncedValue, cancel ];
+};

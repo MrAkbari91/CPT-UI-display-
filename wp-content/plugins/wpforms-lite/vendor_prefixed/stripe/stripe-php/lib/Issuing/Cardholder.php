@@ -32,4 +32,9 @@ class Cardholder extends \WPForms\Vendor\Stripe\ApiResource
     use \WPForms\Vendor\Stripe\ApiOperations\Create;
     use \WPForms\Vendor\Stripe\ApiOperations\Retrieve;
     use \WPForms\Vendor\Stripe\ApiOperations\Update;
+    const STATUS_ACTIVE = 'active';
+    const STATUS_BLOCKED = 'blocked';
+    const STATUS_INACTIVE = 'inactive';
+    const TYPE_COMPANY = 'company';
+    const TYPE_INDIVIDUAL = 'individual';
 }

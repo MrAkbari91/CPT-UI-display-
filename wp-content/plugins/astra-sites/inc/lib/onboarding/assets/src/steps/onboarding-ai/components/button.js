@@ -42,6 +42,11 @@ const Button = (
 			hasPrefixIcon: 'pl-4 pr-6 py-3',
 			hasSuffixIcon: 'pl-6 pr-4 py-3',
 		},
+		medium: {
+			default: 'px-4 py-3 h-11',
+			hasPrefixIcon: 'pl-4 pr-6 py-3',
+			hasSuffixIcon: 'pl-6 pr-4 py-3',
+		},
 		small: {
 			default: 'px-5 py-2 h-[2.625rem]',
 			hasPrefixIcon: 'pl-3 pr-5 py-2 h-[2.625rem]',

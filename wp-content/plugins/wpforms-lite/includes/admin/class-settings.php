@@ -531,6 +531,18 @@ class WPForms_Settings {
 						'{remaining}'
 					),
 				],
+				'validation-requiredpayment'      => [
+					'id'      => 'validation-requiredpayment',
+					'name'    => esc_html__( 'Payment Required', 'wpforms-lite' ),
+					'type'    => 'text',
+					'default' => esc_html__( 'Payment is required.', 'wpforms-lite' ),
+				],
+				'validation-creditcard'           => [
+					'id'      => 'validation-creditcard',
+					'name'    => esc_html__( 'Credit Card', 'wpforms-lite' ),
+					'type'    => 'text',
+					'default' => esc_html__( 'Please enter a valid credit card number.', 'wpforms-lite' ),
+				],
 			],
 			// Provider integrations settings tab.
 			'integrations' => [

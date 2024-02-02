@@ -54,8 +54,7 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 		 *
 		 * @since 1.6.8
 		 */
-		init: function() {
-
+		init() {
 			$( app.ready );
 
 			// Page load.
@@ -75,12 +74,12 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 		 *
 		 * @since 1.6.8
 		 */
-		ready: function() {
-
+		ready() {
 			app.setup();
 			app.setPanelsToggleState();
 			app.setupTitleFocus();
 			app.setTriggerBlankLink();
+			app.setSelectedTemplate();
 			app.events();
 
 			el.$builder.trigger( 'wpformsBuilderSetupReady' );
@@ -91,8 +90,7 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 		 *
 		 * @since 1.6.8
 		 */
-		load: function() {
-
+		load() {
 			app.applyTemplateOnRequest();
 		},
 
@@ -101,8 +99,7 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 		 *
 		 * @since 1.6.8
 		 */
-		setup: function() {
-
+		setup() {
 			// Cache DOM elements.
 			el = {
 				$builder: $( '#wpforms-builder' ),
@@ -111,22 +108,6 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 				$panel: $( '#wpforms-panel-setup' ),
 				$categories: $( '#wpforms-panel-setup .wpforms-setup-templates-categories' ),
 			};
-
-			// Template list object.
-			vars.templateList = new List( 'wpforms-setup-templates-list', {
-				valueNames: [
-					'wpforms-template-name',
-					'wpforms-template-desc',
-					{
-						name: 'categories',
-						attr: 'data-categories',
-					},
-					{
-						name: 'subcategories',
-						attr: 'data-subcategories',
-					},
-				],
-			} );
 
 			// Other values.
 			vars.spinner = '<i class="wpforms-loading-spinner wpforms-loading-white wpforms-loading-inline"></i>';
@@ -138,14 +119,10 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 		 *
 		 * @since 1.6.8
 		 */
-		events: function() {
+		events() {
+			el.$builder.on( 'wpformsBuilderPanelLoaded', app.panelLoaded );
 
-			el.$panel
-				.on( 'keyup', '#wpforms-setup-template-search', WPFormsFormTemplates.searchTemplate )
-				.on( 'click', '.wpforms-setup-templates-categories li div', WPFormsFormTemplates.selectCategory )
-				.on( 'click', '.wpforms-setup-templates-subcategories li', WPFormsFormTemplates.selectSubCategory )
-				.on( 'click', '.wpforms-template-select', app.selectTemplate )
-				.on( 'click', '.wpforms-trigger-blank', app.selectBlankTemplate );
+			app.panelEvents();
 
 			// Focus on the form title field when displaying setup panel.
 			el.$builder
@@ -155,7 +132,40 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 			el.$builder
 				.on( 'input', '#wpforms-panel-field-settings-form_title', app.syncTitle )
 				.on( 'input', '#wpforms-setup-name', app.syncTitle );
+		},
 
+		/**
+		 * Bind panel events.
+		 *
+		 * @since 1.8.6
+		 */
+		panelEvents() {
+			el.$panel
+				.on( 'keyup', '#wpforms-setup-template-search', _.debounce( WPFormsFormTemplates.searchTemplate, 200 ) )
+				.on( 'click', '.wpforms-setup-templates-categories li div', WPFormsFormTemplates.selectCategory )
+				.on( 'click', '.wpforms-setup-templates-subcategories li', WPFormsFormTemplates.selectSubCategory )
+				.on( 'click', '.wpforms-template-select', app.selectTemplate )
+				.on( 'click', '.wpforms-trigger-blank', app.selectBlankTemplate );
+		},
+
+		/**
+		 * Panel loaded event.
+		 *
+		 * @since 1.8.6
+		 *
+		 * @param {Object} e     Event object.
+		 * @param {string} panel Panel name.
+		 */
+		panelLoaded( e, panel ) {
+			if ( panel !== 'setup' ) {
+				return;
+			}
+
+			app.setup();
+			WPFormsFormTemplates.setup();
+			app.setSelectedTemplate();
+
+			app.panelEvents();
 		},
 
 		/**
@@ -190,18 +200,49 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 		 *
 		 * @since 1.6.8
 		 *
-		 * @param {object} e    Event object.
+		 * @param {Object} e    Event object.
 		 * @param {string} view Current view.
 		 */
-		setupTitleFocus: function( e, view ) {
+		setupTitleFocus( e, view ) {
+			view = view || wpf.getQueryString( 'view' );
 
-			if ( typeof view === 'undefined' ) {
-				view = wpf.getQueryString( 'view' );
+			if ( view !== 'setup' ) {
+				return;
 			}
 
-			if ( view === 'setup' ) {
-				el.$formName.trigger( 'focus' );
+			// Clone form title to the Setup page.
+			$( '#wpforms-setup-name' ).val( $( '#wpforms-panel-field-settings-form_title' ).val() );
+
+			el.$formName.trigger( 'focus' );
+		},
+
+		/**
+		 * Mark the current form template as selected.
+		 *
+		 * @since 1.8.6
+		 */
+		setSelectedTemplate() {
+			if ( ! el.$panel.length || ! wpforms_builder.form_meta?.template ) {
+				return;
 			}
+
+			const $template = el.$builder
+				.find( `.wpforms-template-select[data-template="${ wpforms_builder.form_meta.template }"]` )
+				.closest( '.wpforms-template' );
+
+			if ( ! $template.length ) {
+				return;
+			}
+
+			$template
+				.addClass( 'selected' )
+				.addClass( 'badge' );
+
+			// Remove existing badge.
+			$template.find( '.wpforms-badge' ).remove();
+
+			// Add "Selected" badge.
+			$template.find( '.wpforms-template-favorite' ).after( wpforms_builder.template_selected_badge );
 		},
 
 		/**

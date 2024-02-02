@@ -163,6 +163,9 @@ abstract class WPForms_Field {
 		// Add fields tab.
 		add_filter( 'wpforms_builder_fields_buttons', [ $this, 'field_button' ], 15 );
 
+		// Add field keywords to the template fields.
+		add_filter( 'wpforms_setup_template_fields', [ $this, 'enhance_template_fields_with_keywords' ] );
+
 		// Field options tab.
 		add_action( "wpforms_builder_fields_options_{$this->type}", [ $this, 'field_options' ], 10 );
 
@@ -603,7 +606,7 @@ abstract class WPForms_Field {
 		 */
 		// Do not populate if there are errors for that field.
 		/*
-		$errors = wpforms()->process->errors;
+		$errors = wpforms()->get( 'process' )->errors;
 		if ( ! empty( $errors[ $this->form_data['id'] ][ $field['id'] ] ) ) {
 			$allowed = false;
 		}
@@ -716,6 +719,48 @@ abstract class WPForms_Field {
 
 		// Wipe hands clean.
 		return $fields;
+	}
+
+	/**
+	 * Enhances template fields by adding keywords.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $template_fields List of template fields.
+	 *
+	 * @return array
+	 */
+	public function enhance_template_fields_with_keywords( array $template_fields ): array {
+
+		foreach ( $template_fields as $key => $field ) {
+			if ( $field === $this->type ) {
+				$template_fields[ $key ] = $this->name;
+
+				$this->add_keywords( $template_fields );
+			}
+		}
+
+		return array_unique( $template_fields );
+	}
+
+	/**
+	 * Adds keywords to the provided fields.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $fields List of fields to which keywords will be added.
+	 *
+	 * @return void
+	 */
+	private function add_keywords( array &$fields ) {
+
+		if ( $this->keywords ) {
+			$keywords_list = explode( ',', $this->keywords );
+
+			foreach ( $keywords_list as $keyword ) {
+				$fields[] = trim( $keyword );
+			}
+		}
 	}
 
 	/**
@@ -2201,10 +2246,11 @@ abstract class WPForms_Field {
 			case 'choices':
 				$fields_w_choices = [ 'checkbox', 'gdpr-checkbox', 'select', 'payment-select', 'radio', 'payment-multiple', 'payment-checkbox' ];
 
+				$slice_size   = in_array( $field['type'], [ 'payment-select', 'select' ], true ) ? 250 : 20;
 				$values       = ! empty( $field['choices'] ) ? $field['choices'] : $this->defaults;
 				$dynamic      = ! empty( $field['dynamic_choices'] ) ? $field['dynamic_choices'] : false;
 				$total        = count( $values );
-				$values       = array_slice( $values, 0, 20 );
+				$values       = array_slice( $values, 0, $slice_size );
 				$inline_style = '';
 
 				/*
@@ -2341,14 +2387,7 @@ abstract class WPForms_Field {
 						$default  = isset( $value['default'] ) ? (bool) $value['default'] : false;
 						$selected = ! empty( $placeholder ) && empty( $multiple ) ? '' : selected( true, $default, false );
 
-						$label = isset( $value['label'] ) ? trim( $value['label'] ) : '';
-
-						$label  = $label !== '' ?
-							$label :
-							sprintf( /* translators: %d - choice number. */
-								esc_html__( 'Choice %d', 'wpforms-lite' ),
-								(int) $key
-							);
+						$label  = $this->get_choices_label( $value['label'] ?? '', $key + 1 );
 						$label .= ! empty( $field['show_price_after_labels'] ) && isset( $value['value'] ) ? ' - ' . wpforms_format_amount( wpforms_sanitize_amount( $value['value'] ), true ) : '';
 
 						$output .= sprintf(
@@ -2391,14 +2430,7 @@ abstract class WPForms_Field {
 							wpforms_sanitize_classes( $item_class, true )
 						);
 
-						$label = isset( $value['label'] ) ? trim( $value['label'] ) : '';
-
-						$label  = $label !== '' ?
-							$label :
-							sprintf( /* translators: %d - choice number. */
-								esc_html__( 'Choice %d', 'wpforms-lite' ),
-								(int) $key
-							);
+						$label  = $this->get_choices_label( $value['label'] ?? '', $key + 1 );
 						$label .= ! empty( $field['show_price_after_labels'] ) && isset( $value['value'] ) ? ' - ' . wpforms_format_amount( wpforms_sanitize_amount( $value['value'] ), true ) : '';
 
 						if ( $with_images ) {
@@ -2477,17 +2509,18 @@ abstract class WPForms_Field {
 					$output .= '</ul>';
 
 					/*
-					 * Contains more than 20 items, include a note about a limited subset of results displayed.
+					 * Contains more than 20/250 items, include a note about a limited subset of results displayed.
 					*/
-					if ( $total > 20 ) {
+					if ( $total > $slice_size ) {
 						$output .= '<div class="wpforms-alert-dynamic wpforms-alert wpforms-alert-warning">';
 						$output .= sprintf(
 							wp_kses( /* translators: %s - total amount of choices. */
-								__( 'Showing the first 20 choices.<br> All %s choices will be displayed when viewing the form.', 'wpforms-lite' ),
+								__( 'Showing the first %1$s choices.<br> All %2$s choices will be displayed when viewing the form.', 'wpforms-lite' ),
 								[
 									'br' => [],
 								]
 							),
+							$slice_size,
 							$total
 						);
 						$output .= '</div>';
@@ -2768,7 +2801,7 @@ abstract class WPForms_Field {
 
 		// Basic required check - If field is marked as required, check for entry data.
 		if ( ! empty( $form_data['fields'][ $field_id ]['required'] ) && empty( $field_submit ) && '0' !== (string) $field_submit ) {
-			wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = wpforms_get_required_label();
+			wpforms()->get( 'process' )->errors[ $form_data['id'] ][ $field_id ] = wpforms_get_required_label();
 		}
 	}
 
@@ -2793,7 +2826,7 @@ abstract class WPForms_Field {
 		// Sanitize but keep line breaks.
 		$value = wpforms_sanitize_textarea_field( $field_submit );
 
-		wpforms()->process->fields[ $field_id ] = [
+		wpforms()->get( 'process' )->fields[ $field_id ] = [
 			'name'  => $name,
 			'value' => $value,
 			'id'    => absint( $field_id ),
@@ -3182,5 +3215,27 @@ abstract class WPForms_Field {
 			'<div class="wpforms-alert wpforms-alert-warning">%s</div>',
 			esc_html( $this->get_empty_dynamic_choices_message( $field ) )
 		);
+	}
+
+	/**
+	 * Get checkbox, choices and select field options label.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param string $label Choice option label.
+	 * @param int    $key   Choice number.
+	 *
+	 * @return string
+	 */
+	protected function get_choices_label( $label, int $key ) {
+
+		$label = trim( $label );
+
+		return $label === '0' || $label ?
+			$label :
+			sprintf( /* translators: %d - choice number. */
+				__( 'Choice %d', 'wpforms-lite' ),
+				$key
+			);
 	}
 }

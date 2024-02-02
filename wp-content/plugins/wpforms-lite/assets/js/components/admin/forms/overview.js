@@ -53,9 +53,9 @@ WPFormsForms.Overview = WPFormsForms.Overview || ( function( document, window, $
 		 *
 		 * @since 1.7.3
 		 */
-		ready: function() {
-
+		ready() {
 			app.initElements();
+			app.initTableColumns();
 			app.initTagsFilter();
 			app.adjustBulkEditTagsForm();
 			app.initEditTagsBulkActionItem();
@@ -67,16 +67,28 @@ WPFormsForms.Overview = WPFormsForms.Overview || ( function( document, window, $
 		 *
 		 * @since 1.7.5
 		 */
-		initElements: function() {
-
-			el.$overview            = $( '#wpforms-overview' );
-			el.$tagsFilterSelect    = $( '.wpforms-tags-filter select' );
-			el.$tagsFilterButton    = $( '.wpforms-tags-filter button' );
-			el.$listTableRows       = $( '#wpforms-overview #the-list' );
-			el.$bulkEditTagsRows    = $( '.wpforms-bulk-edit-tags' );
-			el.$bulkEditTagsForms   = $( '.wpforms-bulk-edit-tags .wpforms-edit-forms select' );
-			el.$bulkEditTagsTags    = $( '.wpforms-bulk-edit-tags .wpforms-edit-tags select' );
+		initElements() {
+			el.$overview = $( '#wpforms-overview' );
+			el.$tagsFilterSelect = $( '.wpforms-tags-filter select' );
+			el.$tagsFilterButton = $( '.wpforms-tags-filter button' );
+			el.$listTableRows = $( '#wpforms-overview #the-list' );
+			el.$bulkEditTagsRows = $( '.wpforms-bulk-edit-tags' );
+			el.$bulkEditTagsForms = $( '.wpforms-bulk-edit-tags .wpforms-edit-forms select' );
+			el.$bulkEditTagsTags = $( '.wpforms-bulk-edit-tags .wpforms-edit-tags select' );
 			el.$bulkEditTagsMessage = $( '.wpforms-bulk-edit-tags .wpforms-message' );
+		},
+
+		/**
+		 * Init table columns.
+		 *
+		 * @since 1.8.6
+		 */
+		initTableColumns() {
+			const $table = el.$overview.find( '.wp-list-table' );
+
+			// Set the Name column as primary.
+			$table.find( '.column-primary' ).removeClass( 'column-primary' );
+			$table.find( '.column-name' ).addClass( 'column-primary' );
 		},
 
 		/**
@@ -965,28 +977,24 @@ WPFormsForms.Overview = WPFormsForms.Overview || ( function( document, window, $
 		 *
 		 * @since 1.7.5
 		 */
-		adjustBulkEditTagsForm: function() {
-
-			var $columns = $( '.wp-list-table thead .manage-column' ).not( '.hidden' ),
-				$formCells = $( '.wpforms-bulk-edit-tags td' ),
-				formsWidth = 0;
+		adjustBulkEditTagsForm() {
+			const $table = $( '.wp-list-table' ),
+				$columns = $table.find( 'thead .manage-column' ).not( '.hidden' ),
+				$formCells = $( '.wpforms-bulk-edit-tags td' );
 
 			// Update colspan attributes.
 			$formCells.attr( 'colspan', $columns.length );
 
-			// Generate width property of the forms input element.
-			for ( var i = 2; i < $columns.length; i++ ) {
-				formsWidth += $columns[ i ].offsetWidth || $columns.eq( i ).outerWidth();
-			}
+			let nameWidth = $table.find( '.column-name' ).outerWidth();
+			nameWidth = nameWidth < 300 ? 300 : nameWidth;
 
-			formsWidth = 'calc( 100% - ' + ( formsWidth - 10 ) + 'px )';
+			const cellsWidth = $table.outerWidth() - nameWidth -
+				$table.find( '.check-column' ).outerWidth() - 10;
 
-			if ( window.innerWidth < 782 ) {
-				formsWidth = 'calc( 100% - 300px )';
-			}
+			const formsInputWidth = `calc( 100% - ${ cellsWidth }px )`;
 
 			// Update width property of the forms input element.
-			el.$bulkEditTagsForms.closest( '.wpforms-edit-forms' ).css( 'width', formsWidth );
+			el.$bulkEditTagsForms.closest( '.wpforms-edit-forms' ).css( 'width', formsInputWidth );
 		},
 
 		/**

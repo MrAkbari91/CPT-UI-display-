@@ -76,7 +76,7 @@ class WPForms_Widget extends WP_Widget {
 
 		// Form.
 		if ( ! empty( $instance['form_id'] ) ) {
-			wpforms()->frontend->output( absint( $instance['form_id'] ), $instance['show_title'], $instance['show_desc'] );
+			wpforms()->get( 'frontend' )->output( absint( $instance['form_id'] ), $instance['show_title'], $instance['show_desc'] );
 		}
 
 		echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -132,7 +132,8 @@ class WPForms_Widget extends WP_Widget {
 					id="<?php echo esc_attr( $this->get_field_id( 'form_id' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'form_id' ) ); ?>">
 				<?php
-				$forms = wpforms()->form->get();
+				$forms = wpforms()->get( 'form' )->get();
+
 				if ( ! empty( $forms ) ) {
 					echo '<option value="" selected disabled>' . esc_html_x( 'Select your form', 'Widget', 'wpforms-lite' ) . '</option>';
 

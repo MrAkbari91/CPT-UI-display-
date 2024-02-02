@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Si
 Requires at least: 4.4
 Requires PHP: 7.4
 Tested up to: 6.4
-Stable tag: 4.0.1
+Stable tag: 4.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,27 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v4.0.7 - 29-January-2024
+- Fix: Resolved an issue where the Premium Template Kits won't get imported.
+
+v4.0.6 - 25-January-2024
+- Improvement: Enhanced user experience by providing informative error messages for better troubleshooting.
+
+v4.0.5 - 23-January-2024
+- Improvement: Added Flexbox Container compatibility for Elementor templates.
+
+v4.0.4 - 22-January-2024
+- Fix: Fixed the fatal error issue that would occur after Spectra v2.12.0.
+
+v4.0.3 - 17-January-2024
+- Fix: Fixed an issue where the import process was breaking for AI websites.
+- Fix: Fixed an issue where the images won't get reflected in search results as per the search keyword.
+
+v4.0.2 - 15-January-2024
+- Improvement: Added Flexbox Container compatibility in Elementor.
+- Improvement: Added ability to resume back to last session while building AI website.
+- Improvement: Better UX while using AI Website Builder.
 
 v4.0.1 - 04-January-2024
 - Fix: Fixed an issue where the CSS looked messed up after importing using AI Website Builder.

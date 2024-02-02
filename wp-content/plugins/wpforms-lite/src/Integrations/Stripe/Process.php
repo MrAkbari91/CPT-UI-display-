@@ -618,8 +618,9 @@ class Process {
 
 		$args = $this->get_base_subscription_args();
 
-		$args['email']    = sanitize_email( $this->fields[ $this->settings['recurring']['email'] ]['value'] );
-		$args['settings'] = $this->settings['recurring'];
+		$args['email']         = sanitize_email( $this->fields[ $this->settings['recurring']['email'] ]['value'] );
+		$args['settings']      = $this->settings['recurring'];
+		$args['customer_name'] = ! empty( $args['settings']['customer_name'] ) ? sanitize_text_field( $this->fields[ $args['settings']['customer_name'] ]['value'] ) : '';
 
 		$this->process_subscription( $args );
 
@@ -656,13 +657,18 @@ class Process {
 		}
 
 		// Receipt email.
-		if ( ! empty( $this->settings['receipt_email'] ) && ! empty( $this->fields[ $this->settings['receipt_email'] ]['value'] ) ) {
+		if ( isset( $this->settings['receipt_email'] ) && $this->settings['receipt_email'] !== '' && ! empty( $this->fields[ $this->settings['receipt_email'] ]['value'] ) ) {
 			$args['receipt_email'] = sanitize_email( $this->fields[ $this->settings['receipt_email'] ]['value'] );
 		}
 
 		// Customer email.
-		if ( ! empty( $this->settings['customer_email'] ) && ! empty( $this->fields[ $this->settings['customer_email'] ]['value'] ) ) {
+		if ( isset( $this->settings['customer_email'] ) && $this->settings['customer_email'] !== '' && ! empty( $this->fields[ $this->settings['customer_email'] ]['value'] ) ) {
 			$args['customer_email'] = sanitize_email( $this->fields[ $this->settings['customer_email'] ]['value'] );
+		}
+
+		// Customer name.
+		if ( isset( $this->settings['customer_name'] ) && $this->settings['customer_name'] !== '' && ! empty( $this->fields[ $this->settings['customer_name'] ]['value'] ) ) {
+			$args['customer_name'] = sanitize_text_field( $this->fields[ $this->settings['customer_name'] ]['value'] );
 		}
 
 		$this->api->process_single( $args );
@@ -698,6 +704,11 @@ class Process {
 
 			$args['email']    = sanitize_email( $this->fields[ $recurring['email'] ]['value'] );
 			$args['settings'] = $recurring;
+
+			// Customer name.
+			if ( isset( $recurring['customer_name'] ) && $recurring['customer_name'] !== '' && ! empty( $this->fields[ $recurring['customer_name'] ]['value'] ) ) {
+				$args['customer_name'] = sanitize_text_field( $this->fields[ $recurring['customer_name'] ]['value'] );
+			}
 
 			$this->process_subscription( $args );
 

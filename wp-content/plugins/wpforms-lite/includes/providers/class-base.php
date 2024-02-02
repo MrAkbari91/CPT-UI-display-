@@ -383,7 +383,7 @@ abstract class WPForms_Provider {
 		if ( is_object( $form ) ) {
 			$form = wpforms_decode( $form->post_content );
 		} elseif ( is_numeric( $form ) ) {
-			$form = wpforms()->form->get(
+			$form = wpforms()->get( 'form' )->get(
 				$form,
 				[
 					'content_only' => true,

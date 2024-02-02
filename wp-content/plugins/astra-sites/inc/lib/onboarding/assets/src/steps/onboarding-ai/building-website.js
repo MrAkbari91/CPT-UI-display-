@@ -14,10 +14,7 @@ import {
 	exportAiSite,
 	getAiDemo,
 } from '../import-site/import-utils';
-import {
-	SITE_CREATION_STATUS_CODES,
-	removeLocalStorageItem,
-} from './helpers/index';
+import { SITE_CREATION_STATUS_CODES } from './helpers/index';
 import { STORE_KEY } from './store';
 import { addHttps } from './utils/helpers';
 
@@ -183,7 +180,6 @@ const WebsiteBuilding = ( { onClickNext } ) => {
 	}, [] );
 
 	const handleClose = () => {
-		removeLocalStorageItem( 'ai-onboarding-details' );
 		dispatch( {
 			type: 'set',
 			currentIndex: 0,

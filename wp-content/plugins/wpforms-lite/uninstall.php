@@ -101,8 +101,8 @@ if ( ! empty( $preview_page ) ) {
 $wpforms_posts = get_posts(
 	[
 		'post_type'   => [ 'wpforms_log', 'wpforms' ],
-		'post_status' => 'any',
-		'numberposts' => - 1,
+		'post_status' => [ 'any', 'trash', 'auto-draft' ],
+		'numberposts' => -1,
 		'fields'      => 'ids',
 	]
 );

@@ -27,7 +27,7 @@ class EntriesCount {
 	 */
 	public function get_by_form() {
 
-		$forms = wpforms()->form->get( '', [ 'fields' => 'ids' ] );
+		$forms = wpforms()->get( 'form' )->get( '', [ 'fields' => 'ids' ] );
 
 		if ( empty( $forms ) || ! \is_array( $forms ) ) {
 			return [];

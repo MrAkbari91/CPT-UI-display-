@@ -478,18 +478,18 @@ var wpf = {
 	 *
 	 * @param {string} amount Amount to format.
 	 *
-	 * @returns {string} Formatted amount (for instance $ 128.00).
+	 * @return {string} Formatted amount (for instance $ 128.00).
 	 */
-	amountFormatCurrency: function( amount ) {
+	amountFormatCurrency( amount ) {
+		const sanitized = wpf.amountSanitize( amount ),
+			formatted = wpf.amountFormat( sanitized );
 
-		var sanitized  = wpf.amountSanitize( amount ),
-			formatted  = wpf.amountFormat( sanitized ),
-			result;
+		let result;
 
 		if ( wpforms_builder.currency_symbol_pos === 'right' ) {
 			result = formatted + ' ' + wpforms_builder.currency_symbol;
 		} else {
-			result = wpforms_builder.currency_symbol + ' ' + formatted;
+			result = wpforms_builder.currency_symbol + formatted;
 		}
 
 		return result;
@@ -1031,6 +1031,44 @@ var wpf = {
 		}
 
 		return pee;
+	},
+
+	/**
+	 * Init Media Library.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param {Object} args List of arguments.
+	 *
+	 * @return {wp.media.view.MediaFrame} A media workflow.
+	 */
+	initMediaLibrary( args ) {
+		const mediaFrame = wp.media.frames.wpforms_media_frame = wp.media( {
+			className: 'media-frame wpforms-media-frame',
+			multiple: false,
+			title: args.title,
+			library: { type: args.extensions },
+			button: {
+				text: args.buttonText,
+			},
+		} );
+
+		mediaFrame.on( 'uploader:ready', function() {
+			const accept = args.extensions.join( ',' );
+
+			jQuery( '.wpforms-media-frame .moxie-shim-html5 input[type="file"]' )
+				.attr( 'accept', accept );
+		} ).on( 'library:selection:add', function() {
+			const attachment = mediaFrame.state().get( 'selection' ).first().toJSON();
+
+			if ( ! args.extensions.includes( attachment.file.type ) ) {
+				// eslint-disable-next-line no-alert
+				alert( args.extensionsError );
+				mediaFrame.state().get( 'selection' ).reset();
+			}
+		} );
+
+		return mediaFrame;
 	},
 };
 

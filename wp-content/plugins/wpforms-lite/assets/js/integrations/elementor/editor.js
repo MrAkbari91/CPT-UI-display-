@@ -94,7 +94,7 @@ var WPFormsElementor = window.WPFormsElementor || ( function( document, window, 
 				formContainerId = $formContainer.attr( 'id' );
 
 			$scope
-				.closest( '.elementor-inner' )
+				.closest( '.elementor-editor-active' )
 				.find( '.elementor-widget-wpforms:not(.elementor-element-' + elementId + ')' )
 				.each( function() {
 

@@ -303,7 +303,7 @@ class WPForms_Field_GDPR_Checkbox extends WPForms_Field {
 	 */
 	public function format( $field_id, $field_submit, $form_data ) {
 
-		wpforms()->process->fields[ $field_id ] = [
+		wpforms()->get( 'process' )->fields[ $field_id ] = [
 			'name'  => ! empty( $form_data['fields'][ $field_id ]['label'] ) ? sanitize_text_field( $form_data['fields'][ $field_id ]['label'] ) : '',
 			'value' => $form_data['fields'][ $field_id ]['choices'][1]['label'],
 			'id'    => absint( $field_id ),

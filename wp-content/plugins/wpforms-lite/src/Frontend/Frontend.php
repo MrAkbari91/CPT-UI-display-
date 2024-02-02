@@ -215,7 +215,7 @@ class Frontend {
 		$form_data    = apply_filters( 'wpforms_frontend_form_data', wpforms_decode( $form->post_content ) );
 		$form_id      = absint( $form->ID );
 		$this->action = esc_url_raw( remove_query_arg( 'wpforms' ) );
-		$errors       = empty( wpforms()->process->errors[ $form_id ] ) ? [] : wpforms()->process->errors[ $form_id ];
+		$errors       = empty( wpforms()->get( 'process' )->errors[ $form_id ] ) ? [] : wpforms()->get( 'process' )->errors[ $form_id ];
 		$title        = filter_var( $title, FILTER_VALIDATE_BOOLEAN );
 		$description  = filter_var( $description, FILTER_VALIDATE_BOOLEAN );
 
@@ -863,7 +863,7 @@ class Frontend {
 		}
 
 		// Check if there are errors.
-		if ( ! empty( wpforms()->process->errors[ $form_id ][ $field_id ] ) ) {
+		if ( ! empty( wpforms()->get( 'process' )->errors[ $form_id ][ $field_id ] ) ) {
 			$attributes['input_class'][] = 'wpforms-error';
 		}
 
@@ -1018,7 +1018,7 @@ class Frontend {
 		$field      = $this->filter_field( $field, $form_data, $attributes );
 		$form_id    = absint( $form_data['id'] );
 		$field_id   = absint( $field['id'] );
-		$error      = ! empty( wpforms()->process->errors[ $form_id ][ $field_id ] ) ? wpforms()->process->errors[ $form_id ][ $field_id ] : '';
+		$error      = ! empty( wpforms()->get( 'process' )->errors[ $form_id ][ $field_id ] ) ? wpforms()->get( 'process' )->errors[ $form_id ][ $field_id ] : '';
 
 		return [ $field, $attributes, $error ];
 	}
@@ -1796,6 +1796,7 @@ class Frontend {
 			'val_email_restricted'       => wpforms_setting( 'validation-email-restricted', esc_html__( 'This email address is not allowed.', 'wpforms-lite' ) ),
 			'val_number'                 => wpforms_setting( 'validation-number', esc_html__( 'Please enter a valid number.', 'wpforms-lite' ) ),
 			'val_number_positive'        => wpforms_setting( 'validation-number-positive', esc_html__( 'Please enter a valid positive number.', 'wpforms-lite' ) ),
+			'val_minimum_price'          => wpforms_setting( 'validation-minimum-price', esc_html__( 'Amount entered is less than the required minimum.', 'wpforms-lite' ) ),
 			'val_confirm'                => wpforms_setting( 'validation-confirm', esc_html__( 'Field values do not match.', 'wpforms-lite' ) ),
 			'val_checklimit'             => wpforms_setting( 'validation-check-limit', esc_html__( 'You have exceeded the number of allowed selections: {#}.', 'wpforms-lite' ) ),
 			'val_limit_characters'       => wpforms_setting(
@@ -1899,6 +1900,9 @@ class Frontend {
 			$strings['currency_symbol']     = isset( $currencies[ $currency ]['symbol'] ) ? $currencies[ $currency ]['symbol'] : '$';
 			$strings['currency_symbol_pos'] = isset( $currencies[ $currency ]['symbol_pos'] ) ? $currencies[ $currency ]['symbol_pos'] : 'left';
 		}
+
+		$strings['val_requiredpayment'] = wpforms_setting( 'validation-requiredpayment', esc_html__( 'Payment is required.', 'wpforms-lite' ) );
+		$strings['val_creditcard']      = wpforms_setting( 'validation-creditcard', esc_html__( 'Please enter a valid credit card number.', 'wpforms-lite' ) );
 
 		return $strings;
 	}
@@ -2059,12 +2063,12 @@ class Frontend {
 							if ( form.querySelector( '.wpforms-error-container' ) ) {
 								return;
 							}
-							
+
 							const formError = error.cloneNode( true ),
 								formErrorId = form.id + '-error';
-							
+
 							formError.setAttribute( 'id', formErrorId );
-							
+
 							form.insertBefore( formError, form.firstChild );
 							form.setAttribute( 'aria-invalid', 'true' );
 							form.setAttribute( 'aria-errormessage', formErrorId );

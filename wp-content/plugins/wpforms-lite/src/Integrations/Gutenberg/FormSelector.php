@@ -443,7 +443,7 @@ class FormSelector implements IntegrationInterface {
 		);
 
 		return [
-			'logo_url'          => WPFORMS_PLUGIN_URL . 'assets/images/sullie-alt.png',
+			'logo_url'          => WPFORMS_PLUGIN_URL . 'assets/images/wpforms-logo.svg',
 			'block_preview_url' => WPFORMS_PLUGIN_URL . 'assets/images/integrations/gutenberg/block-preview.png',
 			'block_empty_url'   => WPFORMS_PLUGIN_URL . 'assets/images/empty-states/no-forms.svg',
 			'wpnonce'           => wp_create_nonce( 'wpforms-gutenberg-form-selector' ),

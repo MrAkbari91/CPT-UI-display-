@@ -175,10 +175,33 @@ abstract class Common {
 	 * Check if a customer exists in Stripe, if not creates one.
 	 *
 	 * @since 1.8.2
+	 * @since 1.8.6 Added customer name argument and allow empty email.
 	 *
 	 * @param string $email Email to fetch an existing customer.
+	 * @param string $name Customer name.
 	 */
-	protected function set_customer( $email ) {
+	protected function set_customer( $email = '', $name = '' ) {
+
+		if ( ! $email && ! $name  ) {
+			return;
+		}
+
+		// Create a customer with name only if email is empty.
+		if ( ! $email ) {
+
+			try {
+				$customer = Customer::create( [ 'name' => $name ], Helpers::get_auth_opts() );
+			} catch ( \Exception $e ) {
+				$customer = null;
+			}
+
+			if ( ! isset( $customer->id ) ) {
+				return;
+			}
+
+			$this->customer = $customer;
+			return;
+		}
 
 		try {
 			$customers = Customer::all(
@@ -192,14 +215,37 @@ abstract class Common {
 		if ( isset( $customers->data[0]->id ) ) {
 			$this->customer = $customers->data[0];
 
+			if ( ! empty( $name ) && $name !== $this->customer->name ) {
+				try {
+					$this->customer = Customer::update(
+						$this->customer->id,
+						[
+							'name' => $name,
+						],
+						Helpers::get_auth_opts()
+					);
+				} catch ( \Exception $e ) {
+					wpforms_log(
+						'Stripe: Unable to update user name.',
+						$e->getMessage(),
+						[
+							'type' => [ 'payment', 'error' ],
+						]
+					);
+				}
+			}
+
 			return;
 		}
 
 		try {
-			$customer = Customer::create(
-				[ 'email' => $email ],
-				Helpers::get_auth_opts()
-			);
+			$args = [ 'email' => $email ];
+
+			if ( ! empty( $name ) ) {
+				$args['name'] = $name;
+			}
+
+			$customer = Customer::create( $args, Helpers::get_auth_opts() );
 		} catch ( \Exception $e ) {
 			$customer = null;
 		}

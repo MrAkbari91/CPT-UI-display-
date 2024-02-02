@@ -86,23 +86,67 @@ class Geolocation extends AddonsItemBase {
 			return $settings;
 		}
 
-		$section_rows = [
-			'heading',
-			'screenshots',
-			'caps',
-			'submit',
+		$settings[ self::SLUG ][ self::SLUG . '-page' ] = [
+			'id'       => self::SLUG . '-page',
+			'content'  => wpforms_render( 'education/admin/page', $this->template_data(), true ),
+			'type'     => 'content',
+			'no_label' => true,
+			'class'    => [ 'wpforms-education-container-page' ],
 		];
 
-		foreach ( $section_rows as $section_row ) {
-			$settings[ self::SLUG ][ self::SLUG . '-' . $section_row ] = [
-				'id'       => self::SLUG . '-' . $section_row,
-				'content'  => wpforms_render( 'education/admin/settings/geolocation/' . $section_row, $addon, true ),
-				'type'     => 'content',
-				'no_label' => true,
-				'class'    => [ $section_row, 'wpforms-setting-row-education' ],
-			];
-		}
-
 		return $settings;
+	}
+
+	/**
+	 * Get the template data.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @return array
+	 */
+	private function template_data(): array {
+
+		$addon      = $this->addons->get_addon( 'geolocation' );
+		$images_url = WPFORMS_PLUGIN_URL . 'assets/images/geolocation-education/';
+		$params     = [
+			'features'             => [
+				__( 'City', 'wpforms-lite' ),
+				__( 'Latitude/Longitude', 'wpforms-lite' ),
+				__( 'Google Places API', 'wpforms-lite' ),
+				__( 'Country', 'wpforms-lite' ),
+				__( 'Address Autocomplete', 'wpforms-lite' ),
+				__( 'Mapbox API', 'wpforms-lite' ),
+				__( 'Postal/Zip Code', 'wpforms-lite' ),
+				__( 'Embedded Map in Forms', 'wpforms-lite' ),
+			],
+			'images'               => [
+				[
+					'url'   => $images_url . 'entry-location.jpg',
+					'url2x' => $images_url . 'entry-location@2x.jpg',
+					'title' => __( 'Location Info in Entries', 'wpforms-lite' ),
+				],
+				[
+					'url'   => $images_url . 'address-autocomplete.jpg',
+					'url2x' => $images_url . 'address-autocomplete@2x.jpg',
+					'title' => __( 'Address Autocomplete Field', 'wpforms-lite' ),
+				],
+				[
+					'url'   => $images_url . 'smart-address-field.jpg',
+					'url2x' => $images_url . 'smart-address-field@2x.jpg',
+					'title' => __( 'Smart Address Field', 'wpforms-lite' ),
+				],
+			],
+			'utm_medium'           => 'Settings - Geolocation',
+			'utm_content'          => 'Geolocation Addon',
+			'heading_title'        => __( 'Geolocation', 'wpforms-lite' ),
+			'heading_description'  => sprintf(
+				'<p>%1$s</p>',
+				__( 'Do you want to learn more about visitors who fill out your online forms? Our geolocation addon allows you to collect and store your website visitors geolocation data along with their form submission. This insight can help you to be better informed and turn more leads into customers. Furthermore, add a smart address field that autocompletes using the Google Places API.', 'wpforms-lite' )
+			),
+			'badge'                => __( 'Pro', 'wpforms-lite' ),
+			'features_description' => __( 'Powerful location-based insights and features…', 'wpforms-lite' ),
+		];
+
+		return array_merge( $params, $addon );
 	}
 }

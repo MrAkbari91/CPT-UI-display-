@@ -39,7 +39,7 @@ class FinancialAccount extends \WPForms\Vendor\Stripe\ApiResource
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Treasury\FinancialAccount the retrieved financial account
+     * @return \Stripe\Treasury\FinancialAccountFeatures the retrieved financial account features
      */
     public function retrieveFeatures($params = null, $opts = null)
     {
@@ -55,7 +55,7 @@ class FinancialAccount extends \WPForms\Vendor\Stripe\ApiResource
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Treasury\FinancialAccount the updated financial account
+     * @return \Stripe\Treasury\FinancialAccountFeatures the updated financial account features
      */
     public function updateFeatures($params = null, $opts = null)
     {

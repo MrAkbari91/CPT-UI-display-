@@ -64,10 +64,9 @@ var WPFormsStripePaymentElement = window.WPFormsStripePaymentElement || ( functi
 
 				app.initializeFormsDefaultObject();
 
-				$( '.wpforms-stripe form' ).each( app.setupStripeForm );
-
-				// Initialize in Conversational Form on field activation.
-				$( '.wpforms-field-stripe-credit-card' ).on( 'wpformsConvFormsFieldActivationAfter', app.convFormsFieldActivationAfter );
+				$( '.wpforms-stripe form' )
+					.each( app.setupStripeForm )
+					.on( 'wpformsConvFormsFieldActivationAfter', app.convFormsFieldActivationAfter ); // Initialize in Conversational Form on field activation.
 			} );
 
 			$( document )
@@ -233,6 +232,7 @@ var WPFormsStripePaymentElement = window.WPFormsStripePaymentElement || ( functi
 					// See min amount for different currencies https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts.
 					amount: 77777,
 					loader: 'always',
+					setupFutureUsage: 'off_session',
 					locale: wpforms_stripe.data.element_locale,
 					appearance: app.getElementAppearanceOptions( $form ),
 				} );

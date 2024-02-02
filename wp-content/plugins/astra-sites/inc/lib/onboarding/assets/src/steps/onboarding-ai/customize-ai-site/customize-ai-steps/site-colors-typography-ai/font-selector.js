@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tooltip } from '@brainstormforce/starter-templates-components';
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { Button, PreviousStepLink } from '../../../../../components';
 import ICONS from '../../../../../../icons';
 import { useStateValue } from '../../../../../store/store';
@@ -13,6 +13,8 @@ import {
 } from '../../../../import-site/import-utils';
 import LoadingSpinner from '../../../components/loading-spinner';
 import { STORE_KEY } from '../../../store';
+import { removeLocalStorageItem } from '../../../helpers';
+import { initialState } from '../../../store/reducer';
 // import Button from '../../components/button/button';
 // import { useStateValue } from '../../store/store';
 // import './style.scss';
@@ -160,6 +162,7 @@ export const getFontName = ( fontName, inheritFont ) => {
 };
 
 const FontSelector = ( { options, onSelect, selected } ) => {
+	const { setWebsiteOnboardingAIDetails } = useDispatch( STORE_KEY );
 	const [
 		{
 			currentCustomizeIndex,
@@ -199,6 +202,9 @@ const FontSelector = ( { options, onSelect, selected } ) => {
 		await setColorPalettes( JSON.stringify( activePalette ) );
 		await setSiteTitle( businessName );
 		await saveTypography( typography );
+
+		removeLocalStorageItem( 'ai-onboarding-details' );
+		setWebsiteOnboardingAIDetails( initialState.onboardingAI );
 
 		localStorage.removeItem( 'starter-templates-iframe-preview-data' );
 

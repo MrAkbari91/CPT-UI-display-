@@ -24,6 +24,36 @@ class Email {
 	private $plain_text;
 
 	/**
+	 * Temporary storage for the style overrides preferences.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @var array
+	 */
+	private $style_overrides;
+
+	/**
+	 * Determines if the user has the education modal.
+	 * If true, the value will be used to add the Education modal class to the setting controls.
+	 * This is only available in the free version.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @var string
+	 */
+	private $has_education;
+
+	/**
+	 * Determines if the user has the legacy template.
+	 * If true, the value will be used to add the Legacy template class to the setting controls.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @var string
+	 */
+	private $has_legacy_template;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 1.8.5
@@ -62,11 +92,35 @@ class Email {
 		$min = wpforms_get_min_suffix();
 
 		wp_enqueue_script(
-			'wpforms-admin-email-settings',
-			WPFORMS_PLUGIN_URL . "assets/js/components/admin/email/settings{$min}.js",
-			[ 'jquery', 'wpforms-admin', 'choicesjs' ],
+			'wpforms-contrast-checker',
+			WPFORMS_PLUGIN_URL . "assets/js/wpforms-contrast-checker{$min}.js",
+			[],
 			WPFORMS_VERSION,
 			true
+		);
+
+		wp_enqueue_script(
+			'wpforms-xor',
+			WPFORMS_PLUGIN_URL . "assets/js/wpforms-xor{$min}.js",
+			[],
+			WPFORMS_VERSION,
+			true
+		);
+
+		wp_enqueue_script(
+			'wpforms-admin-email-settings',
+			WPFORMS_PLUGIN_URL . "assets/js/components/admin/email/settings{$min}.js",
+			[ 'jquery', 'wpforms-admin', 'wp-escape-html', 'wp-url', 'choicesjs', 'wpforms-contrast-checker', 'wpforms-xor' ],
+			WPFORMS_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'wpforms-admin-email-settings',
+			'wpforms_admin_email_settings',
+			[
+				'contrast_fail' => esc_html__( 'This color combination may be hard to read. Try increasing the contrast between the body and text colors.', 'wpforms-lite' ),
+			]
 		);
 	}
 
@@ -86,17 +140,22 @@ class Email {
 			return $settings;
 		}
 
+		// Remove the appearance mode switcher from the settings array.
+		unset( $settings['email-appearance'] );
+
 		// Backup the Pro version background color setting to the free version.
 		// This is needed to keep the background color when the Pro version is deactivated.
 		if ( wpforms()->is_pro() && ! Helpers::is_legacy_html_template() ) {
-			$settings['email-background-color'] = sanitize_hex_color( $settings['email-color-scheme']['email_background_color'] );
+			$settings['email-background-color']      = sanitize_hex_color( $settings['email-color-scheme']['email_background_color'] );
+			$settings['email-background-color-dark'] = sanitize_hex_color( $settings['email-color-scheme-dark']['email_background_color_dark'] );
 
 			return $settings;
 		}
 
 		// Backup the free version background color setting to the Pro version.
 		// This is needed to keep the background color when the Pro version is activated.
-		$settings['email-color-scheme']['email_background_color'] = sanitize_hex_color( $settings['email-background-color'] );
+		$settings['email-color-scheme']['email_background_color']           = sanitize_hex_color( $settings['email-background-color'] );
+		$settings['email-color-scheme-dark']['email_background_color_dark'] = sanitize_hex_color( $settings['email-background-color-dark'] );
 
 		return $settings;
 	}
@@ -134,30 +193,22 @@ class Email {
 	 */
 	public function register_settings_fields( $settings ) {
 
-		$education_args   = [ 'action' => 'upgrade' ];
-		$has_eduction     = ! wpforms()->is_pro() ? 'education-modal' : '';
-		$style_overrides  = Helpers::get_current_template_style_overrides();
-		$preview_link     = $this->get_current_template_preview_link();
-		$this->plain_text = Helpers::is_plain_text_template();
-		$has_legacy       = Helpers::is_legacy_html_template() ? 'legacy-template' : '';
-
-		// After initializing the color picker, the helper icon from 1Password and LastPass appears inside the input field.
-		// These data attributes disable the extension form from appearing.
-		$color_scheme_data = [
-			'1p-ignore' => 'true', // 1Password ignore.
-			'lp-ignore' => 'true', // LastPass ignore.
-		];
+		$this->plain_text          = Helpers::is_plain_text_template();
+		$this->has_education       = ! wpforms()->is_pro() ? 'education-modal' : '';
+		$this->style_overrides     = Helpers::get_current_template_style_overrides();
+		$this->has_legacy_template = Helpers::is_legacy_html_template() ? 'legacy-template' : '';
+		$preview_link              = $this->get_current_template_preview_link();
 
 		// Add Email settings.
 		$settings['email'] = [
-			'email-heading'           => [
+			'email-heading'     => [
 				'id'       => 'email-heading',
 				'content'  => $this->get_heading_content(),
 				'type'     => 'content',
 				'no_label' => true,
 				'class'    => [ 'section-heading', 'no-desc' ],
 			],
-			'email-template'          => [
+			'email-template'    => [
 				'id'      => 'email-template',
 				'name'    => esc_html__( 'Template', 'wpforms-lite' ),
 				'class'   => [ 'wpforms-email-template', 'wpforms-card-image-group' ],
@@ -166,106 +217,35 @@ class Email {
 				'options' => Helpers::get_email_template_choices(),
 				'value'   => Helpers::get_current_template_name(),
 			],
-			'email-header-image'      => [
-				'id'          => 'email-header-image',
-				'name'        => esc_html__( 'Header Image', 'wpforms-lite' ),
-				'desc'        => esc_html__( 'Upload or choose a logo to be displayed at the top of email notifications.', 'wpforms-lite' ),
-				'class'       => [ 'wpforms-email-header-image', 'hide-for-template-none', $this->get_external_header_image_class() ],
-				'type'        => 'image',
-				'is_hidden'   => $this->plain_text,
-				'show_remove' => true,
-			],
-			'email-header-image-size' => [
-				'id'        => 'email-header-image-size',
-				'no_label'  => true,
-				'type'      => 'select',
-				'class'     => 'wpforms-email-header-image-size',
-				'is_hidden' => true,
-				'choicesjs' => false,
-				'default'   => 'medium',
+			// The reason that we're using the 'content' type is to avoid saving the value in the option storage.
+			// The value is used only for the appearance mode switcher, and merely acts as a switch between dark and light mode controls.
+			'email-appearance'  => [
+				'id'        => 'email-appearance',
+				'name'      => esc_html__( 'Appearance', 'wpforms-lite' ),
+				'desc'      => esc_html__( 'Modern email clients support viewing emails in light and dark modes. You can upload a header image and customize the style for each appearance mode independently to ensure an optimal reading experience.', 'wpforms-lite' ),
+				'type'      => 'radio',
+				'class'     => [ 'wpforms-setting-row-radio', 'hide-for-template-none', 'email-appearance-mode-toggle', $this->has_legacy_template ],
+				'default'   => 'light',
+				'is_hidden' => $this->plain_text,
 				'options'   => [
-					'small'  => esc_html__( 'Small', 'wpforms-lite' ),
-					'medium' => esc_html__( 'Medium', 'wpforms-lite' ),
-					'large'  => esc_html__( 'Large', 'wpforms-lite' ),
+					'light' => esc_html__( 'Light', 'wpforms-lite' ),
+					'dark'  => esc_html__( 'Dark', 'wpforms-lite' ),
 				],
 			],
-			'email-color-scheme'      => [
-				'id'              => 'email-color-scheme',
-				'name'            => esc_html__( 'Color Scheme', 'wpforms-lite' ),
-				'class'           => [ 'hide-for-template-none', $has_eduction, $has_legacy ],
-				'type'            => 'color_scheme',
-				'is_hidden'       => $this->plain_text,
-				'education_badge' => $has_eduction ? EducationHelpers::get_badge( 'Pro' ) : '',
-				'data_attributes' => $has_eduction ? array_merge( [ 'name' => esc_html__( 'Color Scheme', 'wpforms-lite' ) ], $education_args ) : [],
-				'colors'          => [
-					'email_background_color' => [
-						'name' => esc_html__( 'Background', 'wpforms-lite' ),
-						'data' => array_merge(
-							[
-								'fallback-color' => $style_overrides['email_background_color'],
-							],
-							$color_scheme_data
-						),
-					],
-					'email_body_color'       => [
-						'name' => esc_html__( 'Body', 'wpforms-lite' ),
-						'data' => array_merge(
-							[
-								'fallback-color' => $style_overrides['email_body_color'],
-							],
-							$color_scheme_data
-						),
-					],
-					'email_text_color'       => [
-						'name' => esc_html__( 'Text', 'wpforms-lite' ),
-						'data' => array_merge(
-							[
-								'fallback-color' => $style_overrides['email_text_color'],
-							],
-							$color_scheme_data
-						),
-					],
-					'email_links_color'      => [
-						'name' => esc_html__( 'Links', 'wpforms-lite' ),
-						'data' => array_merge(
-							[
-								'fallback-color' => $style_overrides['email_links_color'],
-							],
-							$color_scheme_data
-						),
-					],
-				],
-			],
-			'email-typography'        => [
-				'id'              => 'email-typography',
-				'name'            => esc_html__( 'Typography', 'wpforms-lite' ),
-				'desc'            => esc_html__( 'Choose the style that’s applied to all text in email notifications.', 'wpforms-lite' ),
-				'class'           => [ 'hide-for-template-none', $has_eduction, $has_legacy ],
-				'education_badge' => $has_eduction ? EducationHelpers::get_badge( 'Pro' ) : '',
-				'data_attributes' => $has_eduction ? array_merge( [ 'name' => esc_html__( 'Typography', 'wpforms-lite' ) ], $education_args ) : [],
-				'type'            => 'select',
-				'is_hidden'       => $this->plain_text,
-				'choicesjs'       => true,
-				'default'         => 'sans-serif',
-				'options'         => [
-					'sans-serif' => esc_html__( 'Sans Serif', 'wpforms-lite' ),
-					'serif'      => esc_html__( 'Serif', 'wpforms-lite' ),
-				],
-			],
-			'email-preview'           => [
+			'email-preview'     => [
 				'id'        => 'email-preview',
 				'type'      => 'content',
 				'is_hidden' => empty( $preview_link ),
 				'content'   => $preview_link,
 			],
-			'sending-heading'         => [
+			'sending-heading'   => [
 				'id'       => 'sending-heading',
 				'content'  => '<h4>' . esc_html__( 'Sending', 'wpforms-lite' ) . '</h4>',
 				'type'     => 'content',
 				'no_label' => true,
 				'class'    => [ 'section-heading', 'no-desc' ],
 			],
-			'email-async'             => [
+			'email-async'       => [
 				'id'     => 'email-async',
 				'name'   => esc_html__( 'Optimize Email Sending', 'wpforms-lite' ),
 				'desc'   => sprintf(
@@ -285,7 +265,7 @@ class Email {
 				'type'   => 'toggle',
 				'status' => true,
 			],
-			'email-carbon-copy'       => [
+			'email-carbon-copy' => [
 				'id'     => 'email-carbon-copy',
 				'name'   => esc_html__( 'Carbon Copy', 'wpforms-lite' ),
 				'desc'   => esc_html__( 'Enable the ability to CC: email addresses in the form notification settings.', 'wpforms-lite' ),
@@ -294,8 +274,8 @@ class Email {
 			],
 		];
 
-		// Add background color control if the Pro version is not active or Legacy template is selected.
-		$settings['email'] = $this->maybe_add_background_color_control( $settings['email'], $style_overrides['email_background_color'] );
+		// Add the style controls.
+		$settings['email'] = $this->add_appearance_controls( $settings['email'] );
 
 		// Maybe add the Legacy template notice.
 		$settings['email'] = $this->maybe_add_legacy_notice( $settings['email'] );
@@ -350,6 +330,141 @@ class Email {
 	}
 
 	/**
+	 * Add appearance controls.
+	 * This will include controls for both Light and Dark modes.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $settings Email settings.
+	 *
+	 * @return array
+	 */
+	private function add_appearance_controls( $settings ) {
+
+		// Education modal arguments.
+		$education_args = [ 'action' => 'upgrade' ];
+
+		// New settings for the Light mode.
+		$new_setting = [
+			'email-header-image'      => [
+				'id'          => 'email-header-image',
+				'name'        => esc_html__( 'Header Image', 'wpforms-lite' ),
+				'desc'        => esc_html__( 'Upload or choose a logo to be displayed at the top of email notifications.', 'wpforms-lite' ),
+				'class'       => [ 'wpforms-email-header-image', 'hide-for-template-none', 'has-preview-changes', 'email-light-mode', $this->get_external_header_image_class() ],
+				'type'        => 'image',
+				'is_hidden'   => $this->plain_text,
+				'show_remove' => true,
+			],
+			'email-header-image-size' => [
+				'id'        => 'email-header-image-size',
+				'no_label'  => true,
+				'type'      => 'select',
+				'class'     => [ 'wpforms-email-header-image-size', 'has-preview-changes', 'email-light-mode' ],
+				'is_hidden' => true,
+				'choicesjs' => false,
+				'default'   => 'medium',
+				'options'   => [
+					'small'  => esc_html__( 'Small', 'wpforms-lite' ),
+					'medium' => esc_html__( 'Medium', 'wpforms-lite' ),
+					'large'  => esc_html__( 'Large', 'wpforms-lite' ),
+				],
+			],
+			'email-color-scheme'      => [
+				'id'              => 'email-color-scheme',
+				'name'            => esc_html__( 'Color Scheme', 'wpforms-lite' ),
+				'class'           => [ 'email-color-scheme', 'hide-for-template-none', 'has-preview-changes', 'email-light-mode', $this->has_education, $this->has_legacy_template ],
+				'type'            => 'color_scheme',
+				'is_hidden'       => $this->plain_text,
+				'education_badge' => $this->get_pro_education_badge(),
+				'data_attributes' => $this->has_education ? array_merge( [ 'name' => esc_html__( 'Color Scheme', 'wpforms-lite' ) ], $education_args ) : [],
+				'colors'          => $this->get_color_scheme_controls(),
+			],
+			'email-typography'        => [
+				'id'              => 'email-typography',
+				'name'            => esc_html__( 'Typography', 'wpforms-lite' ),
+				'desc'            => esc_html__( 'Choose the style that’s applied to all text in email notifications.', 'wpforms-lite' ),
+				'class'           => [ 'hide-for-template-none', 'has-preview-changes', 'email-typography', 'email-light-mode', $this->has_education, $this->has_legacy_template ],
+				'education_badge' => $this->get_pro_education_badge(),
+				'data_attributes' => $this->has_education ? array_merge( [ 'name' => esc_html__( 'Typography', 'wpforms-lite' ) ], $education_args ) : [],
+				'type'            => 'select',
+				'is_hidden'       => $this->plain_text,
+				'choicesjs'       => true,
+				'default'         => 'sans-serif',
+				'options'         => [
+					'sans-serif' => esc_html__( 'Sans Serif', 'wpforms-lite' ),
+					'serif'      => esc_html__( 'Serif', 'wpforms-lite' ),
+				],
+			],
+		];
+
+		// Add background color control if the Pro version is not active or Legacy template is selected.
+		$new_setting = $this->maybe_add_background_color_control( $new_setting );
+
+		return wpforms_array_insert(
+			$settings,
+			$this->add_appearance_dark_mode_controls( $new_setting ),
+			'email-appearance'
+		);
+	}
+
+	/**
+	 * Add appearance dark mode controls.
+	 *
+	 * This function will duplicate the default "Light" color
+	 * controls to create corresponding controls for dark mode.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $settings Email settings.
+	 *
+	 * @return array
+	 */
+	private function add_appearance_dark_mode_controls( $settings ) {
+
+		// Duplicate and modify each item for dark mode.
+		foreach ( $settings as $key => $item ) {
+			// Duplicate the item with '-dark' added to the key.
+			$dark_key              = "{$key}-dark";
+			$settings[ $dark_key ] = $item;
+
+			// Modify the 'name' within the duplicated item.
+			if ( isset( $settings[ $dark_key ]['id'] ) ) {
+				$settings[ $dark_key ]['id'] .= '-dark';
+				$classes                      = &$settings[ $dark_key ]['class'];
+				$classes[]                    = 'email-dark-mode';
+				$classes[]                    = 'wpforms-hide';
+
+				// Remove classes related to light mode.
+				$classes = array_filter(
+					$classes,
+					static function ( $class_name ) {
+
+						return $class_name !== 'email-light-mode' && $class_name !== 'has-external-image-url';
+					}
+				);
+			}
+
+			// Override the description for the header image control.
+			if ( $key === 'email-header-image' ) {
+				$settings[ $dark_key ]['desc'] = esc_html__( 'Upload or choose a logo to be displayed at the top of email notifications. Light mode image will be used if not set.', 'wpforms-lite' );
+			}
+
+			// Override the background color control attributes.
+			if ( $key === 'email-background-color' ) {
+				$settings[ $dark_key ]['default']                = sanitize_hex_color( $this->style_overrides['email_background_color_dark'] );
+				$settings[ $dark_key ]['data']['fallback-color'] = sanitize_hex_color( $this->style_overrides['email_background_color_dark'] );
+			}
+
+			// Override the color scheme control attributes.
+			if ( $key === 'email-color-scheme' ) {
+				$settings[ $dark_key ]['colors'] = $this->get_color_scheme_controls( true );
+			}
+		}
+
+		return $settings;
+	}
+
+	/**
 	 * Get Email settings heading content.
 	 *
 	 * @since 1.8.5
@@ -359,6 +474,69 @@ class Email {
 	private function get_heading_content() {
 
 		return wpforms_render( 'admin/settings/email-heading' );
+	}
+
+	/**
+	 * Get Email settings education badge.
+	 * This is only available in the free version.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @return string
+	 */
+	private function get_pro_education_badge() {
+
+		// Leave early if the user has the Lite version.
+		if ( empty( $this->has_education ) ) {
+			return '';
+		}
+
+		// Output the education badge.
+		return EducationHelpers::get_badge( 'Pro' );
+	}
+
+	/**
+	 * Generate color scheme controls for the color picker.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param bool $is_dark_mode Whether the color scheme is for dark mode.
+	 *
+	 * @return array
+	 */
+	private function get_color_scheme_controls( $is_dark_mode = false ) {
+
+		// Append '_dark' to keys if it's for dark mode.
+		$is_dark_mode_suffix = $is_dark_mode ? '_dark' : '';
+
+		// Data attributes to disable extensions from appearing in the input field.
+		$color_scheme_data = [
+			'1p-ignore' => 'true', // 1Password ignore.
+			'lp-ignore' => 'true', // LastPass ignore.
+		];
+
+		$colors   = [];
+		$controls = [
+			"email_background_color{$is_dark_mode_suffix}" => esc_html__( 'Background', 'wpforms-lite' ),
+			"email_body_color{$is_dark_mode_suffix}"       => esc_html__( 'Body', 'wpforms-lite' ),
+			"email_text_color{$is_dark_mode_suffix}"       => esc_html__( 'Text', 'wpforms-lite' ),
+			"email_links_color{$is_dark_mode_suffix}"      => esc_html__( 'Links', 'wpforms-lite' ),
+		];
+
+		foreach ( $controls as $key => $label ) {
+			// Construct the color controls array.
+			$colors[ $key ] = [
+				'name' => $label,
+				'data' => array_merge(
+					[
+						'fallback-color' => $this->style_overrides[ $key ],
+					],
+					$color_scheme_data
+				),
+			];
+		}
+
+		return $colors;
 	}
 
 	/**
@@ -386,9 +564,10 @@ class Email {
 
 		return sprintf(
 			wp_kses( /* translators: %1$s - Email template preview URL. */
-				__( '<a href="%1$s" target="_blank" rel="noopener">Preview Email Template</a>', 'wpforms-lite' ),
+				__( '<a href="%1$s" class="wpforms-btn-preview" target="_blank" rel="noopener">Preview Email Template</a>', 'wpforms-lite' ),
 				[
 					'a' => [
+						'class'  => true,
 						'href'   => true,
 						'target' => true,
 						'rel'    => true,
@@ -405,12 +584,11 @@ class Email {
 	 *
 	 * @since 1.8.5
 	 *
-	 * @param array  $settings       Email settings.
-	 * @param string $fallback_color Fallback color.
+	 * @param array $settings Email settings.
 	 *
 	 * @return array
 	 */
-	private function maybe_add_background_color_control( $settings, $fallback_color = '#e9eaec' ) {
+	private function maybe_add_background_color_control( $settings ) {
 
 		// Leave as is if the Pro version is active and no legacy template available.
 		if ( ! Helpers::is_legacy_html_template() && wpforms()->is_pro() ) {
@@ -425,18 +603,19 @@ class Email {
 					'id'        => 'email-background-color',
 					'name'      => esc_html__( 'Background Color', 'wpforms-lite' ),
 					'desc'      => esc_html__( 'Customize the background color of the email template.', 'wpforms-lite' ),
-					'class'     => 'email-background-color',
+					'class'     => [ 'email-background-color', 'has-preview-changes', 'email-light-mode' ],
 					'type'      => 'color',
 					'is_hidden' => $this->plain_text,
 					'default'   => '#e9eaec',
 					'data'      => [
-						'fallback-color' => $fallback_color,
+						'fallback-color' => $this->style_overrides['email_background_color'],
 						'1p-ignore'      => 'true', // 1Password ignore.
 						'lp-ignore'      => 'true', // LastPass ignore.
 					],
 				],
 			],
-			'email-header-image'
+			'email-color-scheme',
+			'before'
 		);
 	}
 
@@ -445,6 +624,9 @@ class Email {
 	 *
 	 * This is used to determine if the header image is external.
 	 * Legacy header image control was allowing external URLs.
+	 *
+	 * Note that this evaluation is only available for the "Light" mode,
+	 * as the "Dark" mode is a new feature and doesn't have the legacy header image control.
 	 *
 	 * @since 1.8.5
 	 *

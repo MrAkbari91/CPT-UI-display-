@@ -1,0 +1,23 @@
+/*
+* Cube Blog Customize Controls CSS File
+*/
+
+#customize-theme-controls .control-section-upsell {
+	display: block !important; 
+}
+
+.wp-core-ui .control-section-upsell .button-secondary {
+	color: #fff;
+	display: block;
+	margin-top: -3px;
+	font-weight: 600;
+	background: #5cb85c;
+	border-color: #5cb85c; 
+	box-shadow: none;
+}
+
+.wp-core-ui .control-section-upsell .button-secondary:hover,
+.wp-core-ui .control-section-upsell .button-secondary:focus {
+	background: #47a447;
+	border-color: #47a447; 
+}

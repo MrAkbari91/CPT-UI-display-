@@ -48,6 +48,12 @@ h6 a, h6 a:visited {
 	color: <?php echo sanitize_hex_color( $email_links_color ); ?>;
 }
 
+.button-link {
+	background-color: <?php echo sanitize_hex_color( $email_links_color ); ?>;
+	border: 1px solid <?php echo sanitize_hex_color( $email_links_color ); ?>;
+	color: <?php echo sanitize_hex_color( $email_body_color ); ?>;
+}
+
 .content .field-value {
 	border-bottom: 1px solid <?php echo sanitize_hex_color( wpforms_generate_contrasting_color( $email_text_color, 86, 72 ) ); ?>;
 }

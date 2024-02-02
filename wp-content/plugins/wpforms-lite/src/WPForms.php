@@ -4,6 +4,8 @@ namespace WPForms {
 
 	use AllowDynamicProperties;
 	use stdClass;
+	use WPForms_Form_Handler;
+	use WPForms_Process;
 
 	/**
 	 * Main WPForms class.
@@ -193,7 +195,6 @@ namespace WPForms {
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/admin.php';
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-notices.php';
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-menu.php';
-				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/overview/class-overview.php';
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/builder/class-builder.php';
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/builder/functions.php';
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-settings.php';
@@ -269,8 +270,8 @@ namespace WPForms {
 		public function objects() {
 
 			// Global objects.
-			$this->form    = new \WPForms_Form_Handler();
-			$this->process = new \WPForms_Process();
+			$this->registry['form']    = new WPForms_Form_Handler();
+			$this->registry['process'] = new WPForms_Process();
 
 			/**
 			 * Executes when all the WPForms stuff was loaded.
@@ -285,38 +286,38 @@ namespace WPForms {
 		 *
 		 * @since 1.5.7
 		 *
-		 * @param array $class Class registration info.
+		 * @param array $class_data Class registration info.
 		 */
-		public function register( $class ) {
+		public function register( $class_data ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded, WPForms.PHP.HooksMethod.InvalidPlaceForAddingHooks
 
-			if ( empty( $class['name'] ) || ! is_string( $class['name'] ) ) {
+			if ( empty( $class_data['name'] ) || ! is_string( $class_data['name'] ) ) {
 				return;
 			}
 
-			if ( isset( $class['condition'] ) && empty( $class['condition'] ) ) {
+			if ( isset( $class_data['condition'] ) && empty( $class_data['condition'] ) ) {
 				return;
 			}
 
-			$full_name = $this->is_pro() ? '\WPForms\Pro\\' . $class['name'] : '\WPForms\Lite\\' . $class['name'];
-			$full_name = class_exists( $full_name ) ? $full_name : '\WPForms\\' . $class['name'];
+			$full_name = $this->is_pro() ? '\WPForms\Pro\\' . $class_data['name'] : '\WPForms\Lite\\' . $class_data['name'];
+			$full_name = class_exists( $full_name ) ? $full_name : '\WPForms\\' . $class_data['name'];
 
 			if ( ! class_exists( $full_name ) ) {
 				return;
 			}
 
-			$id       = isset( $class['id'] ) ? $class['id'] : '';
+			$id       = $class_data['id'] ?? '';
 			$id       = $id ? preg_replace( '/[^a-z_]/', '', (string) $id ) : $id;
-			$hook     = isset( $class['hook'] ) ? (string) $class['hook'] : 'wpforms_loaded';
-			$run      = isset( $class['run'] ) ? $class['run'] : 'init';
-			$priority = isset( $class['priority'] ) && is_int( $class['priority'] ) ? $class['priority'] : 10;
+			$hook     = isset( $class_data['hook'] ) ? (string) $class_data['hook'] : 'wpforms_loaded';
+			$run      = $class_data['run'] ?? 'init';
+			$priority = isset( $class_data['priority'] ) && is_int( $class_data['priority'] ) ? $class_data['priority'] : 10;
 
 			$callback = function () use ( $full_name, $id, $run ) {
 
+				// Instantiate class.
 				$instance = new $full_name();
 
-				if ( $id && ! array_key_exists( $id, $this->registry ) ) {
-					$this->registry[ $id ] = $instance;
-				}
+				$this->register_instance( $id, $instance );
+
 				if ( $run && method_exists( $instance, $run ) ) {
 					$instance->{$run}();
 				}
@@ -326,6 +327,21 @@ namespace WPForms {
 				add_action( $hook, $callback, $priority );
 			} else {
 				$callback();
+			}
+		}
+
+		/**
+		 * Register any class instance.
+		 *
+		 * @since 1.8.6
+		 *
+		 * @param string $id       Class ID.
+		 * @param object $instance Any class instance (object).
+		 */
+		public function register_instance( $id, $instance ) {
+
+			if ( $id && is_object( $instance ) && ! array_key_exists( $id, $this->registry ) ) {
+				$this->registry[ $id ] = $instance;
 			}
 		}
 

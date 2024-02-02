@@ -28,6 +28,7 @@ function wpforms_edu_get_button( $action, $plugin_allow, $path, $url, $utm ) {
 	$status      = 'inactive';
 	$data_plugin = $path;
 	$title       = esc_html__( 'Activate', 'wpforms-lite' );
+	$can_install = wpforms_can_install( 'addon' );
 
 	if ( $action === 'install' ) {
 		$status      = 'download';
@@ -36,12 +37,19 @@ function wpforms_edu_get_button( $action, $plugin_allow, $path, $url, $utm ) {
 	}
 
 	?>
-	<button
-		class="status-<?php echo esc_attr( $status ); ?> wpforms-btn wpforms-btn-lg wpforms-btn-blue wpforms-education-toggle-plugin-btn"
-		data-type="addon"
-		data-action="<?php echo esc_attr( $action ); ?>"
-		data-plugin="<?php echo esc_attr( $data_plugin ); ?>">
-		<i></i><?php echo esc_html( $title ); ?>
+
+	<?php if ( $action === 'install' && ! $can_install ) : ?>
+		<div class="wpforms-notice wpforms-error">
+			<p><?php esc_html_e( 'Plugin installation is disabled for this site.', 'wpforms-lite' ); ?></p>
+		</div>
+	<?php else : ?>
+		<button
+			class="status-<?php echo esc_attr( $status ); ?> wpforms-btn wpforms-btn-lg wpforms-btn-blue wpforms-education-toggle-plugin-btn"
+			data-type="addon"
+			data-action="<?php echo esc_attr( $action ); ?>"
+			data-plugin="<?php echo esc_attr( $data_plugin ); ?>">
+			<i></i><?php echo esc_html( $title ); ?>
+	<?php endif; ?>
 	<?php
 }
 

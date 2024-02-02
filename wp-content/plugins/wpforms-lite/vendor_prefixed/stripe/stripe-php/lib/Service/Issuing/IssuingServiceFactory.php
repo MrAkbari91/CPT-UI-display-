@@ -10,6 +10,7 @@ namespace WPForms\Vendor\Stripe\Service\Issuing;
  * @property CardholderService $cardholders
  * @property CardService $cards
  * @property DisputeService $disputes
+ * @property TokenService $tokens
  * @property TransactionService $transactions
  */
 class IssuingServiceFactory extends \WPForms\Vendor\Stripe\Service\AbstractServiceFactory
@@ -17,7 +18,7 @@ class IssuingServiceFactory extends \WPForms\Vendor\Stripe\Service\AbstractServi
     /**
      * @var array<string, string>
      */
-    private static $classMap = ['authorizations' => AuthorizationService::class, 'cardholders' => CardholderService::class, 'cards' => CardService::class, 'disputes' => DisputeService::class, 'transactions' => TransactionService::class];
+    private static $classMap = ['authorizations' => AuthorizationService::class, 'cardholders' => CardholderService::class, 'cards' => CardService::class, 'disputes' => DisputeService::class, 'tokens' => TokenService::class, 'transactions' => TransactionService::class];
     protected function getServiceClass($name)
     {
         return \array_key_exists($name, self::$classMap) ? self::$classMap[$name] : null;

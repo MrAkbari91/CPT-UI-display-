@@ -35,8 +35,9 @@ const ConfirmationModal = ( { open, setOpen, onClickGenerate } ) => {
 	return (
 		<Modal width="640" open={ open } setOpen={ setOpen }>
 			<div className="font-sans">
-				<h1 className="font-bold">Congratulations, </h1>
-				<h1 className="font-bold">{ `you're almost there!` } 🎉</h1>
+				<h1 className="font-bold">
+					Congratulations, { `you're almost there!` } 🎉
+				</h1>
 				<div className="pt-2 text-base text-app-text">
 					{ `Before we hit the final button, let's quickly double-check
 					everything.` }
@@ -126,7 +127,7 @@ const ConfirmationModal = ( { open, setOpen, onClickGenerate } ) => {
 					{ isLoading ? (
 						<LoadingSpinner />
 					) : (
-						'Start Building the Website'
+						'Yes! Build This Website.'
 					) }
 				</Button>
 

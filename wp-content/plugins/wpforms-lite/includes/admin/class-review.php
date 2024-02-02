@@ -45,6 +45,11 @@ class WPForms_Review {
 			return;
 		}
 
+		// Do not show the review request on Addons page.
+		if ( wpforms_is_admin_page( 'addons' ) ) {
+			return;
+		}
+
 		// Verify that we can do a check for reviews.
 		$notices = (array) get_option( 'wpforms_admin_notices', [] );
 		$time    = time();
@@ -94,7 +99,7 @@ class WPForms_Review {
 	public function review() {
 
 		// Fetch total entries.
-		$entries = wpforms()->entry->get_entries( [ 'number' => 50 ], true );
+		$entries = wpforms()->get( 'entry' )->get_entries( [ 'number' => 50 ], true );
 
 		// Only show review request if the site has collected at least 50 entries.
 		if ( empty( $entries ) || $entries < 50 ) {

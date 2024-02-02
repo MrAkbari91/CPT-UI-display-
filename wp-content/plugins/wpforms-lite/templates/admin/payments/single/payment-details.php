@@ -3,7 +3,10 @@
  * Single Payment page - Payment details template for single and subscription data.
  *
  * @since 1.8.2
+ * @since 1.8.6 Added $class variable.
  *
+ * @var string $id                  Block id.
+ * @var string $class               Extra Class based on type of payment.
  * @var string $title               Block title.
  * @var string $payment_id          Payment id.
  * @var string $gateway_link        Link to gateway payment details.
@@ -24,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<div id="wpforms-payment-info" class="postbox">
+<div id="<?php echo esc_attr( $id ); ?>" class="postbox <?php echo esc_attr( $class ); ?>">
 
 	<div class="postbox-header">
 		<h2 class="hndle">

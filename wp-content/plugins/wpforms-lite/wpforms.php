@@ -7,7 +7,7 @@
  * Requires PHP:      7.0
  * Author:            WPForms
  * Author URI:        https://wpforms.com
- * Version:           1.8.5.4
+ * Version:           1.8.6.3
  * Text Domain:       wpforms-lite
  * Domain Path:       assets/languages
  *
@@ -36,7 +36,7 @@ if ( ! defined( 'WPFORMS_VERSION' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	define( 'WPFORMS_VERSION', '1.8.5.4' );
+	define( 'WPFORMS_VERSION', '1.8.6.3' );
 }
 
 // Plugin Folder Path.

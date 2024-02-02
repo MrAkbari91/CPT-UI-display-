@@ -5,5 +5,5 @@ namespace WPForms\Vendor\Stripe\Util;
 
 class ApiVersion
 {
-    const CURRENT = '2022-11-15';
+    const CURRENT = '2023-10-16';
 }

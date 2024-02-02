@@ -29,7 +29,7 @@ class SubscriptionItem extends ApiResource
     use ApiOperations\Update;
     const PATH_USAGE_RECORDS = '/usage_records';
     /**
-     * @param null|string $id the ID of the subscription item on which to create the usage record
+     * @param string $id the ID of the subscription item on which to create the usage record
      * @param null|array $params
      * @param null|array|string $opts
      *

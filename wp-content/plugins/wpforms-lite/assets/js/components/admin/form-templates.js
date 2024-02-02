@@ -6,38 +6,34 @@
  * @since 1.7.7
  */
 
-'use strict';
-
+// eslint-disable-next-line no-var
 var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, window, $ ) {
-
 	/**
 	 * Runtime variables.
 	 *
 	 * @since 1.7.7
 	 *
-	 * @type {object}
+	 * @type {Object}
 	 */
-	var vars = {};
+	const vars = {};
 
 	/**
 	 * Public functions and properties.
 	 *
 	 * @since 1.7.7
 	 *
-	 * @type {object}
+	 * @type {Object}
 	 */
-	var app = {
+	const app = {
 
 		/**
 		 * Start the engine.
 		 *
 		 * @since 1.7.7
 		 */
-		init: function() {
-
+		init() {
 			$( app.ready );
 			$( window ).on( 'load', function() {
-
 				// in case of jQuery 3.+ we need to wait for an `ready` event first.
 				if ( typeof $.ready.then === 'function' ) {
 					$.ready.then( app.load );
@@ -52,8 +48,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.7.7
 		 */
-		ready: function() {
-
+		ready() {
 			app.setup();
 			app.events();
 		},
@@ -63,8 +58,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.7.7
 		 */
-		load: function() {
-
+		load() {
 			app.showUpgradeBanner();
 		},
 
@@ -73,13 +67,16 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.7.7
 		 */
-		setup: function() {
-
+		setup() {
 			// Template list object.
 			vars.templateList = new List( 'wpforms-setup-templates-list', {
 				valueNames: [
 					'wpforms-template-name',
 					'wpforms-template-desc',
+					{
+						name: 'fields',
+						attr: 'data-fields',
+					},
 					{
 						name: 'slug',
 						attr: 'data-slug',
@@ -109,23 +106,19 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.7.7
 		 */
-		events: function() {
-
-			$( '#wpforms-setup-templates-list' )
-				.on( 'click', '.wpforms-template-favorite i', app.selectFavorite );
+		events() {
+			$( document )
+				.on( 'click', '#wpforms-setup-templates-list .wpforms-template-favorite i', app.selectFavorite );
 		},
 
 		/**
 		 * Select Favorite Templates.
 		 *
 		 * @since 1.7.7
-		 *
-		 * @param {object} e Event object.
 		 */
 		// eslint-disable-next-line max-lines-per-function
-		selectFavorite: function( e ) {
-
-			let $heartIcon = $( this ),
+		selectFavorite() {
+			const $heartIcon = $( this ),
 				favorite = $heartIcon.hasClass( 'fa-heart-o' ),
 				$favorite = $heartIcon.closest( '.wpforms-template-favorite' ),
 				$template = $heartIcon.closest( '.wpforms-template' ),
@@ -133,25 +126,24 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 				templateSlug = $template.find( '.wpforms-template-select' ).data( 'slug' ),
 				$favoritesCategory = $( '.wpforms-setup-templates-categories' ).find( '[data-category=\'favorites\']' ),
 				$favoritesCount = $favoritesCategory.find( 'span' ),
-				favoritesCount = parseInt( $favoritesCount.html(), 10 ),
 				data = {
 					action: 'wpforms_templates_favorite',
 					slug: templateSlug,
-					favorite: favorite,
+					favorite,
 					nonce: wpforms_form_templates.nonce,
 				};
 
-			let item = vars.templateList.get( 'slug', templateSlug )[0],
+			let favoritesCount = parseInt( $favoritesCount.html(), 10 );
+
+			const item = vars.templateList.get( 'slug', templateSlug )[ 0 ],
 				values = item.values();
 
-			let toggleHeartIcon = function() {
-
+			const toggleHeartIcon = function() {
 				$favorite.find( '.fa-heart-o' ).toggleClass( 'wpforms-hidden', values.favorite );
 				$favorite.find( '.fa-heart' ).toggleClass( 'wpforms-hidden', ! values.favorite );
 			};
 
-			let unMarkFavorite = function() {
-
+			const unMarkFavorite = function() {
 				values.favorite = false;
 				favoritesCount = favoritesCount - 1;
 
@@ -164,8 +156,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 				app.maybeHideFavoritesCategory();
 			};
 
-			let markFavorite = function() {
-
+			const markFavorite = function() {
 				values.favorite = true;
 				favoritesCount = favoritesCount + 1;
 
@@ -179,9 +170,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 			};
 
 			$.post( wpforms_form_templates.ajaxurl, data, function( res ) {
-
 				if ( ! res.success ) {
-
 					if ( favorite ) {
 						unMarkFavorite();
 
@@ -206,16 +195,14 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.7.7
 		 */
-		maybeHideFavoritesCategory: function() {
-
-			let $categoriesList = $( '.wpforms-setup-templates-categories' ),
+		maybeHideFavoritesCategory() {
+			const $categoriesList = $( '.wpforms-setup-templates-categories' ),
 				$favoritesCategory = $categoriesList.find( '[data-category=\'favorites\']' ),
 				favoritesCount = parseInt( $favoritesCategory.find( 'span' ).html(), 10 );
 
 			$favoritesCategory.toggleClass( 'wpforms-hidden', ! favoritesCount );
 
 			if ( $favoritesCategory.hasClass( 'active' ) ) {
-
 				if ( ! favoritesCount ) {
 					$categoriesList.find( '[data-category=\'all\']' ).trigger( 'click' );
 
@@ -230,11 +217,8 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 * Search template callback.
 		 *
 		 * @since 1.7.7
-		 *
-		 * @param {object} e Event object.
 		 */
-		searchTemplate: function( e ) {
-
+		searchTemplate() {
 			app.performSearch( $( this ).val() );
 			app.showUpgradeBanner();
 		},
@@ -249,7 +233,13 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		performSearch( query ) {
 			const searchResult = vars.templateList.search( query, [ 'name' ], function( searchString ) {
 				for ( let index = 0, length = vars.templateList.items.length; index < length; index++ ) {
-					vars.templateList.items[ index ].found = ( new RegExp( searchString ) ).test( vars.templateList.items[ index ].values()[ 'wpforms-template-name' ].toLowerCase() );
+					const values = vars.templateList.items[ index ].values();
+					const templateName = values[ 'wpforms-template-name' ].toLowerCase();
+					const templateDesc = values[ 'wpforms-template-desc' ].toLowerCase();
+					const fields = values.fields.toLowerCase();
+					const searchRegex = new RegExp( searchString );
+
+					vars.templateList.items[ index ].found = searchRegex.test( templateName ) || searchRegex.test( templateDesc ) || searchRegex.test( fields );
 				}
 			} );
 
@@ -328,9 +318,8 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.7.7
 		 */
-		selectTemplateCancel: function( ) {
-
-			let $template = $( '#wpforms-setup-templates-list' ).find( '.wpforms-template.active' ),
+		selectTemplateCancel( ) {
+			const $template = $( '#wpforms-setup-templates-list' ).find( '.wpforms-template.active' ),
 				$button = $template.find( '.wpforms-template-select' );
 
 			$template.removeClass( 'active' );
@@ -342,13 +331,12 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.7.7
 		 */
-		showUpgradeBanner: function() {
-
+		showUpgradeBanner() {
 			if ( ! $( '#tmpl-wpforms-templates-upgrade-banner' ).length ) {
 				return;
 			}
 
-			let template = wp.template( 'wpforms-templates-upgrade-banner' );
+			const template = wp.template( 'wpforms-templates-upgrade-banner' );
 
 			if ( ! template ) {
 				return;
@@ -375,8 +363,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 * @param {jQuery}   $button  Use template button object.
 		 * @param {Function} callback The function to set the template.
 		 */
-		selectTemplateProcess: function( formName, template, $button, callback ) {
-
+		selectTemplateProcess( formName, template, $button, callback ) {
 			if ( $button.data( 'addons' ) ) {
 				app.addonsModal( formName, template, $button, callback );
 
@@ -396,8 +383,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 * @param {jQuery}   $button  Use template button object.
 		 * @param {Function} callback The function to set the template.
 		 */
-		addonsModal: function( formName, template, $button, callback ) {
-
+		addonsModal( formName, template, $button, callback ) {
 			const templateName = $button.data( 'template-name-raw' );
 			const addonsNames = $button.data( 'addons-names' );
 			const addonsSlugs = $button.data( 'addons' );
@@ -430,8 +416,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 * @param {string}   prompt   Modal content.
 		 * @param {Function} callback The function to set the template.
 		 */
-		userCanInstallAddonsModal: function( formName, template, addons, prompt, callback ) {
-
+		userCanInstallAddonsModal( formName, template, addons, prompt, callback ) {
 			const spinner = '<i class="wpforms-loading-spinner wpforms-loading-white wpforms-loading-inline"></i>';
 
 			$.confirm( {
@@ -444,8 +429,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 						text: wpforms_form_templates.install_confirm,
 						btnClass: 'btn-confirm',
 						keys: [ 'enter' ],
-						action: function() {
-
+						action() {
 							this.$$confirm
 								.prop( 'disabled', true )
 								.html( spinner + wpforms_form_templates.activating );
@@ -460,8 +444,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 					},
 					cancel: {
 						text: wpforms_form_templates.cancel,
-						action: function() {
-
+						action() {
 							WPFormsFormTemplates.selectTemplateCancel();
 						},
 					},
@@ -476,8 +459,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @param {string} prompt Modal content.
 		 */
-		userCannotInstallAddonsModal: function( prompt ) {
-
+		userCannotInstallAddonsModal( prompt ) {
 			$.alert( {
 				title: wpforms_form_templates.heads_up,
 				content: prompt,
@@ -488,8 +470,7 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 						text: wpforms_form_templates.ok,
 						btnClass: 'btn-confirm',
 						keys: [ 'enter' ],
-						action: function() {
-
+						action() {
 							WPFormsFormTemplates.selectTemplateCancel();
 						},
 					},
@@ -502,21 +483,19 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.8.2
 		 *
-		 * @param {Array}  addons        Addons slugs.
-		 * @param {object} previousModal Previous modal instance.
-		 * @param {string} formName      Name of the form.
-		 * @param {string} template      Template slug.
-		 * @param {Function} callback    The function to set the template.
+		 * @param {Array}    addons        Addons slugs.
+		 * @param {Object}   previousModal Previous modal instance.
+		 * @param {string}   formName      Name of the form.
+		 * @param {string}   template      Template slug.
+		 * @param {Function} callback      The function to set the template.
 		 */
-		installActivateAddons: function( addons, previousModal, formName, template, callback ) {
-
+		installActivateAddons( addons, previousModal, formName, template, callback ) {
 			const ajaxResults = [];
 			const ajaxErrors = [];
 			let promiseChain = false;
 
 			// Put each of the ajax call promise to the chain.
 			addons.forEach( function( addon ) {
-
 				if ( typeof promiseChain.done !== 'function' ) {
 					promiseChain = app.installActivateAddonAjax( addon );
 
@@ -525,7 +504,6 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 
 				promiseChain = promiseChain
 					.done( function( value ) {
-
 						ajaxResults.push( value );
 
 						return app.installActivateAddonAjax( addon );
@@ -547,7 +525,6 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 
 				// Finally, resolve all the promises.
 				.always( function() {
-
 					previousModal.close();
 
 					if (
@@ -569,12 +546,11 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @since 1.8.2
 		 *
-		 * @param {string} formName Name of the form.
-		 * @param {string} template Template slug.
+		 * @param {string}   formName Name of the form.
+		 * @param {string}   template Template slug.
 		 * @param {Function} callback The function to set the template.
 		 */
-		installActivateAddonsError: function( formName, template, callback ) {
-
+		installActivateAddonsError( formName, template, callback ) {
 			$.confirm( {
 				title: wpforms_form_templates.heads_up,
 				content: wpforms_form_templates.template_addons_error,
@@ -585,15 +561,13 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 						text: wpforms_form_templates.use_template,
 						btnClass: 'btn-confirm',
 						keys: [ 'enter' ],
-						action: function() {
-
+						action() {
 							callback( formName, template );
 						},
 					},
 					cancel: {
 						text: wpforms_form_templates.cancel,
-						action: function() {
-
+						action() {
 							app.selectTemplateCancel();
 						},
 					},
@@ -608,10 +582,9 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 		 *
 		 * @param {string} addon Addon slug.
 		 *
-		 * @returns {Promise} jQuery ajax call promise.
+		 * @return {Promise} jQuery ajax call promise.
 		 */
-		installActivateAddonAjax: function( addon ) {
-
+		installActivateAddonAjax( addon ) {
 			const addonData = wpforms_addons[ addon ];
 			const deferred = new $.Deferred();
 
@@ -637,7 +610,6 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 
 	// Provide access to public functions/properties.
 	return app;
-
 }( document, window, jQuery ) );
 
 // Initialize.

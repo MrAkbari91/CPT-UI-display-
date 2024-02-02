@@ -375,7 +375,7 @@ class Widget extends Widget_Base {
 		static $forms_list = [];
 
 		if ( empty( $forms_list ) ) {
-			$forms = wpforms()->form->get();
+			$forms = wpforms()->get( 'form' )->get();
 
 			if ( ! empty( $forms ) ) {
 				$forms_list[0] = esc_html__( 'Select a form', 'wpforms-lite' );

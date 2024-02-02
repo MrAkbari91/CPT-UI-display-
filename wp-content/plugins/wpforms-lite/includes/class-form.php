@@ -417,9 +417,9 @@ class WPForms_Form_Handler {
 			}
 
 			if ( class_exists( 'WPForms_Entry_Handler', false ) ) {
-				wpforms()->entry->delete_by( 'form_id', $id );
-				wpforms()->entry_meta->delete_by( 'form_id', $id );
-				wpforms()->entry_fields->delete_by( 'form_id', $id );
+				wpforms()->get( 'entry' )->delete_by( 'form_id', $id );
+				wpforms()->get( 'entry_meta' )->delete_by( 'form_id', $id );
+				wpforms()->get( 'entry_fields' )->delete_by( 'form_id', $id );
 			}
 
 			$form = wp_delete_post( $id, true );

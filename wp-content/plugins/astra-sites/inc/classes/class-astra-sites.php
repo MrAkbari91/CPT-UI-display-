@@ -558,6 +558,17 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				update_option( 'elementor_load_fa4_shim', $data['astra-page-options-data']['elementor_load_fa4_shim'] );
 			}
 
+			// Check flexbox container, If inactive then activate it.
+			$flexbox_container = get_option( 'elementor_experiment-container' );
+			// Check if the value is 'inactive'.
+			if ( 'inactive' === $flexbox_container ) {
+				// Delete the option to clear the cache.
+				delete_option( 'elementor_experiment-container' );
+				
+				// Update the option to 'active' to activate the flexbox container.
+				update_option( 'elementor_experiment-container', 'active' );
+			}
+			
 			$import      = new \Elementor\TemplateLibrary\Astra_Sites_Elementor_Pages();
 			$import_data = $import->import( $post_id, $meta );
 
@@ -713,8 +724,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'uuid' => $uuid,
 				)
 			);
-
-			$api_args = array();
 
 			$api_url = add_query_arg( $api_args, trailingslashit( $url ) . 'wp-json/zipwp-client/v1/exporter/export' );
 
@@ -2060,6 +2069,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'rest_api_nonce' => ( current_user_can( 'manage_options' ) ) ? wp_create_nonce( 'wp_rest' ) : '',
 					'zip_token_exists' => Astra_Sites_ZipWP_Helper::get_token() !== '' ? true : false,
 					'zip_plans' => ( $plans && isset( $plans['data'] ) ) ? $plans['data'] : array(),
+					'dashboard_url' => admin_url(),
 				)
 			);
 
@@ -2290,6 +2300,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'title'   => esc_html__( 'Dynamic Page', 'astra-sites' ),
 					'tooltip' => '<p>' . esc_html__( 'The page template you are about to import contains a dynamic widget/module. Please note this dynamic data will not be available with the imported page.', 'astra-sites' ) . '</p><p>' . esc_html__( 'You will need to add it manually on the page.', 'astra-sites' ) . '</p><p>' . esc_html__( 'This dynamic content will be available when you import the entire site.', 'astra-sites' ) . '</p>',
 				),
+				'flexbox-container'         => array(
+					'title'   => esc_html__( 'Enable Flexbox Container from Elementor', 'astra-sites' ),
+					/* translators: %s doc link. */
+					'tooltip' => '<p>' . esc_html__( 'The Flexbox Container widget is disabled on your website. With this disabled, the import process will be affected. Kindly enable it to continue importing the Starter Template.', 'astra-sites' ) . '</p><p>' . sprintf( __( 'Read an article <a href="%s" target="_blank">here</a> to resolve the issue.', 'astra-sites' ), 'https://wpastra.com/docs/enable-flexbox-container-from-elementor' ) . '</p>',
+				),
 			);
 		}
 
@@ -2319,6 +2334,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			if ( ! function_exists( 'curl_version' ) ) {
 				$compatibilities['errors']['curl'] = $data['curl'];
+			}
+
+			$flexbox_container = get_option( 'elementor_experiment-container' );
+			// Check if the value is 'inactive'.
+			if ( 'inactive' === $flexbox_container ) {
+				$compatibilities['warnings']['flexbox-container'] = $data['flexbox-container'];
 			}
 
 			return $compatibilities;
@@ -2515,8 +2536,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-image-processing.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-wp-cli.php';
 			require_once ASTRA_SITES_DIR . 'inc/lib/class-astra-sites-ast-block-templates.php';
+			require_once ASTRA_SITES_DIR . 'inc/lib/class-astra-sites-zip-ai.php';
 			require_once ASTRA_SITES_DIR . 'inc/lib/onboarding/class-onboarding.php';
-			require_once ASTRA_SITES_DIR . 'inc/lib/zip-ai/zip-ai.php';
 
 			// Batch Import.
 			require_once ASTRA_SITES_DIR . 'inc/classes/batch-import/class-astra-sites-batch-import.php';

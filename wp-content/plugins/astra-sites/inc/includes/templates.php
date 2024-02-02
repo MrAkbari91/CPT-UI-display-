@@ -46,6 +46,25 @@ $suggestion_link = astra_sites_get_suggestion_link();
 						<i class="eicon-search"></i>
 					</div>
 				</div>
+				<?php
+					// Check flexbox container, If inactive then activate it.
+					$flexbox_container = get_option( 'elementor_experiment-container' );
+					// Check if the value is 'inactive'.
+				if ( 'inactive' === $flexbox_container ) { 
+					?>
+						<div class="ast-sites-container-notice-wrap">
+							<div class="ast-sites-container-notice-content">
+								<p><?php esc_html_e( "We've observed that the 'Flexbox Container' setting in your Elementor configuration is currently inactive. To ensure a seamless import, please active this option.", 'astra-sites' ); ?></p>
+								<div class="ast-sites-container-notice-actions">
+									<a href="<?php echo esc_url( home_url( '/wp-admin/admin.php?page=elementor#tab-experiments' ) ); ?>" class="ast-sites-container-notice-button" >
+										<span><?php esc_html_e( 'Activate it!', 'astra-sites' ); ?></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					<?php 
+				}
+				?>
 				<div id="ast-sites-floating-notice-wrap-id" class="ast-sites-floating-notice-wrap"><div class="ast-sites-floating-notice"></div></div>
 				<?php
 				$manual_sync = get_site_option( 'astra-sites-manual-sync-complete', 'no' );

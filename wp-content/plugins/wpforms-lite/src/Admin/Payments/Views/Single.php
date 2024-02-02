@@ -327,6 +327,8 @@ class Single implements PaymentsViewsInterface {
 		echo wpforms_render(
 			'admin/payments/single/payment-details',
 			[
+				'id'                  => 'wpforms-payment-info',
+				'class'               => 'payment-details',
 				'title'               => __( 'Payment Details', 'wpforms-lite' ),
 				'payment_id'          => "#{$this->payment->id}",
 				'gateway_link'        => $this->get_gateway_transaction_link(),
@@ -396,6 +398,8 @@ class Single implements PaymentsViewsInterface {
 		echo wpforms_render(
 			'admin/payments/single/payment-details',
 			[
+				'id'                  => 'wpforms-subscription-details',
+				'class'               => 'subscription-details',
 				'title'               => __( 'Subscription Details', 'wpforms-lite' ),
 				'gateway_link'        => $this->get_gateway_subscription_link(),
 				'gateway_text'        => sprintf( /* translators: %s - payment gateway name. */

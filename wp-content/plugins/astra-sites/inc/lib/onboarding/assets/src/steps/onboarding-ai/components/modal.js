@@ -9,6 +9,8 @@ const Modal = ( {
 	width = 520,
 	overflowHidden = true,
 	children,
+	hideCloseIcon = false,
+	className,
 } ) => {
 	let modalWidth = 'max-w-[35rem]';
 
@@ -21,6 +23,9 @@ const Modal = ( {
 			break;
 		case '464':
 			modalWidth = 'sm:max-w-[29rem]';
+			break;
+		case '480':
+			modalWidth = 'sm:max-w-[30rem]';
 			break;
 		case '300':
 			modalWidth = 'sm:max-w-[24rem]';
@@ -64,23 +69,30 @@ const Modal = ( {
 								className={ classNames(
 									'relative w-full transform rounded-lg bg-white px-8 pt-8 pb-6 text-left shadow-xl transition-all sm:my-8 sm:w-full',
 									modalWidth,
-									overflowHidden && 'overflow-hidden'
+									overflowHidden && 'overflow-hidden',
+									className
 								) }
 							>
 								<div className="absolute right-0 top-0 pr-3 pt-3 block">
-									<button
-										type="button"
-										className="rounded-md bg-white text-nav-inactive hover:text-nav-active outline-none border-0 focus:outline-none transition duration-150 ease-in-out cursor-pointer"
-										onClick={ () => setOpen( false ) }
-									>
-										<span className="sr-only">Close</span>
-										<XMarkIcon
-											className="h-5 w-5"
-											aria-hidden="true"
-										/>
-									</button>
+									{ ! hideCloseIcon && (
+										<button
+											type="button"
+											className="rounded-md bg-white text-zip-app-inactive-icon hover:text-nav-active outline-none border-0 focus:outline-none transition duration-150 ease-in-out cursor-pointer"
+											onClick={ () =>
+												setOpen( false, 'close-icon' )
+											}
+										>
+											<span className="sr-only">
+												Close
+											</span>
+											<XMarkIcon
+												className="h-5 w-5"
+												aria-hidden="true"
+											/>
+										</button>
+									) }
 								</div>
-								<div className="space-y-6">
+								<div className="space-y-6 font-sans">
 									{ /* Modal Body */ }
 									{ children }
 								</div>

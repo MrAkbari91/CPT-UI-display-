@@ -326,8 +326,22 @@ class Notifications extends Mailer {
 	 */
 	private function process_message( $message ) {
 
-		$message = $this->process_tag( $message );
-		$message = str_replace( '{all_fields}', $this->process_field_values(), $message );
+		// Check if the placeholder '{all_fields}' is not present in the message.
+		if ( strpos( $message, '{all_fields}' ) === false ) {
+			// Wrap the message with a table row after processing tags.
+			$message = $this->wrap_content_with_table_row( $message );
+		} else {
+			// If {all_fields} is present, extract content before and after into separate variables.
+			list( $before, $after ) = array_map( 'trim', explode( '{all_fields}', $message, 2 ) );
+
+			// Wrap before and after content with <tr> tags if they are not empty to maintain styling.
+			// Note that whatever comes after the {all_fields} should be wrapped in a table row to avoid content misplacement.
+			$before_tr = ! empty( $before ) ? $this->wrap_content_with_table_row( $before ) : '';
+			$after_tr  = ! empty( $after ) ? $this->wrap_content_with_table_row( $after ) : '';
+
+			// Replace {all_fields} with $this->process_field_values() output.
+			$message = $before_tr . $this->process_field_values() . $after_tr;
+		}
 
 		/**
 		 * Filter and modify the email message content before sending.
@@ -439,7 +453,8 @@ class Notifications extends Mailer {
 			$message .= apply_filters( 'wpforms_emails_notifications_plaintext_field_value', $field_value, $field, $this->form_data );
 		}
 
-		return $message;
+		// Trim the message and return.
+		return rtrim( $message, "\r\n" );
 	}
 
 	/**
@@ -513,6 +528,9 @@ class Notifications extends Mailer {
 				$this->form_data,
 				'email-html'
 			);
+
+			// Replace new lines with <br/> tags.
+			$field_val = str_replace( [ "\r\n", "\r", "\n" ], '<br/>', $field_val );
 
 			// Append the field item to the message.
 			$message .= str_replace(
@@ -754,6 +772,74 @@ class Notifications extends Mailer {
 			esc_html__( 'Field ID #%1$d', 'wpforms-lite' ),
 			absint( $field_id )
 		);
+	}
+
+	/**
+	 * Wrap the given content with a table row.
+	 * This method has been added for styling purposes.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param string $content Processed smart tag content.
+	 *
+	 * @return string
+	 */
+	private function wrap_content_with_table_row( $content ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+
+		// If the content is empty, return it as is.
+		if ( empty( $content ) ) {
+			return $content;
+		}
+
+		// Process the smart tags in the content.
+		$processed_content = $this->process_tag( $content );
+
+		// If the content doesn't contain any smart tags, wrap it in a table row, and return early.
+		// Don't go beyond this point if the content doesn't contain any smart tags.
+		if ( ! preg_match( '/{\w+}/', $processed_content ) ) {
+			return '<tr class="smart-tag"><td class="field-name field-value" colspan="2">' . $processed_content . '</td></tr>';
+		}
+
+		// Split the content into lines and remove empty lines.
+		$lines = array_filter( explode( "\n", $content ), 'strlen' );
+
+		// Initialize an empty string to store the modified content.
+		$modified_content = '';
+
+		// Iterate through each line.
+		foreach ( $lines as $line ) {
+			// Trim the line.
+			$trimmed_line = $this->process_tag( trim( $line ) );
+
+			// Extract tags at the beginning of the line.
+			preg_match( '/^(?:\{[^}]+}\s*)+/i', $trimmed_line, $before_line_tags );
+
+			if ( ! empty( $before_line_tags[0] ) ) {
+				// Include the extracted tags at the beginning to the modified content.
+				$modified_content .= trim( $before_line_tags[0] );
+				// Remove the extracted tags from the trimmed line.
+				$trimmed_line = trim( substr( $trimmed_line, strlen( $before_line_tags[0] ) ) );
+			}
+
+			// Extract all smart tags from the remaining content.
+			preg_match_all( '/\{([^}]+)}/i', $trimmed_line, $after_line_tags );
+
+			// Remove the smart tags from the content.
+			$content_without_smart_tags = str_replace( $after_line_tags[0], '', $trimmed_line );
+
+			if ( ! empty( $content_without_smart_tags ) ) {
+				// Wrap the content without the smart tags in a new table row.
+				$modified_content .= '<tr class="smart-tag"><td class="field-name field-value" colspan="2">' . $content_without_smart_tags . '</td></tr>';
+			}
+
+			if ( ! empty( $after_line_tags[0] ) ) {
+				// Move all smart tags to the end of the line after the closing </tr> tag.
+				$modified_content .= implode( ' ', $after_line_tags[0] );
+			}
+		}
+
+		// Return the modified content.
+		return $modified_content;
 	}
 
 	/**

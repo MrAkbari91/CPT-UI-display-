@@ -277,6 +277,7 @@ const WPFormsPaymentsOverview = window.WPFormsPaymentsOverview || ( function( do
 							borderWidth: 2,
 							pointRadius: 4,
 							pointBorderWidth: 1,
+							maxBarThickness: 100,
 							...{
 								pointBackgroundColor: '#ffffff',
 								...( this.colors[ this.report ] || this.colors.default ),
@@ -298,7 +299,6 @@ const WPFormsPaymentsOverview = window.WPFormsPaymentsOverview || ( function( do
 							{
 								type: 'time',
 								offset: this.type === 'bar',
-								maxBarThickness: 100,
 								time: {
 									unit: 'day',
 									tooltipFormat: this.tooltipFormat,

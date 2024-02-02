@@ -420,11 +420,14 @@ class WPForms_WP_Emails {
 			$this
 		);
 
+		$entry_obj = wpforms()->get( 'entry' );
+
+		// phpcs:ignore WPForms.Comments.PHPDocHooks.RequiredHookDocumentation, WPForms.PHP.ValidateHooks.InvalidHookName
 		$send_same_process = apply_filters(
 			'wpforms_tasks_entry_emails_trigger_send_same_process',
 			false,
 			$this->fields,
-			! empty( wpforms()->entry ) ? wpforms()->entry->get( $this->entry_id ) : [],
+			$entry_obj ? $entry_obj->get( $this->entry_id ) : [],
 			$this->form_data,
 			$this->entry_id,
 			'entry'

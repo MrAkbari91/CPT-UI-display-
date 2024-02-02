@@ -33,8 +33,9 @@ const BuildDone = () => {
 		} );
 	};
 
-	const postMessage =
-		'I just started building my website today, and it is already 70% complete — thanks to the incredible @Zip_WP AI builder. All I had to do was explain my idea, and boom, a beautiful website was generated in just seconds! 💪🚀💻 #AI #WebsiteBuilder #WordPress #Innovation';
+	const postMessage = encodeURIComponent(
+		'I just started building my website today, and it is already 70% complete — thanks to the incredible @Zip_WP AI builder. All I had to do was explain my idea, and boom, a beautiful website was generated in just seconds! 💪🚀💻 #AI #WebsiteBuilder #WordPress #Innovation'
+	);
 
 	return (
 		<div className="w-screen h-screen overflow-y-hidden">

@@ -54,6 +54,9 @@ class ApiRequestor
     private static function _telemetryJson($requestTelemetry)
     {
         $payload = ['last_request_metrics' => ['request_id' => $requestTelemetry->requestId, 'request_duration_ms' => $requestTelemetry->requestDuration]];
+        if (\count($requestTelemetry->usage) > 0) {
+            $payload['last_request_metrics']['usage'] = $requestTelemetry->usage;
+        }
         $result = \json_encode($payload);
         if (\false !== $result) {
             return $result;
@@ -89,38 +92,40 @@ class ApiRequestor
         return Util\Util::utf8($d);
     }
     /**
-     * @param string     $method
+     * @param 'delete'|'get'|'post' $method
      * @param string     $url
      * @param null|array $params
      * @param null|array $headers
+     * @param string[] $usage
      *
      * @throws Exception\ApiErrorException
      *
      * @return array tuple containing (ApiReponse, API key)
      */
-    public function request($method, $url, $params = null, $headers = null)
+    public function request($method, $url, $params = null, $headers = null, $usage = [])
     {
         $params = $params ?: [];
         $headers = $headers ?: [];
-        list($rbody, $rcode, $rheaders, $myApiKey) = $this->_requestRaw($method, $url, $params, $headers);
+        list($rbody, $rcode, $rheaders, $myApiKey) = $this->_requestRaw($method, $url, $params, $headers, $usage);
         $json = $this->_interpretResponse($rbody, $rcode, $rheaders);
         $resp = new ApiResponse($rbody, $rcode, $rheaders, $json);
         return [$resp, $myApiKey];
     }
     /**
-     * @param string     $method
+     * @param 'delete'|'get'|'post' $method
      * @param string     $url
      * @param callable $readBodyChunkCallable
      * @param null|array $params
      * @param null|array $headers
+     * @param string[] $usage
      *
      * @throws Exception\ApiErrorException
      */
-    public function requestStream($method, $url, $readBodyChunkCallable, $params = null, $headers = null)
+    public function requestStream($method, $url, $readBodyChunkCallable, $params = null, $headers = null, $usage = [])
     {
         $params = $params ?: [];
         $headers = $headers ?: [];
-        list($rbody, $rcode, $rheaders, $myApiKey) = $this->_requestRawStreaming($method, $url, $params, $headers, $readBodyChunkCallable);
+        list($rbody, $rcode, $rheaders, $myApiKey) = $this->_requestRawStreaming($method, $url, $params, $headers, $usage, $readBodyChunkCallable);
         if ($rcode >= 300) {
             $this->_interpretResponse($rbody, $rcode, $rheaders);
         }
@@ -286,7 +291,7 @@ class ApiRequestor
             $uaString .= ' ' . self::_formatAppInfo($appInfo);
             $ua['application'] = $appInfo;
         }
-        return ['X-Stripe-Client-User-Agent' => \json_encode($ua), 'User-Agent' => $uaString, 'Authorization' => 'Bearer ' . $apiKey];
+        return ['X-Stripe-Client-User-Agent' => \json_encode($ua), 'User-Agent' => $uaString, 'Authorization' => 'Bearer ' . $apiKey, 'Stripe-Version' => Stripe::getApiVersion()];
     }
     private function _prepareRequest($method, $url, $params, $headers)
     {
@@ -317,9 +322,6 @@ class ApiRequestor
         $absUrl = $this->_apiBase . $url;
         $params = self::_encodeObjects($params);
         $defaultHeaders = $this->_defaultHeaders($myApiKey, $clientUAInfo);
-        if (Stripe::$apiVersion) {
-            $defaultHeaders['Stripe-Version'] = Stripe::$apiVersion;
-        }
         if (Stripe::$accountId) {
             $defaultHeaders['Stripe-Account'] = Stripe::$accountId;
         }
@@ -348,31 +350,33 @@ class ApiRequestor
         return [$absUrl, $rawHeaders, $params, $hasFile, $myApiKey];
     }
     /**
-     * @param string $method
+     * @param 'delete'|'get'|'post' $method
      * @param string $url
      * @param array $params
      * @param array $headers
+     * @param string[] $usage
      *
      * @throws Exception\AuthenticationException
      * @throws Exception\ApiConnectionException
      *
      * @return array
      */
-    private function _requestRaw($method, $url, $params, $headers)
+    private function _requestRaw($method, $url, $params, $headers, $usage)
     {
         list($absUrl, $rawHeaders, $params, $hasFile, $myApiKey) = $this->_prepareRequest($method, $url, $params, $headers);
         $requestStartMs = Util\Util::currentTimeMillis();
         list($rbody, $rcode, $rheaders) = $this->httpClient()->request($method, $absUrl, $rawHeaders, $params, $hasFile);
         if (isset($rheaders['request-id']) && \is_string($rheaders['request-id']) && '' !== $rheaders['request-id']) {
-            self::$requestTelemetry = new RequestTelemetry($rheaders['request-id'], Util\Util::currentTimeMillis() - $requestStartMs);
+            self::$requestTelemetry = new RequestTelemetry($rheaders['request-id'], Util\Util::currentTimeMillis() - $requestStartMs, $usage);
         }
         return [$rbody, $rcode, $rheaders, $myApiKey];
     }
     /**
-     * @param string $method
+     * @param 'delete'|'get'|'post' $method
      * @param string $url
      * @param array $params
      * @param array $headers
+     * @param string[] $usage
      * @param callable $readBodyChunkCallable
      *
      * @throws Exception\AuthenticationException
@@ -380,7 +384,7 @@ class ApiRequestor
      *
      * @return array
      */
-    private function _requestRawStreaming($method, $url, $params, $headers, $readBodyChunkCallable)
+    private function _requestRawStreaming($method, $url, $params, $headers, $usage, $readBodyChunkCallable)
     {
         list($absUrl, $rawHeaders, $params, $hasFile, $myApiKey) = $this->_prepareRequest($method, $url, $params, $headers);
         $requestStartMs = Util\Util::currentTimeMillis();

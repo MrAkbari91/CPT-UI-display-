@@ -18,7 +18,6 @@ import { useStateValue } from '../../store/store';
 import {
 	classNames,
 	getLocalStorageItem,
-	removeLocalStorageItem,
 	setLocalStorageItem,
 } from './helpers/index';
 import Button from './components/button';
@@ -33,9 +32,9 @@ import BuildDone from './done';
 import ImportAiSIte from './import-ai-site';
 import PreviewWebsite from './preview';
 import { STORE_KEY } from './store';
-import { initialState } from './store/reducer';
 import LimitExceedModal from './components/limit-exceeded-modal';
 import GetStarted from './get-started-step-ai';
+import ContinueProgressModal from './components/continue-progress-modal';
 
 const { imageDir } = starterTemplates;
 
@@ -173,8 +172,6 @@ const OnboardingAI = ( {
 	const handleClosePopup = ( event ) => {
 		event?.preventDefault();
 		event?.stopPropagation();
-		removeLocalStorageItem( 'ai-onboarding-details' );
-		setWebsiteOnboardingAIDetails( initialState.onboardingAI );
 
 		dispatch( {
 			type: 'set',
@@ -198,12 +195,12 @@ const OnboardingAI = ( {
 
 	const dynamicStepClass = function ( step, stepIndex ) {
 		if ( step === stepIndex + 1 ) {
-			return 'border-white border-solid';
+			return 'border-zip-dark-theme-heading text-zip-dark-theme-heading border-solid';
 		}
 		if ( step > stepIndex + 1 ) {
-			return 'bg-white';
+			return 'bg-zip-dark-theme-content-background text-zip-app-inactive-icon';
 		}
-		return 'border-solid border-nav-inactive';
+		return 'border-solid border-zip-app-inactive-icon text-zip-app-inactive-icon';
 	};
 
 	const dynamicClass = function ( cStep, sIndex ) {
@@ -212,7 +209,7 @@ const OnboardingAI = ( {
 			return 'bg-gradient-to-b from-white to-transparent';
 		}
 		if ( cStep > sIndex + 1 ) {
-			return 'bg-white';
+			return 'bg-zip-dark-theme-border';
 		}
 		return 'bg-gradient-to-b from-gray-700 to-transparent';
 	};
@@ -281,7 +278,7 @@ const OnboardingAI = ( {
 											>
 												<div
 													className={ classNames(
-														'rounded-full border text-white text-xs font-semibold flex items-center justify-center w-6 h-6',
+														'rounded-full border text-xs font-semibold flex items-center justify-center w-6 h-6',
 														dynamicStepClass(
 															currentStep,
 															stepIdx
@@ -290,7 +287,7 @@ const OnboardingAI = ( {
 												>
 													{ currentStep >
 													stepIdx + 1 ? (
-														<CheckIcon className="text-zip-dark-theme-bg h-3 w-3" />
+														<CheckIcon className="text-white h-3 w-3" />
 													) : (
 														<span>
 															{ stepNumber }
@@ -316,8 +313,11 @@ const OnboardingAI = ( {
 														'text-sm font-semibold',
 														currentStep >=
 															stepIdx + 1
-															? 'text-white'
-															: 'text-border-secondary'
+															? 'text-zip-app-inactive-icon'
+															: 'text-zip-dark-theme-body',
+														currentStep ===
+															stepIdx + 1 &&
+															'text-zip-dark-theme-heading'
 													) }
 												>
 													{ name }
@@ -327,8 +327,11 @@ const OnboardingAI = ( {
 														'text-sm font-normal',
 														currentStep >=
 															stepIdx + 1
-															? 'text-secondary-text'
-															: 'text-border-secondary'
+															? 'text-zip-app-inactive-icon'
+															: 'text-zip-app-inactive-icon',
+														currentStep ===
+															stepIdx + 1 &&
+															'text-zip-dark-theme-body'
 													) }
 												>
 													{ description }
@@ -338,31 +341,36 @@ const OnboardingAI = ( {
 									)
 							) }
 						</nav>
-						<div className="flex items-center justify-center mb-5 mt-auto h-[38px]">
-							<Button
-								onClick={ ( e ) => {
-									if ( websiteVersionList?.length >= 1 ) {
-										setAIStep( 9 );
-									} else {
-										handleClosePopup( e );
+
+						{ /* Do not show on Migration step */ }
+						{ !! ( currentStep < 10 ) && (
+							<div className="flex items-center justify-center mb-5 mt-auto h-[38px]">
+								<Button
+									onClick={ ( e ) => {
+										if ( websiteVersionList?.length >= 1 ) {
+											setAIStep( 9 );
+										} else {
+											handleClosePopup( e );
+										}
+									} }
+									type="button"
+									variant="dark"
+									className="flex-1 cursor-pointer"
+									isSmall
+									hasPrefixIcon
+								>
+									{ console.log( { currentStep } ) }
+									<ArrowRightOnRectangleIcon className="w-5 h-5" />
+									{
+										<span>
+											{ websiteVersionList?.length >= 1
+												? 'Back to Preview'
+												: 'Exit' }
+										</span>
 									}
-								} }
-								type="button"
-								variant="dark"
-								className="flex-1 cursor-pointer"
-								isSmall
-								hasPrefixIcon
-							>
-								<ArrowRightOnRectangleIcon className="w-5 h-5" />
-								{
-									<span>
-										{ websiteVersionList?.length >= 1
-											? 'Back to Preview'
-											: 'Exit' }
-									</span>
-								}
-							</Button>
-						</div>
+								</Button>
+							</div>
+						) }
 					</div>
 				</div>
 			) }
@@ -398,6 +406,7 @@ const OnboardingAI = ( {
 				</div>
 			</main>
 			<LimitExceedModal />
+			<ContinueProgressModal />
 		</div>
 	);
 };

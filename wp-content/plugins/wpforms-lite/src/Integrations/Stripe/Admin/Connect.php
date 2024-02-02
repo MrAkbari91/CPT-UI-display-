@@ -2,6 +2,7 @@
 
 namespace WPForms\Integrations\Stripe\Admin;
 
+use WPForms\Integrations\Stripe\Api\DomainManager;
 use WPForms\Integrations\Stripe\Api\WebhooksManager;
 use WPForms\Integrations\Stripe\Helpers;
 use WPForms\Vendor\Stripe\Account;
@@ -39,6 +40,15 @@ class Connect {
 	private $webhooks_manager;
 
 	/**
+	 * Domain manager.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @var DomainManager
+	 */
+	private $domain_manager;
+
+	/**
 	 * Initialize.
 	 *
 	 * @since 1.8.2
@@ -48,6 +58,7 @@ class Connect {
 	public function init() {
 
 		$this->webhooks_manager = new WebhooksManager();
+		$this->domain_manager   = new DomainManager();
 
 		$this->hooks();
 
@@ -99,6 +110,7 @@ class Connect {
 		$this->update_account_meta( $credentials['stripe_user_id'], $mode );
 		$this->set_connected_account_country( $mode );
 		$this->webhooks_manager->connect();
+		$this->domain_manager->validate();
 
 		$settings_url = $this->get_payments_settings_url();
 

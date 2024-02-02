@@ -457,7 +457,7 @@ class DashboardWidget extends Widget {
 			return $cache;
 		}
 
-		$forms = wpforms()->form->get( '', [ 'fields' => 'ids' ] );
+		$forms = wpforms()->get( 'form' )->get( '', [ 'fields' => 'ids' ] );
 
 		if ( empty( $forms ) || ! is_array( $forms ) ) {
 			return [];

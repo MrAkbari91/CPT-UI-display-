@@ -121,6 +121,69 @@ class Education implements PaymentsViewsInterface {
 	public function display() {
 
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo wpforms_render( 'education/admin/payments/coupons', $this->addon, true );
+		echo wpforms_render( 'education/admin/page', $this->template_data(), true );
+	}
+
+	/**
+	 * Get the template data.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @return array
+	 */
+	private function template_data(): array {
+
+		$images_url   = WPFORMS_PLUGIN_URL . 'assets/images/coupons-education/';
+		$utm_medium   = 'Payments - Coupons';
+		$utm_content  = 'Coupons Addon';
+		$upgrade_link = $this->addon['action'] === 'upgrade'
+			? sprintf( /* translators: %1$s - WPForms.com Upgrade page URL. */
+				' <strong><a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a></strong>',
+				esc_url( wpforms_admin_upgrade_link( $utm_medium, $utm_content ) ),
+				esc_html__( 'Upgrade to WPForms Pro', 'wpforms-lite' )
+			)
+			: '';
+		$params       = [
+			'features'             => [
+				__( 'Custom Coupon Codes', 'wpforms-lite' ),
+				__( 'Percentage or Fixed Discounts', 'wpforms-lite' ),
+				__( 'Start and End Dates', 'wpforms-lite' ),
+				__( 'Maximum Usage Limit', 'wpforms-lite' ),
+				__( 'Once Per Email Address Limit', 'wpforms-lite' ),
+				__( 'Usage Statistics', 'wpforms-lite' ),
+			],
+			'images'               => [
+				[
+					'url'   => $images_url . 'coupons-addon-thumbnail-01.png',
+					'url2x' => $images_url . 'coupons-addon-screenshot-01.png',
+					'title' => __( 'Coupons Overview', 'wpforms-lite' ),
+				],
+				[
+					'url'   => $images_url . 'coupons-addon-thumbnail-02.png',
+					'url2x' => $images_url . 'coupons-addon-screenshot-02.png',
+					'title' => __( 'Coupon Settings', 'wpforms-lite' ),
+				],
+			],
+			'utm_medium'           => $utm_medium,
+			'utm_content'          => $utm_content,
+			'upgrade_link'         => $upgrade_link,
+			'heading_description'  => '<p>' . sprintf( /* translators: %1$s - WPForms.com Upgrade page URL. */
+				esc_html__( 'With the Coupons addon, you can offer customers discounts using custom coupon codes. Create your own percentage or fixed rate discount, then add the Coupon field to any payment form. When a customer enters your unique code, they’ll receive the specified discount. You can also add limits to restrict when coupons are available and how often they can be used. The Coupons addon requires a license level of Pro or higher.%s', 'wpforms-lite' ),
+				wp_kses(
+					$upgrade_link,
+					[
+						'a'      => [
+							'href'   => [],
+							'rel'    => [],
+							'target' => [],
+						],
+						'strong' => [],
+					]
+				)
+			) . '</p>',
+			'features_description' => __( 'Easy to Use, Yet Powerful', 'wpforms-lite' ),
+		];
+
+		return array_merge( $params, $this->addon );
 	}
 }

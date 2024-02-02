@@ -103,33 +103,81 @@ class Access {
 	 */
 	public function add_section( $settings ) {
 
-		$section_rows = [
-			'heading',
-			'screenshots',
-			'caps',
-			'upgrade_to_pro',
+		$settings[ self::SLUG ][ self::SLUG . '-page' ] = [
+			'id'       => self::SLUG . '-page',
+			'content'  => wpforms_render( 'education/admin/page', $this->template_data(),true ),
+			'type'     => 'content',
+			'no_label' => true,
 		];
 
-		foreach ( $section_rows as $section_row ) {
-
-			$settings[ self::SLUG ][ self::SLUG . '-' . $section_row ] = [
-				'id'       => self::SLUG . '-' . $section_row,
-				'content'  => method_exists( $this, 'output_section_row_' . $section_row ) ? $this->{ 'output_section_row_' . $section_row }() : '',
-				'type'     => 'content',
-				'no_label' => true,
-				'class'    => [ $section_row ],
-			];
-		}
-
 		return $settings;
+	}
+
+	/**
+	 * Get the template data.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @return array
+	 */
+	private function template_data(): array {
+
+		$images_url = WPFORMS_PLUGIN_URL . 'assets/images/lite-settings-access/';
+
+		return [
+			'features'             => [
+				__( 'Create Forms', 'wpforms-lite' ),
+				__( 'Delete Forms', 'wpforms-lite' ),
+				__( 'Edit Forms Entries', 'wpforms-lite' ),
+				__( 'Edit Forms', 'wpforms-lite' ),
+				__( 'Delete Others Forms', 'wpforms-lite' ),
+				__( 'Edit Others Forms Entries', 'wpforms-lite' ),
+				__( 'Edit Others Forms', 'wpforms-lite' ),
+				__( 'View Forms Entries', 'wpforms-lite' ),
+				__( 'Delete Forms Entries', 'wpforms-lite' ),
+				__( 'View Forms', 'wpforms-lite' ),
+				__( 'View Others Forms Entries', 'wpforms-lite' ),
+				__( 'Delete Others Forms Entries', 'wpforms-lite' ),
+				__( 'View Others Forms', 'wpforms-lite' ),
+			],
+			'images'               => [
+				[
+					'url'   => $images_url . 'screenshot-access-controls.png',
+					'url2x' => $images_url . 'screenshot-access-controls@2x.png',
+					'title' => __( 'Simple Built-in Controls', 'wpforms-lite' ),
+				],
+				[
+					'url'   => $images_url . 'screenshot-members.png',
+					'url2x' => $images_url . 'screenshot-members@2x.png',
+					'title' => __( 'Members Integration', 'wpforms-lite' ),
+				],
+				[
+					'url'   => $images_url . 'screenshot-user-role-editor.png',
+					'url2x' => $images_url . 'screenshot-user-role-editor@2x.png',
+					'title' => __( 'User Role Editor Integration', 'wpforms-lite' ),
+				],
+			],
+			'utm_medium'           => 'Settings - Access',
+			'utm_content'          => 'Access Controls',
+			'heading_title'        => __( 'Access Controls', 'wpforms-lite' ),
+			'heading_description'  => sprintf(
+				'<p>%1$s</p>',
+				__( 'Access controls allows you to manage and customize access to WPForms functionality. You can easily grant or restrict access using the simple built-in controls, or use our official integrations with Members and User Role Editor plugins.', 'wpforms-lite' )
+			),
+			'badge'                => __( 'Pro', 'wpforms-lite' ),
+			'features_description' => __( 'Custom access to the following capabilities…', 'wpforms-lite' ),
+		];
 	}
 
 	/**
 	 * Generate and output section "Heading" row HTML.
 	 *
 	 * @since 1.5.8
+	 * @deprecated 1.8.6
 	 */
 	public function output_section_row_heading() {
+
+		_deprecated_function( __METHOD__, '1.8.6 of the WPForms plugin' );
 
 		return sprintf(
 			'<h4>%1$s%2$s</h4><p>%3$s</p><p>%4$s</p>',
@@ -144,8 +192,11 @@ class Access {
 	 * Generate and output section "Screenshots" row HTML.
 	 *
 	 * @since 1.5.8
+	 * @deprecated 1.8.6
 	 */
 	public function output_section_row_screenshots() {
+
+		_deprecated_function( __METHOD__, '1.8.6 of the WPForms plugin' );
 
 		$format = '<div class="cont">
 			<img src="%1$s" srcset="%2$s 2x" alt="%6$s"/>
@@ -192,8 +243,11 @@ class Access {
 	 * Generate and output section "Capabilities" row HTML.
 	 *
 	 * @since 1.5.8
+	 * @deprecated 1.8.6
 	 */
 	public function output_section_row_caps() {
+
+		_deprecated_function( __METHOD__, '1.8.6 of the WPForms plugin' );
 
 		$caps = [
 			[
@@ -234,8 +288,11 @@ class Access {
 	 * Generate and output section "Upgrade to Pro" row HTML.
 	 *
 	 * @since 1.5.8
+	 * @deprecated 1.8.6
 	 */
 	public function output_section_row_upgrade_to_pro() {
+
+		_deprecated_function( __METHOD__, '1.8.6 of the WPForms plugin' );
 
 		return sprintf(
 			'<a href="%1$s" target="_blank" rel="noopener noreferrer" class="wpforms-upgrade-modal wpforms-btn wpforms-btn-lg wpforms-btn-orange">%2$s</a>',

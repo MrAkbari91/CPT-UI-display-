@@ -13,7 +13,7 @@ if ( ! \defined( 'ABSPATH' ) ) {
 ?>
 <div class="wpforms-elementor wpforms-elementor-form-selector">
 
-	<img src="<?php echo esc_url( WPFORMS_PLUGIN_URL . 'assets/images/integrations/elementor/wpforms-logo.svg' ); ?>" alt="WPForms Logo"/>
+	<img src="<?php echo esc_url( WPFORMS_PLUGIN_URL . 'assets/images/wpforms-logo.svg' ); ?>" alt="WPForms Logo"/>
 
 	<div class="select-wrapper">
 		<select>

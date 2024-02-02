@@ -319,7 +319,7 @@ class WPForms_Field_Textarea extends WPForms_Field {
 		// Sanitize but keep line breaks.
 		$value = wpforms_sanitize_textarea_field( $field_submit );
 
-		wpforms()->process->fields[ $field_id ] = [
+		wpforms()->get( 'process' )->fields[ $field_id ] = [
 			'name'  => $name,
 			'value' => $value,
 			'id'    => absint( $field_id ),
@@ -356,13 +356,15 @@ class WPForms_Field_Textarea extends WPForms_Field {
 		if ( 'characters' === $mode ) {
 			if ( mb_strlen( str_replace( "\r\n", "\n", $value ) ) > $limit ) {
 				/* translators: %s - limit characters number. */
-				wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d character.', 'Text can\'t exceed %d characters.', $limit, 'wpforms-lite' ), $limit );
+				wpforms()->get( 'process' )->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d character.', 'Text can\'t exceed %d characters.', $limit, 'wpforms-lite' ), $limit );
+
 				return;
 			}
 		} else {
 			if ( wpforms_count_words( $value ) > $limit ) {
 				/* translators: %s - limit words number. */
-				wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d word.', 'Text can\'t exceed %d words.', $limit, 'wpforms-lite' ), $limit );
+				wpforms()->get( 'process' )->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d word.', 'Text can\'t exceed %d words.', $limit, 'wpforms-lite' ), $limit );
+
 				return;
 			}
 		}

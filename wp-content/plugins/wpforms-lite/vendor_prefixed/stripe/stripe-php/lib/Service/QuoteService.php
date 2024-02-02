@@ -117,6 +117,26 @@ class QuoteService extends \WPForms\Vendor\Stripe\Service\AbstractService
         return $this->request('post', $this->buildPath('/v1/quotes/%s/finalize', $id), $params, $opts);
     }
     /**
+     * Download the PDF for a finalized quote.
+     *
+     * @param string $id
+     * @param callable $readBodyChunkCallable
+     * @param null|array $params
+     * @param null|array|\Stripe\Util\RequestOptions $opts
+     *
+     * @throws \Stripe\Exception\ApiErrorException if the request fails
+     *
+     * @return mixed
+     */
+    public function pdf($id, $readBodyChunkCallable, $params = null, $opts = null)
+    {
+        $opts = \WPForms\Vendor\Stripe\Util\RequestOptions::parse($opts);
+        if (!isset($opts->apiBase)) {
+            $opts->apiBase = $this->getClient()->getFilesBase();
+        }
+        return $this->requestStream('get', $this->buildPath('/v1/quotes/%s/pdf', $id), $readBodyChunkCallable, $params, $opts);
+    }
+    /**
      * Retrieves the quote with the given ID.
      *
      * @param string $id
@@ -145,23 +165,5 @@ class QuoteService extends \WPForms\Vendor\Stripe\Service\AbstractService
     public function update($id, $params = null, $opts = null)
     {
         return $this->request('post', $this->buildPath('/v1/quotes/%s', $id), $params, $opts);
-    }
-    /**
-     * Download the PDF for a finalized quote.
-     *
-     * @param string $id
-     * @param callable $readBodyChunkCallable
-     * @param null|array $params
-     * @param null|array|\Stripe\Util\RequestOptions $opts
-     *
-     * @throws \Stripe\Exception\ApiErrorException if the request fails
-     */
-    public function pdf($id, $readBodyChunkCallable, $params = null, $opts = null)
-    {
-        $opts = \WPForms\Vendor\Stripe\Util\RequestOptions::parse($opts);
-        if (!isset($opts->apiBase)) {
-            $opts->apiBase = $this->getClient()->getFilesBase();
-        }
-        $this->requestStream('get', $this->buildPath('/v1/quotes/%s/pdf', $id), $readBodyChunkCallable, $params, $opts);
     }
 }

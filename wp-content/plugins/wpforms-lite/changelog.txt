@@ -1,5 +1,62 @@
 == Changelog ==
 
+= 1.8.6.3 =
+- Fixed: The Name field was not clickable with Classic Markup and Base Styles.
+
+= 1.8.6.2 =
+- Added: New column selector and column reordering on the Forms Overview and Form Entries page.
+- Added: New right-click context menu in the Form Builder.
+- Added: Forms can now be imported programmatically.
+- Added: New minimum price option for the Payment Single Item field that can help protect your forms against card testing by fraudsters.
+- Added: Caching to the templates list markup on the Templates page and in the Form Builder for improved performance.
+- Added: Customer name can now be configured on the Form Builder > Payments > Stripe screen.
+- Added: Dark Mode support for email notifications. Users are now able to customize styling for each appearance theme.
+- Changed: Improved compatibility with the Apple Pay feature for Stripe payments.
+- Changed: Updated the design of the Addons page in the admin dashboard.
+- Changed: Improved compatibility with latest versions of Divi theme.
+- Changed: Improved compatibility with OceanWP theme.
+- Changed: Improved compatibility with the Hello Elementor theme.
+- Changed: Improved styles of various Lite Connect settings.
+- Changed: Improved behavior of various Email settings on the WPForms Settings page.
+- Changed: Improved form templates search.
+- Changed: Significantly improved performance of the Form Builder when opening existing forms.
+- Changed: Restrict media files to only valid image types for the Header Image field on the Email page, and Image Choices options in the Builder.
+- Changed: Improved handling of empty choice labels of the Dropdown, Checkboxes, and Multiple Choice fields.
+- Changed: Improved various messages across the admin area.
+- Changed: Styles customizations of email notifications on the WPForms Settings page can now be previewed without saving them.
+- Changed: Stripe library updated to the latest version.
+- Changed: The Authorize.Net logo was updated.
+- Fixed: Pressing Apply with no selected action on the Payments Overview page triggered WordPress' die screen.
+- Fixed: Elementor widget preview is not properly updated after editing the form in the builder popup.
+- Fixed: Plugin prefix added to all action links on the plugins page to prevent collisions with third-party CSS code.
+- Fixed: Stripe Credit Card field styles are not applied in WordPress Site Customizer.
+- Fixed: Stripe Elements field had too much spacing around the Submit button with Modern styles applied.
+- Fixed: Trashed forms not removed during the plugin deletion process.
+- Fixed: An empty value from the Dropdown field is saved if the choice with empty label is selected.
+- Fixed: Some styles were incorrect for the Form Selector widget in Block Editor, Elementor and Divi.
+- Fixed: Confirmation Page dropdown is not completely visible in some cases on smaller screens.
+- Fixed: Header Image Size dropdown appeared on the Email Settings page even though there is no image set for the Email Header.
+- Fixed: Scroll to the error message when the form is submitted with an error not working in some cases.
+- Fixed: Some 3rd-party plugins could be included in the translation files check.
+- Fixed: Email notification not rendered correctly if multiple smart tags are used.
+- Fixed: PHP deprecation warning logged when the Weekly Summary email is triggered via cron on PHP 8.2.
+- Fixed: Dropdown preview in the Form Builder not updated correctly.
+- Fixed: Fields and a submit button not aligned properly on single line form layout.
+- Fixed: Checkbox and multiple dropdown values displayed in one line with new email templates.
+- Fixed: Do not display the "Install and Activate" button on the Geolocation and Coupons pages for Lite users if plugin installation is not allowed.
+- Fixed: Read-only Number fields should not display spin buttons.
+- Fixed: Incorrect error text displayed when uploading a file of an illegal format in the Form Builder.
+- Fixed: Incorrect error messages displayed for the required Payment Total and Stripe Credit Card fields.
+- Fixed: Prevent form pagination if the form is invalid.
+- Fixed: Field validation error icon positioned incorrectly when a form inherited content centering from the theme.
+- Fixed: Email addresses containing special characters are incorrectly validated against allow/deny list.
+- Fixed: Fields with subfields displayed incorrectly on the frontend in latest Safari and other browsers using WebKit.
+- Fixed: Email notifications using Plain Text format has some special characters that are converted into their HTML entities.
+- Fixed: JavaScript deprecation notices in the browser's console when the Bar graph style is used on the Payments Overview page.
+- Fixed: Stripe subscriptions paid by Link were unable to be renewed.
+- Fixed: PHP warning was thrown for legacy subscription Stripe payment form.
+- Fixed: PHP warning was thrown while connecting the Jetpack plugin account.
+
 = 1.8.5.4 =
 - Changed: The `Chart.js` library has been updated to v2.9.4.
 - Fixed: Email Summary header image did not honor max width setting.

@@ -348,7 +348,7 @@ function wpforms_format_amount( $amount, $symbol = false, $currency = '' ) { // 
 		if ( $currencies[ $currency ]['symbol_pos'] === 'right' ) {
 			$number .= $symbol_padding . $currencies[ $currency ]['symbol'];
 		} else {
-			$number = $currencies[ $currency ]['symbol'] . $symbol_padding . $number;
+			$number = $currencies[ $currency ]['symbol'] . $number;
 		}
 	}
 

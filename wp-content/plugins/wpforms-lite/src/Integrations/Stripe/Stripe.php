@@ -55,6 +55,7 @@ final class Stripe implements IntegrationInterface {
 		$api = new Api\PaymentIntents();
 
 		( new WebhooksHealthCheck() )->init();
+		( new DomainHealthCheck() )->init();
 		( new Admin\Payments\SingleActionsHandler() )->init( $api );
 
 		// Bail early for paid users with active Stripe addon.

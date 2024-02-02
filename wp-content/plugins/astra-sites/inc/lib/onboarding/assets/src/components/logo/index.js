@@ -15,7 +15,9 @@ const Logo = () => {
 					className="ist-logo"
 					src={ `${ imageDir }logo.svg` }
 					alt={ __( 'Starter Templates', 'astra-sites' ) }
-					href={ astraSitesVars.st_page_url }
+					onClick={ () =>
+						window.open( astraSitesVars.st_page_url, '_self' )
+					}
 				/>
 			) }
 		</div>

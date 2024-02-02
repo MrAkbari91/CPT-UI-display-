@@ -177,9 +177,10 @@ abstract class ApiErrorException extends \Exception implements ExceptionInterfac
      */
     public function __toString()
     {
+        $parentStr = parent::__toString();
         $statusStr = null === $this->getHttpStatus() ? '' : "(Status {$this->getHttpStatus()}) ";
         $idStr = null === $this->getRequestId() ? '' : "(Request {$this->getRequestId()}) ";
-        return "{$statusStr}{$idStr}{$this->getMessage()}";
+        return "Error sending request to Stripe: {$statusStr}{$idStr}{$this->getMessage()}\n{$parentStr}";
     }
     protected function constructErrorObject()
     {

@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import {
+	ArrowRightIcon,
+	ArrowRightStartOnRectangleIcon,
+} from '@heroicons/react/24/outline';
 import { __ } from '@wordpress/i18n';
 import { useDispatch } from '@wordpress/data';
 import { removeQueryArgs } from '@wordpress/url';
 import { Button, DefaultStep, PreviousStepLink } from '../../components/index';
 import { useStateValue } from '../../store/store';
-import { removeLocalStorageItem } from '../onboarding-ai/helpers';
 import { STORE_KEY } from '../onboarding-ai/store';
-import { initialState } from '../onboarding-ai/store/reducer';
 import LimitExceedModal from '../onboarding-ai/components/limit-exceeded-modal';
+import { getLocalStorageItem } from '../onboarding-ai/helpers';
 
 const { imageDir } = starterTemplates;
 const SiteType = () => {
 	const [ , dispatch ] = useStateValue();
-	const { setWebsiteOnboardingAIDetails, setLimitExceedModal } =
+	const { setLimitExceedModal, setContinueProgressModal } =
 		useDispatch( STORE_KEY );
 
 	const zipPlans = astraSitesVars?.zip_plans;
@@ -74,8 +76,6 @@ const SiteType = () => {
 	}, [] );
 
 	const handleBuildWithAIPress = () => {
-		console.log( { aiSitesRemainingCount } );
-
 		if (
 			( typeof aiSitesRemainingCount === 'number' &&
 				aiSitesRemainingCount <= 0 ) ||
@@ -88,8 +88,14 @@ const SiteType = () => {
 			return;
 		}
 
-		removeLocalStorageItem( 'ai-onboarding-details' );
-		setWebsiteOnboardingAIDetails( initialState.onboardingAI );
+		const savedAiOnboardingDetails = getLocalStorageItem(
+			'ai-onboarding-details'
+		);
+		if ( savedAiOnboardingDetails?.stepData?.businessType?.name ) {
+			setContinueProgressModal( {
+				open: true,
+			} );
+		}
 
 		dispatch( {
 			type: 'set',
@@ -150,7 +156,10 @@ const SiteType = () => {
 									onClick={ () => {
 										dispatch( {
 											type: 'set',
-											currentIndex: 3,
+											currentIndex:
+												astraSitesVars.default_page_builder
+													? 4
+													: 3,
 										} );
 									} }
 								>
@@ -222,6 +231,19 @@ const SiteType = () => {
 							}
 						} }
 					/>
+
+					{ /* Back to the wordpress dashboard button */ }
+					<button
+						className="mx-auto flex items-center justify-center gap-2 mt-10 border-0 bg-transparent focus:outline-none text-zip-body-text text-sm font-normal cursor-pointer"
+						onClick={ () =>
+							window.open( starterTemplates.adminUrl, '_self' )
+						}
+					>
+						<ArrowRightStartOnRectangleIcon className="w-5 h-5" />
+						<span>
+							{ __( 'Exit to Dashboard', 'astra-sites' ) }
+						</span>
+					</button>
 				</div>
 			}
 			actions={

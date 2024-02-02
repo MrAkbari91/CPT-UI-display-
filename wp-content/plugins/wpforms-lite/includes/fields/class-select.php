@@ -473,11 +473,14 @@ class WPForms_Field_Select extends WPForms_Field {
 
 		// Build the select options.
 		foreach ( $choices as $key => $choice ) {
+			$label = $this->get_choices_label( $choice['label']['text'] ?? '', $key );
+			$value = ! empty( $choice['attr']['value'] ) ? $choice['attr']['value'] : $label;
+
 			printf(
 				'<option value="%s" %s>%s</option>',
-				esc_attr( $choice['attr']['value'] ),
+				esc_attr( $value ),
 				selected( true, ! empty( $choice['default'] ), false ),
-				esc_html( $choice['label']['text'] )
+				esc_html( $label )
 			);
 		}
 
@@ -609,7 +612,7 @@ class WPForms_Field_Select extends WPForms_Field {
 		}
 
 		// Push field details to be saved.
-		wpforms()->process->fields[ $field_id ] = $data;
+		wpforms()->get( 'process' )->fields[ $field_id ] = $data;
 	}
 
 	/**
@@ -631,7 +634,7 @@ class WPForms_Field_Select extends WPForms_Field {
 			}
 		}
 
-		if ( $has_modern_select || wpforms()->frontend->assets_global() ) {
+		if ( $has_modern_select || wpforms()->get( 'frontend' )->assets_global() ) {
 			$min = wpforms_get_min_suffix();
 
 			wp_enqueue_style(
@@ -662,7 +665,7 @@ class WPForms_Field_Select extends WPForms_Field {
 			}
 		}
 
-		if ( $has_modern_select || wpforms()->frontend->assets_global() ) {
+		if ( $has_modern_select || wpforms()->get( 'frontend' )->assets_global() ) {
 			$this->enqueue_choicesjs_once( $forms );
 		}
 	}

@@ -3,6 +3,7 @@
 namespace WPForms\Admin\Builder;
 
 use WPForms\Helpers\CacheBase;
+use WPForms\Helpers\File;
 
 /**
  * Form templates cache handler.
@@ -10,6 +11,18 @@ use WPForms\Helpers\CacheBase;
  * @since 1.6.8
  */
 class TemplatesCache extends CacheBase {
+
+	/**
+	 * Templates list content cache files.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @var array
+	 */
+	const CONTENT_CACHE_FILES = [
+		'admin-page' => 'templates-admin-page.html',
+		'builder'    => 'templates-builder.html',
+	];
 
 	/**
 	 * Determine if the class is allowed to load.
@@ -98,5 +111,88 @@ class TemplatesCache extends CacheBase {
 		}
 
 		return $cache_data;
+	}
+
+	/**
+	 * Update the cache.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param bool $force Whether to force update the cache.
+	 *
+	 * @return bool
+	 */
+	public function update( $force = false ): bool {
+
+		$result = parent::update( $force );
+
+		if ( ! $result ) {
+			return false;
+		}
+
+		$this->wipe_content_cache();
+
+		return $result;
+	}
+
+	/**
+	 * Get cached templates content.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @return string
+	 */
+	public function get_content_cache(): string {
+		// phpcs:ignore WPForms.Formatting.EmptyLineBeforeReturn.RemoveEmptyLineBeforeReturnStatement, Universal.Operators.DisallowShortTernary.Found
+		return File::get_contents( $this->get_content_cache_file() ) ?: '';
+	}
+
+	/**
+	 * Save templates content cache.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param string|mixed $content Templates content.
+	 *
+	 * @return bool
+	 */
+	public function save_content_cache( $content ): bool {
+		// phpcs:ignore WPForms.Formatting.EmptyLineBeforeReturn.RemoveEmptyLineBeforeReturnStatement
+		return File::put_contents( $this->get_content_cache_file(), (string) $content );
+	}
+
+	/**
+	 * Wipe cached templates content.
+	 *
+	 * @since 1.8.6
+	 */
+	public function wipe_content_cache() {
+
+		$cache_dir = $this->get_cache_dir();
+
+		// Delete the template content cache files. They will be regenerated on the first visit.
+		foreach ( self::CONTENT_CACHE_FILES as $file ) {
+
+			$cache_file = $cache_dir . $file;
+
+			if ( is_file( $cache_file ) && is_readable( $cache_file ) ) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink
+				unlink( $cache_file );
+			}
+		}
+	}
+
+	/**
+	 * Get templates content cache file path.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @return string
+	 */
+	private function get_content_cache_file(): string {
+
+		$context = wpforms_is_admin_page( 'templates' ) ? 'admin-page' : 'builder';
+
+		return File::get_cache_dir() . self::CONTENT_CACHE_FILES[ $context ];
 	}
 }

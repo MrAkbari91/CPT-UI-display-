@@ -128,7 +128,8 @@ class WPForms_Admin_Editor {
 						);
 						echo '</p>';
 						$args  = apply_filters( 'wpforms_modal_select', [] );
-						$forms = wpforms()->form->get( '', $args );
+						$forms = wpforms()->get( 'form' )->get( '', $args );
+
 						if ( ! empty( $forms ) ) {
 							printf( '<p><label for="wpforms-modal-select-form">%s</label></p>', esc_html__( 'Select a form below to insert', 'wpforms-lite' ) );
 							echo '<select id="wpforms-modal-select-form">';

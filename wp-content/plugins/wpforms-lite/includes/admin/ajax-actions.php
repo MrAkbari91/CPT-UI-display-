@@ -277,6 +277,12 @@ function wpforms_update_form_template() {
 	// If the form title is set, use it. Otherwise, use the template title.
 	$form_title = ! empty( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : $template_title;
 
+	// Check if the current form title is equal to the previous template name.
+	// If so, set the form title equal to the new template name.
+	$prev_template_slug = $data['meta']['template'] ?? '';
+	$prev_template      = wpforms()->get( 'builder_templates' )->get_template( $prev_template_slug );
+	$form_title         = isset( $prev_template['name'] ) && $prev_template['name'] === $form_title ? $template_title : $form_title;
+
 	// If the these template titles are empty, use the form title.
 	$form_pages_title          = $template_title ? $template_title : $form_title;
 	$form_conversational_title = ! empty( $template_data['data']['settings']['conversational_forms_title'] ) ? $template_data['data']['settings']['conversational_forms_title'] : $form_title;
@@ -688,8 +694,8 @@ function wpforms_install_addon() {
 	$error = $type === 'plugin'
 		? esc_html__( 'Could not install the plugin. Please download and install it manually.', 'wpforms-lite' )
 		: sprintf(
-			wp_kses( /* translators: %1$s - addon download URL, %2$s - link to manual installation guide. */
-				__( 'Could not install the addon. Please <a href="%1$s" target="_blank" rel="noopener noreferrer">download it from wpforms.com</a> and <a href="%2$s" target="_blank" rel="noopener noreferrer">install it manually</a>.', 'wpforms-lite' ),
+			wp_kses( /* translators: %1$s - addon download URL, %2$s - link to manual installation guide, %3$s - link to contact support. */
+				__( 'Could not install the addon. Please <a href="%1$s" target="_blank" rel="noopener noreferrer">download it from wpforms.com</a> and <a href="%2$s" target="_blank" rel="noopener noreferrer">install it manually</a>, or <a href="%3$s" target="_blank" rel="noopener noreferrer">contact support</a> for assistance.', 'wpforms-lite' ),
 				[
 					'a' => [
 						'href'   => true,
@@ -698,8 +704,9 @@ function wpforms_install_addon() {
 					],
 				]
 			),
-			'https://wpforms.com/account/licenses/',
-			'https://wpforms.com/docs/how-to-manually-install-addons-in-wpforms/'
+			esc_url( wpforms_utm_link( 'https://wpforms.com/account/licenses/', 'Licenses', 'Addons Error' ) ),
+			esc_url( wpforms_utm_link( 'https://wpforms.com/docs/how-to-manually-install-addons-in-wpforms/', 'Addons Doc', 'Addons Error' ) ),
+			esc_url( wpforms_utm_link( 'https://wpforms.com/contact/', 'Contact', 'Addons Error' ) )
 		);
 
 	$plugin_url = ! empty( $_POST['plugin'] ) ? esc_url_raw( wp_unslash( $_POST['plugin'] ) ) : '';

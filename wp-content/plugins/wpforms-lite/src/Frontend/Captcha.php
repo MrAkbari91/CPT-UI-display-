@@ -59,6 +59,41 @@ class Captcha {
 			return;
 		}
 
+		$frontend = wpforms()->get( 'frontend' );
+
+		$container_classes = [ 'wpforms-recaptcha-container', 'wpforms-is-' . $captcha_settings['provider'] ];
+
+		if ( $captcha_settings['provider'] === 'recaptcha' ) {
+			$container_classes[] = 'wpforms-is-recaptcha-type-' . $captcha_settings['recaptcha_type'];
+		}
+
+		printf(
+			'<div class="%1$s" %2$s>',
+			wpforms_sanitize_classes( $container_classes, true ),
+			$frontend->pages ? 'style="display:none;"' : ''
+		);
+
+		$this->print_recaptcha_fields( $captcha_settings, $form_data );
+
+		if ( ! empty( $errors['recaptcha'] ) ) {
+			$frontend->form_error( 'recaptcha', $errors['recaptcha'] );
+		}
+
+		echo '</div>';
+	}
+
+	/**
+	 * Get recaptcha data.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $captcha_settings Captcha settings.
+	 * @param array $form_data        Form data and settings.
+	 *
+	 * @return array
+	 */
+	private function get_recaptcha_data( array $captcha_settings, array $form_data ): array {
+
 		/**
 		 * Filters captcha sitekey.
 		 *
@@ -73,52 +108,68 @@ class Captcha {
 			$form_data
 		);
 
-		if ( $captcha_settings['provider'] === 'recaptcha' && $captcha_settings['recaptcha_type'] === 'invisible' ) {
+		$is_recaptcha = $captcha_settings['provider'] === 'recaptcha';
+		$is_turnstile = $captcha_settings['provider'] === 'turnstile';
+
+		if ( $is_recaptcha && $captcha_settings['recaptcha_type'] === 'invisible' ) {
 			$data['size'] = 'invisible';
 		}
 
-		if ( $captcha_settings['provider'] === 'turnstile' ) {
-
-			/**
-			 * Filter Turnstile action value.
-			 *
-			 * @since 1.8.1
-			 *
-			 * @param string $action    Action value. Can only contain up to 32 alphanumeric characters including _ and -.
-			 * @param array  $form_data Form data and settings.
-			 */
-			$data['action'] = apply_filters( // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
-				'wpforms_frontend_recaptcha_turnstile_action',
-				sprintf(
-					'FormID-%d',
-					$form_data['id']
-				),
-				$form_data
-			);
+		if ( ! $is_turnstile ) {
+			return $data;
 		}
 
-		$frontend_obj = wpforms()->get( 'frontend' );
-
-		printf(
-			'<div class="wpforms-recaptcha-container wpforms-is-%s" %s>',
-			sanitize_html_class( $captcha_settings['provider'] ),
-			$frontend_obj->pages ? 'style="display:none;"' : ''
+		/**
+		 * Filter Turnstile action value.
+		 *
+		 * @since 1.8.1
+		 *
+		 * @param string $action    Action value. Can only contain up to 32 alphanumeric characters including _ and -.
+		 * @param array  $form_data Form data and settings.
+		 */
+		$data['action'] = apply_filters( // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
+			'wpforms_frontend_recaptcha_turnstile_action',
+			sprintf(
+				'FormID-%d',
+				$form_data['id']
+			),
+			$form_data
 		);
+
+		return $data;
+	}
+
+	/**
+	 * Print recaptcha fields.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $captcha_settings Captcha settings.
+	 * @param array $form_data        Form data and settings.
+	 */
+	private function print_recaptcha_fields( array $captcha_settings, array $form_data ) {
+
+		$data            = $this->get_recaptcha_data( $captcha_settings, $form_data );
+		$is_recaptcha    = $captcha_settings['provider'] === 'recaptcha';
+		$is_recaptcha_v3 = $is_recaptcha && $captcha_settings['recaptcha_type'] === 'v3';
+
+		if ( $is_recaptcha_v3 ) {
+			// The value adds via JS code.
+			echo '<input type="hidden" name="wpforms[recaptcha]" value="">';
+
+			return;
+		}
 
 		echo '<div ' . wpforms_html_attributes( '', [ 'g-recaptcha' ], $data ) . '></div>';
 
-		if ( ! ( $captcha_settings['provider'] === 'recaptcha' && $captcha_settings['recaptcha_type'] === 'invisible' ) ) {
-			echo sprintf(
-				'<input type="text" name="g-recaptcha-hidden" class="wpforms-recaptcha-hidden" style="position:absolute!important;clip:rect(0,0,0,0)!important;height:1px!important;width:1px!important;border:0!important;overflow:hidden!important;padding:0!important;margin:0!important;" data-rule-%1$s="1">',
-				esc_attr( $captcha_settings['provider'] )
-			);
+		if ( $is_recaptcha && $captcha_settings['recaptcha_type'] === 'invisible' ) {
+			return;
 		}
 
-		if ( ! empty( $errors['recaptcha'] ) ) {
-			$frontend_obj->form_error( 'recaptcha', $errors['recaptcha'] );
-		}
-
-		echo '</div>';
+		printf(
+			'<input type="text" name="g-recaptcha-hidden" class="wpforms-recaptcha-hidden" style="position:absolute!important;clip:rect(0,0,0,0)!important;height:1px!important;width:1px!important;border:0!important;overflow:hidden!important;padding:0!important;margin:0!important;" data-rule-%1$s="1">',
+			esc_attr( $captcha_settings['provider'] )
+		);
 	}
 
 	/**
@@ -156,12 +207,6 @@ class Captcha {
 		$is_recaptcha_v3 = $captcha_settings['provider'] === 'recaptcha' && $captcha_settings['recaptcha_type'] === 'v3';
 
 		if ( wpforms()->get( 'amp' )->output_captcha( $is_recaptcha_v3, $captcha_settings, $form_data ) ) {
-			return null;
-		}
-
-		if ( $is_recaptcha_v3 ) {
-			echo '<input type="hidden" name="wpforms[recaptcha]" value="">';
-
 			return null;
 		}
 
@@ -388,8 +433,8 @@ class Captcha {
 			'var turnstileUpdateContainer = function (el) {
 				let form = el.closest( "form" ),
 				iframeHeight = el.getElementsByTagName("iframe")[0].style.height;
-				
-				parseInt(iframeHeight) === 0 ? 
+
+				parseInt(iframeHeight) === 0 ?
 					form.querySelector(".wpforms-is-turnstile").classList.add( "wpforms-is-turnstile-invisible" ) :
 					form.querySelector(".wpforms-is-turnstile").classList.remove( "wpforms-is-turnstile-invisible" );
 			};
@@ -451,7 +496,7 @@ class Captcha {
 						});
 						el.setAttribute("data-recaptcha-id", captchaID);
 					});
-					
+
 					wpformsDispatchEvent( document, "wpformsRecaptchaLoaded", true );
 				};
 			';

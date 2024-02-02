@@ -117,7 +117,7 @@ abstract class Base implements ImporterInterface {
 		$form['field_id'] = count( $form['fields'] ) + 1;
 
 		// Update the form with all our compiled data.
-		wpforms()->form->update( $form_id, $form );
+		wpforms()->get( 'form' )->update( $form_id, $form );
 
 		// Make note that this form has been imported.
 		$this->track_import( $form['settings']['import_form_id'], $form_id );

@@ -82,6 +82,6 @@ $rocket_cache_ignored_parameters = array(
   'vgo_ee' => 67,
   'gad_source' => 68,
 );
-$rocket_cache_mandatory_cookies = '';
+$rocket_cache_mandatory_cookies = 'pll_language';
 $rocket_cache_dynamic_cookies = array();
 $rocket_permalink_structure = '/%postname%/';

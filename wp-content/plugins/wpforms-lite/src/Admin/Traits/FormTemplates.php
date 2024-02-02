@@ -2,6 +2,9 @@
 
 namespace WPForms\Admin\Traits;
 
+use WPForms\Admin\Addons\Addons;
+use WPForms\Admin\Builder\Templates;
+
 /**
  * Form Templates trait.
  *
@@ -9,16 +12,14 @@ namespace WPForms\Admin\Traits;
  */
 trait FormTemplates {
 
-	// phpcs:disable WPForms.PHP.BackSlash.UseShortSyntax
 	/**
 	 * Addons data handler class instance.
 	 *
 	 * @since 1.7.7
 	 *
-	 * @var \WPForms\Admin\Addons\Addons
+	 * @var Addons
 	 */
 	private $addons_obj;
-	// phpcs:enable WPForms.PHP.BackSlash.UseShortSyntax
 
 	/**
 	 * Is addon templates available?
@@ -54,7 +55,41 @@ trait FormTemplates {
 	 */
 	private function output_templates_content() {
 
+		$templates_hash        = wpforms()->get( 'builder_templates' )->get_hash();
+		$templates_hash_option = get_option( Templates::TEMPLATES_HASH_OPTION, '' );
+
+		// Compare the current hash and the previous one to detect changes in the templates list.
+		if ( $templates_hash !== $templates_hash_option ) {
+			// Update the hash in the option.
+			update_option( Templates::TEMPLATES_HASH_OPTION, $templates_hash );
+
+			// Wipe both caches - for the admin page and for the Form Builder.
+			wpforms()->get( 'builder_templates_cache' )->wipe_content_cache();
+		}
+
+		// Attempt to get cached content.
+		$content = wpforms()->get( 'builder_templates_cache' )->get_content_cache();
+
+		if ( empty( $content ) ) {
+			$content = $this->generate_templates_content_cache();
+		}
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $content;
+	}
+
+	/**
+	 * Generate and save cached templates content.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @retur string
+	 */
+	public function generate_templates_content_cache() {
+
 		$this->prepare_templates_data();
+
+		ob_start();
 		?>
 
 		<div class="wpforms-setup-templates">
@@ -85,6 +120,12 @@ trait FormTemplates {
 			</div>
 		</div>
 		<?php
+
+		$content = ob_get_clean();
+
+		wpforms()->get( 'builder_templates_cache' )->save_content_cache( $content );
+
+		return $content;
 	}
 
 	/**
@@ -99,6 +140,8 @@ trait FormTemplates {
 		if ( empty( $templates ) ) {
 			return;
 		}
+
+		wpforms()->get( 'builder_templates' )->update_favorites_list();
 
 		// Loop through each available template.
 		foreach ( $templates as $id => $template ) {
@@ -262,6 +305,7 @@ trait FormTemplates {
 		$args['template_id']   = ! empty( $template['id'] ) ? $template['id'] : $template['slug'];
 		$args['categories']    = $this->get_template_categories( $template );
 		$args['subcategories'] = $this->get_template_subcategories( $template );
+		$args['fields']        = $this->get_template_fields( $template );
 		$args['demo_url']      = '';
 
 		if ( ! empty( $template['url'] ) ) {
@@ -309,11 +353,10 @@ trait FormTemplates {
 
 		$args['addons_attributes'] = $this->prepare_addons_attributes( $template );
 
-		$args['selected']       = ! empty( $this->form_data['meta']['template'] ) && $this->form_data['meta']['template'] === $args['template_id'];
-		$args['selected_class'] = $args['selected'] ? ' selected' : '';
-		$args['badge_text']     = $args['selected'] ? esc_html__( 'Selected', 'wpforms-lite' ) : $args['badge_text'];
-		$args['badge_class']    = ! empty( $args['badge_text'] ) ? ' badge' : '';
-		$args['template']       = $template;
+		$args['selected']    = ! empty( $this->form_data['meta']['template'] ) && $this->form_data['meta']['template'] === $args['template_id'];
+		$args['badge_text']  = $args['selected'] ? esc_html__( 'Selected', 'wpforms-lite' ) : $args['badge_text'];
+		$args['badge_class'] = ! empty( $args['badge_text'] ) ? ' badge' : '';
+		$args['template']    = $template;
 
 		return $args;
 	}
@@ -459,6 +502,31 @@ trait FormTemplates {
 		$subcategories = array_keys( $subcategories );
 
 		return implode( ',', $subcategories );
+	}
+
+	/**
+	 * Determine template fields.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $template Template data.
+	 *
+	 * @return string Template fields, comma separated.
+	 */
+	private function get_template_fields( array $template ): string {
+
+		$fields = ! empty( $template['fields'] ) ? (array) $template['fields'] : [];
+
+		/**
+		 * Filter template fields.
+		 *
+		 * @since 1.8.6
+		 *
+		 * @param array $fields Template fields.
+		 */
+		$fields = (array) apply_filters( 'wpforms_setup_template_fields', $fields );
+
+		return implode( ',', $fields );
 	}
 
 	/**

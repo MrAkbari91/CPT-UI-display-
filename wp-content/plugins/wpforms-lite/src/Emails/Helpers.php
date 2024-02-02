@@ -144,38 +144,77 @@ class Helpers {
 	 */
 	public static function get_current_template_style_overrides() {
 
-		$header_image_size = self::get_template_header_image_size();
-		$defaults          = [
-			'email_background_color'  => '#e9eaec',
-			'email_body_color'        => '#ffffff',
-			'email_text_color'        => '#333333',
-			'email_links_color'       => '#e27730',
-			'email_typography'        => self::get_template_typography(),
-			'header_image_max_width'  => $header_image_size['width'],
-			'header_image_max_height' => $header_image_size['height'],
+		// Get the header image size for the current template.
+		list( $header_image_size, $header_image_size_dark ) = self::get_template_header_image_size();
+
+		// Get the typography for the current template.
+		list( $email_typography, $email_typography_dark ) = self::get_template_typography();
+
+		// Default style overrides.
+		$defaults = [
+			'email_background_color'       => '#e9eaec',
+			'email_body_color'             => '#ffffff',
+			'email_text_color'             => '#333333',
+			'email_links_color'            => '#e27730',
+			'email_background_color_dark'  => '#2d2f31',
+			'email_body_color_dark'        => '#1f1f1f',
+			'email_text_color_dark'        => '#dddddd',
+			'email_links_color_dark'       => '#e27730',
+			'email_typography'             => $email_typography,
+			'email_typography_dark'        => $email_typography_dark,
+			'header_image_max_width'       => $header_image_size['width'],
+			'header_image_max_height'      => $header_image_size['height'],
+			'header_image_max_width_dark'  => $header_image_size_dark['width'],
+			'header_image_max_height_dark' => $header_image_size_dark['height'],
 		];
 
-		// This option will retrieve the old background color setting from the Lite version.
-		$lite_background_color = wpforms_setting( 'email-background-color', $defaults['email_background_color'] );
+		// Retrieve old background colors setting from the Lite version.
+		$lite_background_color      = wpforms_setting( 'email-background-color', $defaults['email_background_color'] );
+		$lite_background_color_dark = wpforms_setting( 'email-background-color-dark', $defaults['email_background_color_dark'] );
 
-		// Return the color scheme if the user has the Pro version.
+		// Leave early if the user has the Lite version.
 		if ( ! wpforms()->is_pro() ) {
-			// Override the background color with the old setting.
-			$defaults['email_background_color'] = $lite_background_color;
+			// Override the background colors with the old setting.
+			$defaults['email_background_color']      = $lite_background_color;
+			$defaults['email_background_color_dark'] = $lite_background_color_dark;
 
-			return $defaults;
+			/**
+			 * Filter the style overrides for the current email template.
+			 *
+			 * @since 1.8.6
+			 *
+			 * @param array $overrides The current email template style overrides.
+			 */
+			return (array) apply_filters( 'wpforms_emails_helpers_style_overrides_args', $defaults );
 		}
 
 		// Get the color scheme from the settings.
-		// Default to an empty array if the setting is not found as we will merge it with the defaults later.
 		$color_scheme = wpforms_setting( 'email-color-scheme', [] );
 
-		// If the user has the Pro version, but the background color is the old setting, override it.
+		// If the user has the Pro version, but the light mode background color is the old setting, override it.
 		if ( empty( $color_scheme['email_background_color'] ) && ! empty( $lite_background_color ) ) {
 			$color_scheme['email_background_color'] = $lite_background_color;
 		}
 
-		return wp_parse_args( $color_scheme, $defaults );
+		// Get the dark mode color scheme from the settings.
+		$color_scheme_dark = wpforms_setting( 'email-color-scheme-dark', [] );
+
+		// If the user has the Pro version, but the dark mode background color is the old setting, override it.
+		if ( empty( $color_scheme_dark['email_background_color_dark'] ) && ! empty( $lite_background_color_dark ) ) {
+			$color_scheme_dark['email_background_color_dark'] = $lite_background_color_dark;
+		}
+
+		// Merge the color schemes with the defaults.
+		$overrides = wp_parse_args( $color_scheme + $color_scheme_dark, $defaults );
+
+		/**
+		 * Filter the style overrides for the current email template.
+		 *
+		 * @since 1.8.6
+		 *
+		 * @param array $overrides The current email template style overrides.
+		 */
+		return (array) apply_filters( 'wpforms_emails_helpers_style_overrides_args', $overrides );
 	}
 
 	/**
@@ -220,37 +259,66 @@ class Helpers {
 	 * ("Classic" and "Compact") use this font-family in their design.
 	 *
 	 * @since 1.8.5
+	 * @since 1.8.6 Added $typography argument.
 	 *
-	 * @return string
+	 * @param string $typography Optional. The typography setting to evaluate.
+	 *
+	 * @return array|string
 	 */
-	private static function get_template_typography() {
+	public static function get_template_typography( $typography = '' ) {
 
+		// Predefined font families for light and dark modes.
 		$font_families = [
 			'sans_serif' => '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif',
 			'serif'      => 'Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
 		];
 
-		// In case user downgraded to the free version return the "Sans Serif" font-family.
-		// The only available templates for free users are "Classic" and "Compact" which both uses the "Sans Serif" font-family in their design.
+		// If the user is not using the Pro version, return "Sans Serif" font-family.
 		if ( ! wpforms()->is_pro() ) {
-			return $font_families['sans_serif'];
+			return [ $font_families['sans_serif'], $font_families['sans_serif'] ];
 		}
 
-		$template_typography = wpforms_setting( 'email-typography', 'sans-serif' );
+		// Leave early if a specific typography is requested.
+		if ( ! empty( $typography ) ) {
+			// Validate the input and return the corresponding font family.
+			return $font_families[ $typography ] ?? $font_families['sans_serif'];
+		}
 
-		return isset( $font_families[ $template_typography ] ) ? $font_families[ $template_typography ] : $font_families['sans_serif'];
+		// Get typography settings from email settings.
+		$setting_typography = [
+			// Light mode.
+			wpforms_setting( 'email-typography', 'sans-serif' ),
+			// Dark mode.
+			wpforms_setting( 'email-typography-dark', 'sans-serif' ),
+		];
+
+		// Map setting values to predefined font families, default to 'sans_serif' if not found.
+		return array_map(
+			static function ( $item ) use ( $font_families ) {
+
+				return $font_families[ $item ] ?? $font_families['sans_serif'];
+			},
+			$setting_typography
+		);
 	}
 
 
 	/**
 	 * Get the header image size based on the specified size or 'medium' by default.
 	 *
+	 * Note that when given a size input, this function will only validate the input and return the corresponding size.
+	 * Otherwise, it will return the header image size for the current template in both light and dark modes.
+	 *
 	 * @since 1.8.5
+	 * @since 1.8.6 Added $size argument.
+	 *
+	 * @param string $size Optional. The desired image size ('small', 'medium', or 'large').
 	 *
 	 * @return array
 	 */
-	private static function get_template_header_image_size() {
+	public static function get_template_header_image_size( $size = '' ) {
 
+		// Predefined image sizes.
 		$sizes = [
 			'small'  => [
 				'width'  => '240',
@@ -266,9 +334,27 @@ class Helpers {
 			],
 		];
 
-		// The desired image size ('small', 'medium', or 'large').
-		$header_image_size = wpforms_setting( 'email-header-image-size', 'medium' );
+		// Leave early if a specific size is requested.
+		if ( ! empty( $size ) ) {
+			// Validate the input and return the corresponding size.
+			return $sizes[ $size ] ?? $sizes['medium'];
+		}
 
-		return ! empty( $sizes[ $header_image_size ] ) ? $sizes[ $header_image_size ] : $sizes['medium'];
+		// Get header image sizes from settings.
+		$setting_size = [
+			// Light mode.
+			wpforms_setting( 'email-header-image-size', 'medium' ),
+			// Dark mode.
+			wpforms_setting( 'email-header-image-size-dark', 'medium' ),
+		];
+
+		// Map setting values to predefined sizes, default to 'medium' if not found.
+		return array_map(
+			static function ( $item ) use ( $sizes ) {
+
+				return $sizes[ $item ] ?? $sizes['medium'];
+			},
+			$setting_size
+		);
 	}
 }

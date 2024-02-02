@@ -25,10 +25,8 @@ import { addHttps } from './utils/helpers';
 import {
 	// classNames,
 	getPercent,
-	removeLocalStorageItem,
 } from './helpers';
 import Tooltip from './components/tooltip';
-import { initialState } from './store/reducer';
 import { ProgressBar } from './components/progress-bar';
 import Dropdown from './components/dropdown';
 
@@ -38,8 +36,7 @@ const SitePreview = ( { onClickContinue, setAIStep } ) => {
 	const storedState = useStateValue();
 	const [ , dispatch ] = useStateValue();
 
-	const { setSelectedWebsiteVersion, setWebsiteOnboardingAIDetails } =
-		useDispatch( STORE_KEY );
+	const { setSelectedWebsiteVersion } = useDispatch( STORE_KEY );
 
 	const [ loadingIframe, setLoadingIframe ] = useState( true );
 	const [ isLoadingNext, setIsLoadingNext ] = useState( false );
@@ -161,8 +158,6 @@ const SitePreview = ( { onClickContinue, setAIStep } ) => {
 	const handleClosePopup = ( event ) => {
 		event?.preventDefault();
 		event?.stopPropagation();
-		removeLocalStorageItem( 'ai-onboarding-details' );
-		setWebsiteOnboardingAIDetails( initialState.onboardingAI );
 
 		dispatch( {
 			type: 'set',

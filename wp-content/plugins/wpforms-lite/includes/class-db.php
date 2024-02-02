@@ -332,8 +332,25 @@ abstract class WPForms_DB {
 			return false;
 		}
 
+		/**
+		 * Fires before a record is deleted from the database.
+		 *
+		 * @since 1.5.9
+		 *
+		 * @param int $row_id Row ID.
+		 */
 		do_action( 'wpforms_pre_delete', $row_id );
-		do_action( 'wpforms_pre_delete_' . $this->type, $row_id );
+
+		/**
+		 * Fires before a record is deleted from the database by type.
+		 *
+		 * @since 1.5.9
+		 * @since 1.8.6 Added `$primary_key` parameter.
+		 *
+		 * @param int    $row_id      Column value.
+		 * @param string $primary_key Column name.
+		 */
+		do_action( 'wpforms_pre_delete_' . $this->type, $row_id, $this->primary_key );
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
 		$result = $wpdb->query(
@@ -375,8 +392,11 @@ abstract class WPForms_DB {
 			return false;
 		}
 
+		// This action is documented in includes/class-db.php method delete().
 		do_action( 'wpforms_pre_delete', $column_value );
-		do_action( 'wpforms_pre_delete_' . $this->type, $column_value );
+
+		// This action is documented in includes/class-db.php method delete().
+		do_action( 'wpforms_pre_delete_' . $this->type, $column_value, $column );
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
 		$result = $wpdb->query(

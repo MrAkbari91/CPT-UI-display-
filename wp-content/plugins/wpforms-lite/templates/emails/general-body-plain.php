@@ -11,8 +11,9 @@
  * @var string $message
  */
 
-if ( ! \defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-echo \wp_kses_post( $message );
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+echo $message;

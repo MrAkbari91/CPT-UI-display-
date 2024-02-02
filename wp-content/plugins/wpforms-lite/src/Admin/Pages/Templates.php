@@ -29,7 +29,10 @@ class Templates {
 	 */
 	public function init() {
 
-		if ( ! wpforms_is_admin_page( 'templates' ) ) {
+		if (
+			! wpforms_is_admin_page( 'templates' ) &&
+			! wpforms_is_admin_ajax()
+		) {
 			return;
 		}
 

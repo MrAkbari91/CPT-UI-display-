@@ -73,6 +73,7 @@ class Astra_Site_Options_Import {
 			'elementor_stretched_section_container',
 			'elementor_load_fa4_shim',
 			'elementor_active_kit',
+			'elementor_experiment-container',
 
 			// Plugin: Beaver Builder.
 			'_fl_builder_enabled_icons',

@@ -5,12 +5,13 @@
  *
  * @since 1.6.8
  * @since 1.8.4 Added subcategories attribute.
+ * @since 1.8.6 Added fields attribute.
  *
- * @var string $selected_class       Selected item class.
  * @var bool   $selected             Is template selected.
  * @var string $license_class        License class (in the case of higher license needed).
  * @var string $categories           Categories, coma separated.
  * @var string $subcategories        Subcategories, comma separated.
+ * @var string $fields               Fields, comma separated.
  * @var string $badge_text           Badge text.
  * @var string $demo_url             Template demo URL.
  * @var string $template_id          Template ID (Slug or ID if available).
@@ -29,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div class="wpforms-template<?php echo esc_attr( $selected_class ); ?><?php echo esc_attr( $license_class ); ?><?php echo esc_attr( $badge_class ); ?>"
+<div class="wpforms-template<?php echo esc_attr( $license_class ); ?><?php echo esc_attr( $badge_class ); ?>"
 	id="wpforms-template-<?php echo sanitize_html_class( $template['slug'] ); ?>">
 
 	<div class="wpforms-template-thumbnail">
@@ -46,8 +47,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php } ?>
 	</div>
 
-	<!-- As requirment for Lists.js library data attribute slug is used in classes list. -->
-	<h3 class="wpforms-template-name categories has-access favorite slug subcategories" data-categories="<?php echo esc_attr( $categories ); ?>" data-subcategories="<?php echo esc_attr( $subcategories ); ?>" data-has-access="<?php echo esc_attr( $template['has_access'] ); ?>" data-favorite="<?php echo esc_attr( $template['favorite'] ); ?>" data-slug="<?php echo esc_attr( $template['slug'] ); ?>">
+	<!-- As requirement for Lists.js library data attribute slug is used in classes list. -->
+	<h3 class="wpforms-template-name categories has-access favorite slug subcategories fields" data-categories="<?php echo esc_attr( $categories ); ?>" data-subcategories="<?php echo esc_attr( $subcategories ); ?>"  data-fields="<?php echo esc_attr( $fields ); ?>" data-has-access="<?php echo esc_attr( $template['has_access'] ); ?>" data-favorite="<?php echo esc_attr( $template['favorite'] ); ?>" data-slug="<?php echo esc_attr( $template['slug'] ); ?>">
 		<?php echo esc_html( $template['name'] ); ?>
 	</h3>
 

@@ -157,7 +157,7 @@ class Divi implements IntegrationInterface {
 
 		// Load CSS per global setting.
 		wp_register_style(
-			"wpforms-{$styles_name}",
+			"wpforms-divi-{$styles_name}",
 			WPFORMS_PLUGIN_URL . "assets/css/integrations/divi/wpforms-{$styles_name}{$min}.css",
 			[],
 			WPFORMS_VERSION
@@ -219,10 +219,21 @@ class Divi implements IntegrationInterface {
 			'wpforms-divi',
 			'wpforms_divi_builder',
 			[
-				'ajax_url'          => admin_url( 'admin-ajax.php' ),
-				'nonce'             => wp_create_nonce( 'wpforms_divi_builder' ),
-				'placeholder'       => WPFORMS_PLUGIN_URL . 'assets/images/sullie-alt.png',
-				'placeholder_title' => esc_html__( 'WPForms', 'wpforms-lite' ),
+				'ajax_url'         => admin_url( 'admin-ajax.php' ),
+				'nonce'            => wp_create_nonce( 'wpforms_divi_builder' ),
+				'placeholder'      => WPFORMS_PLUGIN_URL . 'assets/images/wpforms-logo.svg',
+				'block_empty_url'  => WPFORMS_PLUGIN_URL . 'assets/images/empty-states/no-forms.svg',
+				'block_empty_text' => wp_kses(
+					__( 'You can use <b>WPForms</b> to build contact forms, surveys, payment forms, and more with just a few clicks.', 'wpforms-lite' ),
+					[
+						'b' => [],
+					]
+				),
+				'get_started_url'  => esc_url( admin_url( 'admin.php?page=wpforms-builder' ) ),
+				'get_started_text' => esc_html__( 'Get Started', 'wpforms-lite' ),
+				'guide_url'        => esc_url( wpforms_utm_link( 'https://wpforms.com/docs/creating-first-form/', 'Divi', 'Create Your First Form Documentation' ) ),
+				'guide_text'       => esc_html__( 'comprehensive guide', 'wpforms-lite' ),
+				'help_text'        => esc_html__( 'Need some help? Check out our', 'wpforms-lite' ),
 			]
 		);
 	}

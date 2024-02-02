@@ -1,10 +1,9 @@
 <?php
+/**
+ * The error handler to suppress error messages from vendor directories.
+ */
 
 namespace WPForms;
-
-/**
- * The error handler to suppress deprecated messages from vendor folders.
- */
 
 /**
  * Class ErrorHandler.
@@ -14,7 +13,7 @@ namespace WPForms;
 class ErrorHandler {
 
 	/**
-	 * Directories where can deprecation error occurs.
+	 * Directories from where errors should be suppressed.
 	 *
 	 * @since 1.8.5
 	 *
@@ -23,11 +22,35 @@ class ErrorHandler {
 	private $dirs;
 
 	/**
+	 * Previous error handler.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @var callable|null
+	 */
+	private $previous_error_handler;
+
+	/**
+	 * Error levels to suppress.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @var int
+	 */
+	private $levels;
+
+	/**
 	 * Init class.
 	 *
 	 * @since 1.8.5
+	 *
+	 * @noinspection PhpUndefinedConstantInspection
 	 */
 	public function init() {
+
+		if ( defined( 'WPFORMS_DISABLE_ERROR_HANDLER' ) && WPFORMS_DISABLE_ERROR_HANDLER ) {
+			return;
+		}
 
 		$this->dirs = [
 			WPFORMS_PLUGIN_DIR . 'vendor/',
@@ -70,6 +93,19 @@ class ErrorHandler {
 			WP_PLUGIN_DIR . '/wpforms-zapier/vendor/',
 		];
 
+		/**
+		 * Allow modifying the list of dirs to suppress messages from.
+		 *
+		 * @since 1.8.6
+		 *
+		 * @param bool $dirs The list of dirs to suppress messages from.
+		 */
+		$this->dirs = (array) apply_filters( 'wpforms_error_handler_dirs', $this->dirs );
+
+		if ( ! $this->dirs ) {
+			return;
+		}
+
 		$this->dirs = array_map(
 			static function ( $dir ) {
 
@@ -78,8 +114,21 @@ class ErrorHandler {
 			$this->dirs
 		);
 
+		/**
+		 * Allow modifying the levels of messages to suppress.
+		 *
+		 * @since 1.8.6
+		 *
+		 * @param bool $level Error levels of messages to suppress.
+		 */
+		$this->levels = (int) apply_filters(
+			'wpforms_error_handler_level',
+			E_WARNING | E_NOTICE | E_USER_WARNING | E_USER_NOTICE | E_DEPRECATED | E_USER_DEPRECATED
+		);
+
+		// To chain error handlers, we must not specify the second argument and catch all errors in our handler.
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler
-		set_error_handler( [ $this, 'error_handler' ] );
+		$this->previous_error_handler = set_error_handler( [ $this, 'error_handler' ] );
 	}
 
 	/**
@@ -93,25 +142,30 @@ class ErrorHandler {
 	 * @param int    $line    Line number.
 	 *
 	 * @return bool
-	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function error_handler( int $level, string $message, string $file, int $line ): bool { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 
-		if ( $level !== E_DEPRECATED ) {
+		if ( ( $level & $this->levels ) === 0 ) {
 			// Use standard error handler.
-			return false;
+			return $this->previous_error_handler === null ?
+				false :
+				// phpcs:ignore PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection
+				(bool) call_user_func_array( $this->previous_error_handler, func_get_args() );
 		}
 
-		$file = str_replace( DIRECTORY_SEPARATOR, '/', $file );
+		$normalized_file = str_replace( DIRECTORY_SEPARATOR, '/', $file );
 
 		foreach ( $this->dirs as $dir ) {
-			if ( false !== strpos( $file, $dir ) ) {
+			if ( strpos( $normalized_file, $dir ) !== false ) {
 				// Suppress deprecated errors from this directory.
 				return true;
 			}
 		}
 
 		// Use standard error handler.
-		return false;
+		return $this->previous_error_handler === null ?
+			false :
+			// phpcs:ignore PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection
+			(bool) call_user_func_array( $this->previous_error_handler, func_get_args() );
 	}
 }

@@ -846,14 +846,11 @@ class WPForms_Process {
 			empty( $response_body->success ) ||
 			( $is_recaptcha_v3 && $response_body->score <= wpforms_setting( 'recaptcha-v3-threshold', '0.4' ) )
 		) {
-			if ( $is_recaptcha_v3 ) {
-				if ( isset( $response_body->score ) ) {
-					$error .= ' (' . esc_html( $response_body->score ) . ')';
-				}
-				$this->spam_errors[ $this->form_data['id'] ]['footer'] = $error;
-			} else {
-				$this->spam_errors[ $this->form_data['id'] ]['recaptcha'] = $error;
+			if ( $is_recaptcha_v3 && isset( $response_body->score ) ) {
+				$error .= ' (' . esc_html( $response_body->score ) . ')';
 			}
+
+			$this->spam_errors[ $this->form_data['id'] ]['recaptcha'] = $error;
 
 			$this->log_spam_entry( $entry, $error );
 
@@ -1024,7 +1021,7 @@ class WPForms_Process {
 		}
 
 		// Get lead and verify it is attached to the form we received with it.
-		$entry = wpforms()->entry->get( $output['entry_id'], [ 'cap' => false ] );
+		$entry = wpforms()->get( 'entry' )->get( $output['entry_id'], [ 'cap' => false ] );
 
 		if ( empty( $entry->form_id ) ) {
 			return false;
@@ -1084,7 +1081,7 @@ class WPForms_Process {
 			$this->valid_hash = true;
 			$this->entry_id   = absint( $hash_data['entry_id'] );
 			$this->fields     = json_decode( $hash_data['fields'], true );
-			$this->form_data  = wpforms()->form->get(
+			$this->form_data  = wpforms()->get( 'form' )->get(
 				absint( $hash_data['form_id'] ),
 				[
 					'content_only' => true,
@@ -1197,7 +1194,7 @@ class WPForms_Process {
 			$this->confirmation_message = $confirmations[ $confirmation_id ]['message'];
 
 			if ( ! empty( $confirmations[ $confirmation_id ]['message_scroll'] ) ) {
-				wpforms()->frontend->confirmation_message_scroll = true;
+				wpforms()->get( 'frontend' )->confirmation_message_scroll = true;
 			}
 		}
 	}
@@ -1433,6 +1430,8 @@ class WPForms_Process {
 	 */
 	public function entry_save( $fields, $entry, $form_id, $form_data = [] ) {
 
+		$fields = $this->remove_raw_data_before_save( $fields );
+
 		/**
 		 * Fires on entry save.
 		 *
@@ -1446,6 +1445,27 @@ class WPForms_Process {
 		do_action( 'wpforms_process_entry_save', $fields, $entry, $form_id, $form_data );
 
 		return $this->entry_id;
+	}
+
+	/**
+	 * Remove raw data from fields before saving.
+	 * This is needed to prevent raw password data from being saved to the database.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $fields List of form fields.
+	 *
+	 * @return array
+	 */
+	private function remove_raw_data_before_save( array $fields ): array {
+
+		foreach ( $fields as $key => $field ) {
+			if ( ! empty( $field['type'] ) && $field['type'] === 'password' ) {
+				unset( $fields[ $key ]['value_raw'] );
+			}
+		}
+
+		return $fields;
 	}
 
 	/**
@@ -1534,7 +1554,7 @@ class WPForms_Process {
 		$form_data = $this->form_data;
 
 		if ( empty( $form_data ) ) {
-			$form_data = wpforms()->form->get( $form_id, [ 'content_only' => true ] );
+			$form_data = wpforms()->get( 'form' )->get( $form_id, [ 'content_only' => true ] );
 			$form_data = apply_filters( 'wpforms_frontend_form_data', $form_data );
 		}
 
@@ -1545,7 +1565,7 @@ class WPForms_Process {
 
 		ob_start();
 
-		wpforms()->frontend->confirmation( $form_data );
+		wpforms()->get( 'frontend' )->confirmation( $form_data );
 
 		$response = apply_filters( 'wpforms_ajax_submit_success_response', [ 'confirmation' => ob_get_clean() ], $form_id, $form_data );
 
@@ -1628,7 +1648,7 @@ class WPForms_Process {
 	 */
 	private function ajax_error_field_name( $field, $form_data, $error ) {
 
-		$props = wpforms()->frontend->get_field_properties( $field, $form_data );
+		$props = wpforms()->get( 'frontend' )->get_field_properties( $field, $form_data );
 
 		return apply_filters( 'wpforms_process_ajax_error_field_name', '', $field, $props, $error );
 	}

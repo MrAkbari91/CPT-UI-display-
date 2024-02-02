@@ -56,6 +56,24 @@ class Preview {
 	const PREVIEW_NONCE_NAME = 'wpforms_email_preview';
 
 	/**
+	 * XOR key.
+	 *
+	 * The encryption key is a critical element in encryption algorithms,
+	 * playing a crucial role in XOR encryption as employed in the WPFormsXOR plugin class.
+	 * This key serves to govern the transformation of data during both encryption and decryption processes.
+	 *
+	 * The default and placeholder value for the key, as defined in the plugin class, is set to 42.
+	 * If you wish to employ a different key (any numerical value is acceptable), you must provide
+	 * that specific number to the plugin instance. It's essential to use the exact same key for
+	 * both encrypting and decrypting data in the PHP environment as well.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @var int
+	 */
+	const XOR_KEY = 42;
+
+	/**
 	 * Initialize class.
 	 *
 	 * @since 1.8.5
@@ -68,7 +86,7 @@ class Preview {
 		}
 
 		// Leave early if nonce verification failed.
-		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), self::PREVIEW_NONCE_NAME ) ) {
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), self::PREVIEW_NONCE_NAME ) ) {
 			return;
 		}
 
@@ -80,7 +98,236 @@ class Preview {
 		$this->current_template = sanitize_key( $_GET['wpforms_email_template'] );
 		$this->plain_text       = $this->current_template === 'none';
 
+		$this->hooks();
 		$this->preview();
+	}
+
+	/**
+	 * Hooks.
+	 *
+	 * @since 1.8.6
+	 */
+	private function hooks() {
+
+		add_filter( 'wpforms_emails_templates_notifications_get_header_image', [ $this, 'edit_current_template_header_image' ] );
+		add_filter( 'wpforms_emails_helpers_style_overrides_args', [ $this, 'edit_current_template_style_overrides' ] );
+	}
+
+	/**
+	 * This filter is used to override the current email template header image.
+	 *
+	 * This is needed to make sure the preview link is able to reflect the
+	 * changes made in the email template style settings without saving the settings page.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $header_image The current email template header image.
+	 *
+	 * @return array
+	 */
+	public function edit_current_template_header_image( $header_image ) {
+
+		// Get style overrides.
+		$overrides = $this->get_style_overrides();
+
+		// Leave early if no overrides are passed for the preview.
+		if ( empty( $header_image ) || empty( $overrides ) ) {
+			return $header_image;
+		}
+
+		// Check for the presence of light mode header image in the query string.
+		if ( isset( $overrides['email_header_image'] ) ) {
+			$header_image['url_light'] = esc_url_raw( $overrides['email_header_image'] );
+
+			// Check for the presence of light mode header image size in the query string.
+			if ( ! empty( $overrides['email_header_image_size'] ) ) {
+				$header_image['size_light'] = sanitize_text_field( $overrides['email_header_image_size'] );
+			}
+		}
+
+		// Check for the presence of dark mode header image in the query string.
+		if ( isset( $overrides['email_header_image_dark'] ) ) {
+			$header_image['url_dark'] = esc_url_raw( $overrides['email_header_image_dark'] );
+
+			if ( ! empty( $overrides['email_header_image_size_dark'] ) ) {
+				$header_image['size_dark'] = sanitize_text_field( $overrides['email_header_image_size_dark'] );
+			}
+		}
+
+		return $header_image;
+	}
+
+	/**
+	 * This filter is used to override the current email template style overrides.
+	 *
+	 * This is needed to make sure the preview link is able to reflect the
+	 * changes made in the email template style settings without saving the settings page.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $styles The current email template styles.
+	 *
+	 * @return array
+	 */
+	public function edit_current_template_style_overrides( $styles ) {
+
+		// Get style overrides.
+		$overrides = $this->get_style_overrides();
+
+		// Leave early if no overrides are passed for the preview.
+		if ( empty( $overrides ) ) {
+			return $styles;
+		}
+
+		// Check for the presence of light mode background color in the query string.
+		if ( ! empty( $overrides['email_background_color'] ) ) {
+			$styles['email_background_color'] = sanitize_hex_color( $overrides['email_background_color'] );
+		}
+
+		// Check for the presence of dark mode background color in the query string.
+		if ( ! empty( $overrides['email_background_color_dark'] ) ) {
+			$styles['email_background_color_dark'] = sanitize_hex_color( $overrides['email_background_color_dark'] );
+		}
+
+		// Leave early if the user has the Lite version.
+		if ( ! wpforms()->is_pro() ) {
+			// The only allowed override for the Lite version is the header image size.
+			// This is needed to make sure the preview link is able to reflect the
+			// changes made in the email template style settings without saving the settings page.
+			if ( empty( $overrides['email_header_image_size'] ) ) {
+				// Return the styles if no header image size override is passed for the preview.
+				return $styles;
+			}
+
+			// Override and process the header image size.
+			$overrides = [ 'email_header_image_size' => $overrides['email_header_image_size'] ];
+
+			return $this->process_allowed_overrides( $styles, $overrides );
+		}
+
+		// Process allowed overrides using a separate function.
+		return $this->process_allowed_overrides( $styles, $overrides );
+	}
+
+	/**
+	 * Get style overrides.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @return array
+	 */
+	private function get_style_overrides() {
+
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// Check if the 'wpforms_email_style_overrides' parameter is empty.
+		if ( empty( $_GET['wpforms_email_style_overrides'] ) ) {
+			return [];
+		}
+
+		// Retrieve and unslash the encoded style overrides from the query string.
+		$style_overrides = wp_unslash( $_GET['wpforms_email_style_overrides'] );
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		$overrides     = '';
+		$overrides_len = strlen( $style_overrides );
+
+		// Decode the overrides.
+		// This is needed because the overrides are encoded before being passed in the query string.
+		for ( $i = 0; $i < $overrides_len; $i++ ) {
+			$overrides .= chr( ord( $style_overrides[ $i ] ) ^ self::XOR_KEY );
+		}
+
+		// Return the decoded overrides as an associative array.
+		return json_decode( $overrides, true );
+	}
+
+	/**
+	 * Process allowed style overrides.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $styles    Current styles.
+	 * @param array $overrides Style overrides.
+	 *
+	 * @return array Updated styles.
+	 */
+	private function process_allowed_overrides( $styles, $overrides ) {
+
+		// Leave early if no overrides are passed for the preview.
+		if ( empty( $overrides ) ) {
+			return $styles;
+		}
+
+		// Define an array of allowed query parameters.
+		$allowed_overrides = [
+			'email_body_color',
+			'email_text_color',
+			'email_links_color',
+			'email_typography',
+			'email_header_image_size',
+			'email_body_color_dark',
+			'email_text_color_dark',
+			'email_links_color_dark',
+			'email_typography_dark',
+			'email_header_image_size_dark',
+		];
+
+		// Loop through allowed parameters and update $overrides if present in the query string.
+		foreach ( $allowed_overrides as $param ) {
+			// Leave early if the parameter is not present in the query string.
+			if ( empty( $overrides[ $param ] ) ) {
+				continue;
+			}
+
+			$styles = $this->process_override( $param, $styles, $overrides );
+		}
+
+		return $styles;
+	}
+
+	/**
+	 * Process a specific style override.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param string $param     Style parameter.
+	 * @param array  $styles    Current styles.
+	 * @param array  $overrides Style overrides.
+	 *
+	 * @return array Updated styles.
+	 */
+	private function process_override( $param, $styles, $overrides ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
+
+		// Use a switch to handle specific cases.
+		switch ( $param ) {
+			case 'email_body_color':
+			case 'email_text_color':
+			case 'email_links_color':
+			case 'email_body_color_dark':
+			case 'email_text_color_dark':
+			case 'email_links_color_dark':
+				$styles[ $param ] = sanitize_hex_color( $overrides[ $param ] );
+				break;
+
+			case 'email_typography':
+			case 'email_typography_dark':
+				$styles[ $param ] = Helpers::get_template_typography( sanitize_text_field( $overrides[ $param ] ) );
+				break;
+
+			case 'email_header_image_size':
+				$header_image_size                 = Helpers::get_template_header_image_size( sanitize_text_field( $overrides[ $param ] ) );
+				$styles['header_image_max_width']  = $header_image_size['width'];
+				$styles['header_image_max_height'] = $header_image_size['height'];
+				break;
+
+			case 'email_header_image_size_dark':
+				$header_image_size_dark                 = Helpers::get_template_header_image_size( sanitize_text_field( $overrides[ $param ] ) );
+				$styles['header_image_max_width_dark']  = $header_image_size_dark['width'];
+				$styles['header_image_max_height_dark'] = $header_image_size_dark['height'];
+				break;
+		}
+
+		return $styles;
 	}
 
 	/**
@@ -99,7 +346,7 @@ class Preview {
 		 *
 		 * @param array $template Email template.
 		 */
-		$template = apply_filters( 'wpforms_emails_preview_template', $template );
+		$template = (array) apply_filters( 'wpforms_emails_preview_template', $template );
 
 		// Redirect to the email settings page if the template is not set.
 		if ( ! isset( $template['path'] ) || ! class_exists( $template['path'] ) ) {

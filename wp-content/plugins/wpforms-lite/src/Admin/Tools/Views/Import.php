@@ -2,6 +2,7 @@
 
 namespace WPForms\Admin\Tools\Views;
 
+use WP_Error;
 use WPForms\Helpers\File;
 use WPForms\Admin\Tools\Importers;
 use WPForms\Admin\Tools\Tools;
@@ -286,13 +287,14 @@ class Import extends View {
 	 *
 	 * @since 1.6.6
 	 */
-	private function process() {
+	private function process() { // phpcs:ignore WPForms.PHP.HooksMethod.InvalidPlaceForAddingHooks
 
 		// Add filter of the link rel attr to avoid JSON damage.
 		add_filter( 'wp_targeted_link_rel', '__return_empty_string', 50, 1 );
 
 		$ext = '';
 
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		if ( isset( $_FILES['file']['name'] ) ) {
 			$ext = strtolower( pathinfo( sanitize_text_field( wp_unslash( $_FILES['file']['name'] ) ), PATHINFO_EXTENSION ) );
 		}
@@ -307,19 +309,67 @@ class Import extends View {
 			);
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- wp_unslash() breaks upload on Windows.
-		$tmp_name = isset( $_FILES['file']['tmp_name'] ) ? sanitize_text_field( $_FILES['file']['tmp_name'] ) : '';
-		$forms    = json_decode( File::remove_utf8_bom( file_get_contents( $tmp_name ) ), true );
+		// The wp_unslash() function breaks upload on Windows.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.NonceVerification.Missing
+		$filename = isset( $_FILES['file']['tmp_name'] ) ? sanitize_text_field( $_FILES['file']['tmp_name'] ) : '';
 
-		if ( empty( $forms ) || ! is_array( $forms ) ) {
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
+
+		$result = self::import_forms( $filename );
+
+		if ( $result !== null ) {
 			wp_die(
-				esc_html__( 'Form data cannot be imported.', 'wpforms-lite' ),
+				esc_html( $result->get_error_message() ),
 				esc_html__( 'Error', 'wpforms-lite' ),
 				[
 					'response' => 400,
 				]
 			);
 		}
+
+		wp_safe_redirect( add_query_arg( [ 'wpforms_notice' => 'forms-imported' ] ) );
+		exit;
+	}
+
+	/**
+	 * Import forms from file.
+	 * Should be static for external use.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param string $filename File containing forms to be imported.
+	 *
+	 * @return null|WP_Error
+	 */
+	public static function import_forms( string $filename ) {
+
+		if ( ! current_user_can( 'unfiltered_html' ) ) {
+			return new WP_Error( 'no_permission', __( 'The unfiltered HTML permissions are required to import form.', 'wpforms-lite' ) );
+		}
+
+		$forms = json_decode( File::remove_utf8_bom( file_get_contents( $filename ) ), true );
+
+		if ( empty( $forms ) || ! is_array( $forms ) ) {
+			return new WP_Error( 'bad_json', __( 'Please upload a valid .json form export file.', 'wpforms-lite' ) );
+		}
+
+		if ( ! self::save_forms( $forms ) ) {
+			return new WP_Error( 'no_permission', __( 'There was an error saving your form. Please check your file and try again.', 'wpforms-lite' ) );
+		}
+
+		return null;
+	}
+
+	/**
+	 * Save forms.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $forms Forms.
+	 *
+	 * @return bool
+	 */
+	private static function save_forms( array $forms ): bool {
 
 		foreach ( $forms as $form ) {
 			$title  = ! empty( $form['settings']['form_title'] ) ? $form['settings']['form_title'] : '';
@@ -333,27 +383,59 @@ class Import extends View {
 				]
 			);
 
-			if ( $new_id ) {
-				$form['id'] = $new_id;
-
-				wp_update_post(
-					[
-						'ID'           => $new_id,
-						'post_content' => wpforms_encode( $form ),
-					]
-				);
+			// When we cannot insert one form into the DB, or update it,
+			// we will have a similar issue with the following form in the JSON file.
+			// So, it is better to bail out and inform the user that we cannot proceed.
+			if ( ! $new_id ) {
+				return false;
 			}
 
-			if ( ! empty( $form['settings']['form_tags'] ) ) {
-				wp_set_post_terms(
-					$new_id,
-					implode( ',', (array) $form['settings']['form_tags'] ),
-					WPForms_Form_Handler::TAGS_TAXONOMY
-				);
+			$form['id'] = $new_id;
+
+			if ( ! self::update_form( $form ) ) {
+				return false;
 			}
 		}
 
-		wp_safe_redirect( add_query_arg( [ 'wpforms_notice' => 'forms-imported' ] ) );
-		exit;
+		return true;
+	}
+
+	/**
+	 * Update form.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $form Form.
+	 *
+	 * @return bool
+	 */
+	private static function update_form( array $form ): bool {
+
+		$result = wp_update_post(
+			[
+				'ID'           => $form['id'],
+				'post_content' => wpforms_encode( $form ),
+			]
+		);
+
+		if ( ! $result ) {
+			return false;
+		}
+
+		if ( empty( $form['settings']['form_tags'] ) ) {
+			return true;
+		}
+
+		$result = wp_set_post_terms(
+			$form['id'],
+			implode( ',', (array) $form['settings']['form_tags'] ),
+			WPForms_Form_Handler::TAGS_TAXONOMY
+		);
+
+		if ( ! $result ) {
+			return false;
+		}
+
+		return true;
 	}
 }

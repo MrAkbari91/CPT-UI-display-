@@ -249,6 +249,20 @@ namespace {
 		 * @since 1.8.2.2
 		 */
 		class_alias( '\WPForms\Pro\Integrations\Translations\Translations', '\WPForms\Pro\Integrations\TranslationsPress\Translations' );
+
+		/**
+		 * This alias is a safeguard to those developers who use our internal class \WPForms_Entries_List, which we deleted.
+		 *
+		 * @since 1.8.6
+		 */
+		class_alias( '\WPForms\Pro\Admin\Entries\Page', '\WPForms_Entries_List' );
+
+		/**
+		 * This alias is a safeguard to those developers who use our internal class \WPForms_Entries_Table, which we deleted.
+		 *
+		 * @since 1.8.6
+		 */
+		class_alias( '\WPForms\Pro\Admin\Entries\ListTable', '\WPForms_Entries_Table' );
 	}
 
 	/**
@@ -258,6 +272,20 @@ namespace {
 	 * @since 1.8.1
 	 */
 	class_alias( '\WPForms\Frontend\Frontend', '\WPForms_Frontend' );
+
+	/**
+	 * This alias is a safeguard to those developers who use our internal class \WPForms_Overview, which we deleted.
+	 *
+	 * @since 1.8.6
+	 */
+	class_alias( '\WPForms\Admin\Forms\Page', '\WPForms_Overview' );
+
+	/**
+	 * This alias is a safeguard to those developers who use our internal class \WPForms_Overview_Table, which we deleted.
+	 *
+	 * @since 1.8.6
+	 */
+	class_alias( '\WPForms\Admin\Forms\ListTable', '\WPForms_Overview_Table' );
 
 	/**
 	 * This adds backwards compatibility after scoping the stripe lib and using our own prefix `\WPForms\Vendor\Stripe`.

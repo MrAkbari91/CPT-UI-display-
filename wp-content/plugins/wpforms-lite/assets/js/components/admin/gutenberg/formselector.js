@@ -800,7 +800,6 @@ WPForms.FormSelector = WPForms.FormSelector || ( function( document, window, $ )
 						key="wpforms-gutenberg-form-selector-wrap"
 						className="wpforms-gutenberg-form-selector-wrap">
 						<img src={ wpforms_gutenberg_form_selector.logo_url } alt="" />
-						<h3>{ strings.title }</h3>
 						<SelectControl
 							key="wpforms-gutenberg-form-selector-select-control"
 							value={ attributes.formId }

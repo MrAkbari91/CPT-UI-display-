@@ -180,6 +180,11 @@ const selectors = {
 	getLimitExceedModalInfo( { onboardingAI: { limitExceedModal } } ) {
 		return limitExceedModal;
 	},
+	getContinueProgressModalInfo( {
+		onboardingAI: { continueProgressModal },
+	} ) {
+		return continueProgressModal;
+	},
 	getDisableAi( { disableAi } ) {
 		return disableAi;
 	},

@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<img src="<?php echo esc_url( WPFORMS_PLUGIN_URL . 'assets/images/lite-connect/info-circle.svg' ); ?>" alt="">
 		<span><?php echo esc_html( $entries_since_info ); ?></span>
 		<a href="<?php echo esc_url( wpforms_admin_upgrade_link( 'dashboard-widget', 'restore-entries' ) ); ?>" target="_blank" rel="noopener noreferrer" class="wpforms-upgrade-modal">
-			<?php esc_html_e( 'Restore Form Entries', 'wpforms-lite' ); ?>
+			<?php esc_html_e( 'Restore Entries', 'wpforms-lite' ); ?>
 		</a>
 	</div>
 </div>

@@ -20,11 +20,11 @@ class SetupIntentService extends \WPForms\Vendor\Stripe\Service\AbstractService
         return $this->requestCollection('get', '/v1/setup_intents', $params, $opts);
     }
     /**
-     * A SetupIntent object can be canceled when it is in one of these statuses:
+     * You can cancel a SetupIntent object when it’s in one of these statuses:
      * <code>requires_payment_method</code>, <code>requires_confirmation</code>, or
      * <code>requires_action</code>.
      *
-     * Once canceled, setup is abandoned and any operations on the SetupIntent will
+     * After you cancel it, setup is abandoned and any operations on the SetupIntent
      * fail with an error.
      *
      * @param string $id
@@ -67,8 +67,8 @@ class SetupIntentService extends \WPForms\Vendor\Stripe\Service\AbstractService
     /**
      * Creates a SetupIntent object.
      *
-     * After the SetupIntent is created, attach a payment method and <a
-     * href="/docs/api/setup_intents/confirm">confirm</a> to collect any required
+     * After you create the SetupIntent, attach a payment method and <a
+     * href="/docs/api/setup_intents/confirm">confirm</a> it to collect any required
      * permissions to charge the payment method later.
      *
      * @param null|array $params

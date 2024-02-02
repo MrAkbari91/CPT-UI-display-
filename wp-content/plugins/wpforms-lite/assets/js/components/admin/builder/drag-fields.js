@@ -363,11 +363,18 @@ WPForms.Admin.Builder.DragFields = WPForms.Admin.Builder.DragFields || ( functio
 						$target = $( e.target ),
 						$placeholder = $target.find( '.wpforms-field-drag-placeholder' ),
 						isColumn = $target.hasClass( 'wpforms-layout-column' ),
-						targetClass = isColumn ? ' wpforms-field-drag-to-column' : '',
 						helper = {
 							width: $target.outerWidth(),
 							height: $field.outerHeight(),
 						};
+
+					let targetClass = isColumn ? ' wpforms-field-drag-to-column' : '';
+
+					if ( isColumn ) {
+						const columnSize = $target.attr( 'class' ).match( /wpforms-layout-column-(\d+)/ )[ 1 ];
+
+						targetClass += ` wpforms-field-drag-to-column-${ columnSize }`;
+					}
 
 					fieldId = $field.data( 'field-id' );
 					fieldType = $field.data( 'field-type' ) || vars.fieldType;
@@ -414,7 +421,10 @@ WPForms.Admin.Builder.DragFields = WPForms.Admin.Builder.DragFields || ( functio
 
 					$field
 						.removeClass( 'wpforms-field-drag-not-allowed' )
-						.removeClass( 'wpforms-field-drag-to-column' );
+						.removeClass( function( index, className ) {
+							// Remove all classes starting with `wpforms-field-drag-to-column`.
+							return ( className.match( /wpforms-field-drag-to-column(-\d+|)/g ) || [] ).join( ' ' );
+						} );
 
 					if ( vars.fieldReceived ) {
 						$field.attr( 'style', '' );

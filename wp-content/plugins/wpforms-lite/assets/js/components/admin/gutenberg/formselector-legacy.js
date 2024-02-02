@@ -265,7 +265,6 @@ registerBlockType( 'wpforms/form-selector', {
 					key="wpforms-gutenberg-form-selector-wrap"
 					className="wpforms-gutenberg-form-selector-wrap">
 					<img src={ wpforms_gutenberg_form_selector.logo_url }/>
-					<h3>{ wpforms_gutenberg_form_selector.strings.title }</h3>
 					<SelectControl
 						key="wpforms-gutenberg-form-selector-select-control"
 						value={ formId }

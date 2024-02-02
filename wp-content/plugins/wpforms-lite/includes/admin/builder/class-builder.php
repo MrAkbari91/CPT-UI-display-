@@ -4,6 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use WPForms\Admin\Education\Helpers;
+
 /**
  * Form builder that contains magic.
  *
@@ -544,6 +546,17 @@ class WPForms_Builder {
 		 */
 		$smart_tags = apply_filters( 'wpforms_builder_enqueues_smart_tags', wpforms()->get( 'smart_tags' )->get_smart_tags() );
 
+		$image_extensions = wpforms_chain( get_allowed_mime_types() )
+			->map(
+				static function ( $mime ) {
+
+					return strpos( $mime, 'image/' ) === 0 ? $mime : '';
+				}
+			)
+			->array_filter()
+			->array_values()
+			->value();
+
 		$strings = [
 			'and'                                     => esc_html__( 'And', 'wpforms-lite' ),
 			'ajax_url'                                => admin_url( 'admin-ajax.php' ),
@@ -620,6 +633,7 @@ class WPForms_Builder {
 			'template_modal_msg'                      => ! empty( $this->template['modal']['message'] ) ? $this->template['modal']['message'] : '',
 			'template_modal_display'                  => ! empty( $this->template['modal_display'] ) ? $this->template['modal_display'] : '',
 			'template_select'                         => esc_html__( 'Use Template', 'wpforms-lite' ),
+			'template_selected_badge'                 => Helpers::get_badge( esc_html__( 'Selected', 'wpforms-lite' ), 'sm', 'corner', 'steel', 'rounded-bl' ),
 			'template_confirm'                        => esc_html__( 'Changing templates on an existing form will DELETE existing form fields. Are you sure you want apply the new template?', 'wpforms-lite' ),
 			'use_simple_contact_form'                 => esc_html__( 'Use Simple Contact Form Template', 'wpforms-lite' ),
 			'embed'                                   => esc_html__( 'Embed', 'wpforms-lite' ),
@@ -665,6 +679,8 @@ class WPForms_Builder {
 			'upload_image_title'                      => esc_html__( 'Upload or Choose Your Image', 'wpforms-lite' ),
 			'upload_image_button'                     => esc_html__( 'Use Image', 'wpforms-lite' ),
 			'upload_image_remove'                     => esc_html__( 'Remove Image', 'wpforms-lite' ),
+			'upload_image_extensions'                 => $image_extensions,
+			'upload_image_extensions_error'           => esc_html__( 'You tried uploading a file type that is not allowed. Please try again.', 'wpforms-lite' ),
 			'provider_add_new_acc_btn'                => esc_html__( 'Add', 'wpforms-lite' ),
 			'pro'                                     => wpforms()->is_pro(),
 			'is_gutenberg'                            => version_compare( get_bloginfo( 'version' ), '5.0', '>=' ) && ! is_plugin_active( 'classic-editor/classic-editor.php' ),
@@ -679,6 +695,7 @@ class WPForms_Builder {
 			'error_contact_support'                   => esc_html__( 'Please contact the plugin support team if this behavior persists.', 'wpforms-lite' ),
 			'ms_win_css_url'                          => WPFORMS_PLUGIN_URL . 'assets/css/builder/builder-ms-win.css',
 			'error_select_template'                   => esc_html__( 'Please close the form builder and try again. If the error persists, contact our support team.', 'wpforms-lite' ),
+			'error_load_templates'                    => esc_html__( 'Couldn\'t load the Setup panel.', 'wpforms-lite' ),
 			'blank_form'                              => esc_html__( 'Blank Form', 'wpforms-lite' ),
 			'something_went_wrong'                    => esc_html__( 'Something went wrong', 'wpforms-lite' ),
 			'field_cannot_be_reordered'               => esc_html__( 'This field cannot be moved.', 'wpforms-lite' ),
@@ -689,6 +706,7 @@ class WPForms_Builder {
 				'{from}',
 				'{to}'
 			),
+			'form_meta'                               => $this->form_data['meta'] ?? [],
 		];
 
 		$strings = $this->add_localized_currencies( $strings );

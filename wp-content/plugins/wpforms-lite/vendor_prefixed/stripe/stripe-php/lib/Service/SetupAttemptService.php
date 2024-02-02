@@ -6,7 +6,7 @@ namespace WPForms\Vendor\Stripe\Service;
 class SetupAttemptService extends \WPForms\Vendor\Stripe\Service\AbstractService
 {
     /**
-     * Returns a list of SetupAttempts associated with a provided SetupIntent.
+     * Returns a list of SetupAttempts that associate with a provided SetupIntent.
      *
      * @param null|array $params
      * @param null|array|\Stripe\Util\RequestOptions $opts

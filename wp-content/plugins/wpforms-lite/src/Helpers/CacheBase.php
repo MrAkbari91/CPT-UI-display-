@@ -3,6 +3,7 @@
 namespace WPForms\Helpers;
 
 use WPForms\Tasks\Tasks;
+use WPForms\Helpers\File;
 
 /**
  * Remote data cache handler.
@@ -155,28 +156,12 @@ abstract class CacheBase {
 	 * Get cache directory path.
 	 *
 	 * @since 1.6.8
+	 *
+	 * @return string
 	 */
 	protected function get_cache_dir() {
 
-		static $cache_dir;
-
-		if ( $cache_dir ) {
-			/**
-			 * Since wpforms_upload_dir() relies on hooks, and hooks can be added unpredictably,
-			 * we need to cache the result of this method.
-			 * Otherwise, it is the risk to save cache file to one dir and try to get from another.
-			 */
-			return $cache_dir;
-		}
-
-		$upload_dir  = wpforms_upload_dir();
-		$upload_path = ! empty( $upload_dir['path'] )
-			? trailingslashit( wp_normalize_path( $upload_dir['path'] ) )
-			: trailingslashit( WP_CONTENT_DIR ) . 'uploads/wpforms/';
-
-		$cache_dir = $upload_path . 'cache/';
-
-		return $cache_dir;
+		return File::get_cache_dir();
 	}
 
 	/**
@@ -202,8 +187,8 @@ abstract class CacheBase {
 	 *
 	 * @return bool
 	 */
-	private function is_expired_cache() {
-
+	private function is_expired_cache(): bool {
+		// phpcs:ignore WPForms.Formatting.EmptyLineBeforeReturn.RemoveEmptyLineBeforeReturnStatement
 		return $this->cache_time() + $this->settings['cache_ttl'] < time();
 	}
 
@@ -256,7 +241,7 @@ abstract class CacheBase {
 			return [];
 		}
 
-		return (array) json_decode( file_get_contents( $this->cache_file ), true );
+		return (array) json_decode( File::get_contents( $this->cache_file ), true );
 	}
 
 	/**
@@ -286,7 +271,7 @@ abstract class CacheBase {
 		$data = $this->perform_remote_request();
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
-		if ( file_put_contents( $this->cache_file, wp_json_encode( $data ) ) === false ) {
+		if ( File::put_contents( $this->cache_file, wp_json_encode( $data ) ) === false ) {
 			return false;
 		}
 

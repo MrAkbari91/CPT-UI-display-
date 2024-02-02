@@ -6,7 +6,9 @@ namespace WPForms\Vendor\Stripe\Service;
 class PriceService extends \WPForms\Vendor\Stripe\Service\AbstractService
 {
     /**
-     * Returns a list of your prices.
+     * Returns a list of your active prices, excluding <a
+     * href="/docs/products-prices/pricing-models#inline-pricing">inline prices</a>.
+     * For the list of inactive prices, set <code>active</code> to false.
      *
      * @param null|array $params
      * @param null|array|\Stripe\Util\RequestOptions $opts

@@ -54,6 +54,7 @@ class Frontend {
 		add_action( 'wpforms_wp_footer', [ $this, 'enqueues' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_assets' ] );
 		add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'elementor_enqueues' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ] );
 		add_filter( 'register_block_type_args', [ $this, 'register_block_type_args' ], 20, 2 );
 	}
 
@@ -101,6 +102,20 @@ class Frontend {
 		}
 
 		$this->enqueue_assets();
+	}
+
+	/**
+	 * Enqueue block editor assets.
+	 *
+	 * @since 1.8.6
+	 */
+	public function enqueue_block_assets() {
+
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		$this->enqueue_styles();
 	}
 
 	/**

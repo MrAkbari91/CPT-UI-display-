@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { DefaultStep, PreviousStepLink } from '../../components/index';
 import { useStateValue } from '../../store/store';
-// import ZipWPAuthorize from '../../components/zipwp-auth/index';
 import './style.scss';
 const { imageDir, isBrizyEnabled, isElementorDisabled } = starterTemplates;
 
@@ -148,9 +147,6 @@ const PageBuilder = () => {
 							</div>
 						) }
 					</div>
-					{ /* <div className="zipwp-authorize-wrap">
-						{ <ZipWPAuthorize /> }
-					</div> */ }
 				</div>
 			}
 			actions={

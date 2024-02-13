@@ -1,0 +1,964 @@
+# Copyright (C) 2015 Child Theme Configurator
+# This file is distributed under the same license as the Child Theme Configurator package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Child Theme Configurator 1.7.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/child-theme-configurator\n"
+"POT-Creation-Date: 2015-02-20 02:29:04+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-03-03 11:16+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.7.4\n"
+"Language: sr_RS\n"
+
+#. Plugin Name of the plugin/theme
+#: child-theme-configurator.php:76 child-theme-configurator.php:86
+#: includes/forms/main.php:23
+msgid "Child Theme Configurator"
+msgstr "Child Theme Configurator"
+
+#: child-theme-configurator.php:77 child-theme-configurator.php:87
+#: child-theme-configurator.php:97
+msgid "Child Themes"
+msgstr "Podređene teme"
+
+#: child-theme-configurator.php:112
+msgid "Child Theme Configurator requires WordPress version %s or later."
+msgstr "Child Theme Configurator zahteva WordPress verziju %s ili noviju"
+
+#: includes/class-ctc-ui.php:143
+msgid "Child Theme files modified successfully."
+msgstr "Podređena tema uspešno izmenjena."
+
+#: includes/class-ctc-ui.php:146
+msgid ""
+"Child Theme <strong>%s</strong> has been generated successfully.\n"
+"                "
+msgstr "Podređena tema <strong>%s</strong> uspešno generisana.\n"
+
+#: includes/class-ctc-ui.php:149
+msgid "IMPORTANT:"
+msgstr "VAŽNO:"
+
+#: includes/class-ctc-ui.php:151 includes/forms/themepreview.php:20
+msgid "Go to Themes"
+msgstr "Idi na teme"
+
+#: includes/class-ctc-ui.php:151
+msgid "Network enable"
+msgstr "Aktiviraj mrežu"
+
+#: includes/class-ctc-ui.php:151
+msgid "your child theme."
+msgstr "vaša podređena tema."
+
+#: includes/class-ctc-ui.php:153 includes/forms/themepreview.php:18
+msgid "Live Preview"
+msgstr "Live pregled"
+
+#: includes/class-ctc-ui.php:153
+msgid "Test your child theme"
+msgstr "Testirajte svoju podređenu temu"
+
+#: includes/class-ctc-ui.php:153
+msgid "before activating."
+msgstr "pre nego što je aktivirate."
+
+#: includes/class-ctc.php:143
+msgid "URL/None"
+msgstr "URL/Nijedan"
+
+#: includes/class-ctc.php:144
+msgid "Origin"
+msgstr "Poreklo"
+
+#: includes/class-ctc.php:145
+msgid "Color 1"
+msgstr "Boja 1"
+
+#: includes/class-ctc.php:146
+msgid "Color 2"
+msgstr "Boja 2"
+
+#: includes/class-ctc.php:147
+msgid "Width/None"
+msgstr "Širina/Nijedna"
+
+#: includes/class-ctc.php:148
+msgid "Style"
+msgstr "Stil"
+
+#: includes/class-ctc.php:149
+msgid "Color"
+msgstr "Boja"
+
+#: includes/class-ctc.php:151
+msgid "Are you sure? This will replace your current settings."
+msgstr "Jeste li sigurni? Ovim ćete zameniti svoje trenutne postavke."
+
+#: includes/class-ctc.php:152
+msgid "<span style=\"font-size:10px\">!</span>"
+msgstr "<span style=\"font-size:10px\">!</span>"
+
+#: includes/class-ctc.php:153 includes/forms/rule-value.php:32
+msgid "Selectors"
+msgstr "Selektori"
+
+#: includes/class-ctc.php:154
+msgid "Close"
+msgstr "Zatvori"
+
+#: includes/class-ctc.php:155
+msgid "Edit"
+msgstr "Uredi"
+
+#: includes/class-ctc.php:156
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: includes/class-ctc.php:157
+msgid "Rename"
+msgstr "Promeni naziv"
+
+#: includes/class-ctc.php:158
+msgid "The stylesheet cannot be displayed."
+msgstr "Datoteka sa stilovima ne može biti prikazana."
+
+#: includes/class-ctc.php:159
+msgid "(Child Only)"
+msgstr "(Samo podređena)"
+
+#: includes/class-ctc.php:160
+msgid "Please enter a valid Child Theme."
+msgstr "Unesite važeću podređenu temu."
+
+#: includes/class-ctc.php:161
+msgid "Please enter a valid Child Theme name."
+msgstr "Unesite naziv važeće podređene teme"
+
+#: includes/class-ctc.php:162
+msgid "<strong>%s</strong> exists. Please enter a different Child Theme"
+msgstr "<strong>%s</strong> već postoji. Unesite drugačiju podređenu temu. "
+
+#: includes/class-ctc.php:163
+msgid "The page could not be loaded correctly so some controls have been disabled."
+msgstr "Stranica se nije pravilno učitala, tako da su neke kontrole deaktivirane."
+
+#: includes/class-ctc.php:165
+msgid "Conflicting jQuery libraries were loaded by another plugin:"
+msgstr "Drugi plugin je učitao konfliktne jQuery biblioteke:"
+
+#: includes/class-ctc.php:167
+msgid "Deactivating other plugins may resolve this issue."
+msgstr "Deaktiviranjem drugih plugin-a možete rešiti ovaj problem."
+
+#: includes/class-ctc.php:168
+msgid "%sWhy am I seeing this?%s"
+msgstr "%sZašto vidim ovu poruku?%s"
+
+#: includes/class-ctc.php:385
+msgid "Zip file creation failed."
+msgstr "Neuspelo kreiranje zip datoteke."
+
+#: includes/class-ctc.php:421
+msgid "The Functions file is required and cannot be deleted."
+msgstr "Datoteka ‘Funkcije’ je obavezna i ne može se obrisati. "
+
+#: includes/class-ctc.php:502
+msgid "You do not have permission to configure child themes."
+msgstr "Nemate dozvole da konfigurišete podređene teme."
+
+#: includes/class-ctc.php:549
+msgid "%s does not exist. Please select a valid Parent Theme."
+msgstr "%s ne postoji. Odaberite važeću nadređenu temu."
+
+#: includes/class-ctc.php:553
+msgid "Please select a valid Parent Theme."
+msgstr "Odaberite važeću nadređenu temu."
+
+#: includes/class-ctc.php:556
+msgid "Please enter a valid Child Theme directory."
+msgstr "Unesite važeći direktorijum za podređenu temu."
+
+#: includes/class-ctc.php:564
+msgid "Please enter a valid Child Theme template name."
+msgstr "Unesite važeći naziv šablona podređene teme."
+
+#: includes/class-ctc.php:569
+msgid "<strong>%s</strong> exists. Please enter a different Child Theme template name."
+msgstr "<strong>%s</strong> već postoji. Unesite drugi naziv šablona podređene teme."
+
+#: includes/class-ctc.php:575
+msgid "Your theme directories are not writable."
+msgstr "Direktorijumi vaše teme nisu raspoloživi za pisanje. "
+
+#: includes/class-ctc.php:635
+msgid "Your stylesheet is not writable."
+msgstr "Vaša datoteka sa stilovima nije raspoloživa za pisanje."
+
+#: includes/class-ctc.php:877
+msgid ""
+"A closing PHP tag was detected in Child theme functions file so \"Parent Stylesheet "
+"Handling\" option was not configured. Closing PHP at the end of the file is discouraged "
+"as it can cause premature HTTP headers. Please edit <code>functions.php</code> to "
+"remove the final <code>?&gt;</code> tag and click \"Generate/Rebuild Child Theme Files"
+"\" again."
+msgstr ""
+"Završna PHP oznaka otkrivena je u datoteci sa funkcijama podređene teme pa opcija "
+"\"Rukovanje nadređenom datotekom sa stilovima\" nije konfigurisana. Zatvaranje PHP-a na "
+"kraju datoteke ne preporučuje se jer može dovesti do preuranjenih HTTP zaglavlja. "
+"Uredite <code>functions.php</code> da ukloni završnu <code>?&gt;</code> oznaku i "
+"kliknite na \"Generiši/Ponovo izgradi datoteke sa podređenim temama\"."
+
+#: includes/class-ctc.php:964
+msgid "Could not delete file."
+msgstr "Datoteka nije obrisana."
+
+#: includes/class-ctc.php:1040
+msgid "Could not set write permissions."
+msgstr "Dozvole za pisanje nisu podešene."
+
+#: includes/class-ctc.php:1114
+msgid "There were errors while resetting permissions."
+msgstr "Došlo je do grešaka prilikom podešavanja dozvola."
+
+#: includes/class-ctc.php:1156
+msgid "Could not upload file."
+msgstr "Datoteka nije otpremljena."
+
+#: includes/class-ctc.php:1239
+msgid ""
+"Child Theme Configurator is unable to write to the stylesheet. This can be resolved "
+"using one of the following options:<ol>"
+msgstr ""
+"Child Theme Configurator ne može da piše u datoteku sa stilovima. To se može rešiti uz "
+"pomoć jedne od sledećih opcija: <ol>"
+
+#: includes/class-ctc.php:1242
+msgid ""
+"<li>Temporarily make the stylesheet writable by clicking the button below. You should "
+"change this back when you are finished editing for security by clicking \"Make read-only"
+"\" under the \"Files\" tab.</li>"
+msgstr ""
+"<li>Trenutno učinite datoteku sa stilovima raspoloživom za pisanje tako što ćete "
+"kliknuti na taster ispod. Kad završite uređivanje, trebalo bi da vratite opciju na "
+"prethodno stanje iz bezbednosnih razloga, tako što ćete kliknuti na  \"Raspoloživo samo "
+"za čitanje\" na tabulatoru \"Datoteke\".</li>"
+
+#: includes/class-ctc.php:1245
+msgid "Temporarily make stylesheet writable"
+msgstr "Privremeno napravite datoteku sa stilovima raspoloživu za pisanje."
+
+#: includes/class-ctc.php:1246
+msgid ""
+"<li><a target=\"_blank\"  href=\"http://codex.wordpress.org/Editing_wp-config."
+"php#WordPress_Upgrade_Constants\" title=\"Editin wp-config.php\">Add your FTP/SSH "
+"credentials to the WordPress config file</a>.</li>"
+msgstr ""
+"<li><a target=\"_blank\" href=\"http://codex.wordpress.org/Editing_wp-config."
+"php#WordPress_Upgrade_Constants\" title=\"Editing wp-config.php\">Dodajte svoje FTP/SSH "
+"akreditive WordPress datoteci za konfiguraciju</a>.</li>"
+
+#: includes/class-ctc.php:1248
+msgid ""
+"<li><a target=\"_blank\" href=\"http://technet.microsoft.com/en-us/library/cc771170\" "
+"title=\"Setting Application Pool Identity\">Assign WordPress to an application pool "
+"that has write permissions</a> (Windows IIS systems).</li>"
+msgstr ""
+"<li><a target=\"_blank\" href=\"http://technet.microsoft.com/en-us/library/cc771170\" "
+"title=\"Podešavanje identiteta skupa aplikacija\">Dodelite WordPress skupu aplikacija "
+"koji ima dozvole za pisanje</a> (Windows IIS systems).</li>"
+
+#: includes/class-ctc.php:1249
+msgid ""
+"<li><a target=\"_blank\" href=\"http://codex.wordpress.org/Changing_File_Permissions\" "
+"title=\"Changing File Permissions\">Set the stylesheet write permissions on the server "
+"manually</a> (not recommended).</li>"
+msgstr ""
+"<li><a target=\"_blank\" href=\"http://codex.wordpress.org/Changing_File_Permissions\" "
+"title=\"Promena dozvola datoteke\">Podesite ručno dozvole na serveru </a> (ne "
+"preporučuje se).</li>"
+
+#: includes/class-ctc.php:1251
+msgid "<li>Run PHP under Apache with suEXEC (contact your web host).</li>"
+msgstr "<li>Pokreni PHP pod Apache-om uz suEXEC (obratite se svom web hostu).</li>"
+
+#: includes/class-ctc.php:1261
+msgid ""
+"This Child Theme is not owned by your website account. It may have been created by a "
+"prior version of this plugin or by another program. Moving forward, it must be owned by "
+"your website account to make changes. Child Theme Configurator will attempt to correct "
+"this when you click the button below."
+msgstr ""
+"Nalog vašeg web site-a ne poseduje ovu podređenu temu. Možda je kreirana od strane "
+"prethodne verzije ovog plugin-a ili od strane drugog programa. Da biste pravili izmene, "
+"mora biti u vlasništvu naloga vašeg web site-a. Child Theme Configurator će pokušati da "
+"to ispravi kad kliknete na donji taster."
+
+#: includes/class-ctc.php:1264
+msgid "Correct Child Theme Permissions"
+msgstr "Dozvole za ispravljanje podređene teme"
+
+#: includes/class-ctc.php:1271
+msgid ""
+"Child Theme Configurator needs to update its interal data. Please set your preferences "
+"below and click \"Generate Child Theme Files\" to update your configuration."
+msgstr ""
+"Child Theme Configurator treba da ažurira svoje interne podatke. Podesite "
+"karakteristike i kliknite na \"Generiši datoteke podređene teme\" kako biste ažurirali "
+"konfiguraciju."
+
+#: includes/class-ctc.php:1277
+msgid ""
+"<strong>However, some styles could not be parsed due to memory limits.</strong> Try "
+"deselecting \"Additional Stylesheets\" below and click \"Generate/Rebuild Child Theme "
+"Files\". %sWhy am I seeing this?%s"
+msgstr ""
+"<strong>Neki stilovi ne mogu biti parsirani zbog ograničenja memorije.</strong> "
+"Pokušajte da poništite štikliranje opcije \"Dodatne datoteke sa stilovima\" i kliknite "
+"na \"Generiši/Ponovo izgradi datoteke sa podređenimm temama\". %Zašto vidim ovu poruku?"
+"% "
+
+#: includes/class-ctc.php:1286
+msgid ""
+"Child Theme Configurator did not detect any configuration data because a previously "
+"configured Child Theme has been removed. Please set your preferences below and click "
+"\"Generate Child Theme Files\"."
+msgstr ""
+"Child Theme Configurator nije otkrio podatke o konfiguraciji jer je prethodno "
+"konfigurisana podređena tema uklonjena. Podesite karakteristike i kliknite na "
+"\"Generiši datoteke podređene teme\"."
+
+#: includes/forms/addl_css.php:7
+msgid "Parse additional stylesheets:"
+msgstr "Parsiraj dodatne datoteke sa stilovima:"
+
+#: includes/forms/addl_css.php:11 includes/forms/parent-child.php:226
+msgid ""
+"Stylesheets that are currently being loaded by the parent theme are automatically "
+"selected below (except for Bootstrap stylesheets which add a large amount data to the "
+"configuration). To further reduce overhead, select only the additional stylesheets you "
+"wish to customize."
+msgstr ""
+"Datoteke sa stilovima koje trenutno učitava nadređena tema automatski se biraju dole "
+"(osim Bootstrap datoteke sa stilovima koja dodaje veliku količinu podataka "
+"konfiguraciji). Da biste redukovali opterećenje, odaberite samo dodatne datoteke sa "
+"stilovima koje želite da prilagodite."
+
+#: includes/forms/addl_panels.php:8 includes/forms/addl_panels.php:9
+msgid "Learn more about IntelliWidget"
+msgstr "Saznajte više o IntelliWidget-u"
+
+#: includes/forms/addl_panels.php:9
+msgid ""
+"IntelliWidget is a versatile widget manager that does the work of multiple plugins by "
+"combining custom page menus, featured posts, sliders and other dynamic content features "
+"into a single plugin that can display on a per-page or site-wide basis."
+msgstr ""
+"IntelliWidget je svestran upravljač widget-ima koji radi sa mnogim dodacima tako što "
+"kombinuje prilagođene stranice menija, uobličene postove, slajdere i druge "
+"funkcionalnosti dinamičkog sadržaja u jednom plugin-u koji se može prikazati na "
+"stranici ili na site-u. "
+
+#: includes/forms/addl_panels.php:10 includes/forms/addl_panels.php:13
+msgid "Learn more"
+msgstr "Saznajte više"
+
+#: includes/forms/addl_panels.php:11 includes/forms/addl_panels.php:12
+msgid "Learn more about IW Responsive Menu"
+msgstr "Saznajte više o IW responzivnom meniju"
+
+#: includes/forms/addl_panels.php:12
+msgid ""
+"IntelliWidget Responsive Menu lets you break free from your theme’s built-in responsive "
+"menu options and gives you complete control over the user experience."
+msgstr ""
+"IntelliWidget responzivni meni omogućava vam da se oslobodite ugrađenih opcija "
+"responzivnog menija i daje vam potpunu kontrolu korisničkog iskustva."
+
+#: includes/forms/addl_panels.php:16 includes/help/help_en_US.php:211
+msgid "Learn more about CTC Pro"
+msgstr "Saznajte više o CTC Pro"
+
+#: includes/forms/addl_panels.php:17
+msgid "Customizing WordPress just got even easier."
+msgstr "Prilagođavanje WordPress-a upravo je postalo još lakše!"
+
+#: includes/forms/addl_panels.php:18
+msgid ""
+"Thousands of users have already seen the benefits of using Child Theme Configurator. If "
+"you spend any amount of time customizing WordPress, CTC Pro will help maximize your "
+"productivity."
+msgstr ""
+"Hiljade korisnika već su uvidele prednosti upotrebe dodatka Child Theme Configurator. "
+"Ako trošite vreme na prilagođavanje WordPress-a, CTC Pro pomoći će vam da povećate "
+"produktivnost."
+
+#: includes/forms/addl_panels.php:19
+msgid "Designed by Developers Who Use It Every Day."
+msgstr "Osmislili su ga programeri koji ga svakodnevno koriste."
+
+#: includes/forms/addl_panels.php:20
+msgid ""
+"We've packed in more features to make design work quicker and easier with <strong>Child "
+"Theme Configurator Pro.</strong>"
+msgstr ""
+"Spakovali smo više funkcioonalnosti kako bi dizajn radio brže i lakše uz <strong>Child "
+"Theme Configurator Pro.</strong>"
+
+#: includes/forms/addl_panels.php:22
+msgid "Customize Plugin Stylesheets"
+msgstr "Datoteke sa stilovima za prilagođavanje plugin-a  "
+
+#: includes/forms/addl_panels.php:23
+msgid ""
+"Apply the power of CTC's top-rated interface to your site's plugin styles. All new "
+"design makes it much easier to get the results you want."
+msgstr ""
+"Primenite moć najbolje ocenjenih CTC interfejsa na plugin stilove svog site-a. "
+"Zahvaljujući novom dizajnu, biće vam mnogo lakše da dobijete rezultate koje želite.  "
+
+#: includes/forms/addl_panels.php:24
+msgid "Quick Preview"
+msgstr "Brzi pregled"
+
+#: includes/forms/addl_panels.php:24
+msgid "Test your child theme with a single click."
+msgstr "Testirajte svoju podređenu temu jednim klikom."
+
+#: includes/forms/addl_panels.php:25
+msgid "Find related styles"
+msgstr "Nađite povezane stilove"
+
+#: includes/forms/addl_panels.php:25
+msgid ""
+"Use the \"All Styles\" panel to edit groups of selectors from a single combined list."
+msgstr ""
+"Koristite panel \"Svi stilovi\" da biste uredili grupe selektora iz pojedinačne "
+"kombinovane liste. "
+
+#: includes/forms/addl_panels.php:26
+msgid "Find styles by Nav Menu"
+msgstr "Nađi stilove u navigacionom meniju"
+
+#: includes/forms/addl_panels.php:26
+msgid "Tweak menus quickly and easily."
+msgstr "Uzima delove menija lako i brzo."
+
+#: includes/forms/addl_panels.php:27
+msgid "Most recent edits"
+msgstr "Najnovije ispravke"
+
+#: includes/forms/addl_panels.php:27
+msgid "Return to recently edited selectors from a toggleable sidebar."
+msgstr "Vratite se na nedavno uređene selektore sa podesive bočne trake. "
+
+#: includes/forms/addl_panels.php:28
+msgid "Free Upgrades"
+msgstr "Besplatna nadgradnja"
+
+#: includes/forms/addl_panels.php:29
+msgid "Your Update Key gives you access to new Pro features as soon as they are released."
+msgstr ""
+"Vaš novi ključ za ažuriranje omogućava vam pristup novim profesionalnim "
+"funkcionalnostima čim se objave."
+
+#: includes/forms/addl_panels.php:30
+msgid "Top-rated Online Support"
+msgstr "Najbolje ocenjena online podrška"
+
+#: includes/forms/addl_panels.php:31
+msgid "Online Documentation"
+msgstr "Online dokumentacija"
+
+#: includes/forms/addl_panels.php:32
+msgid "Tutorial Videos"
+msgstr "Video tutorijali"
+
+#: includes/forms/addl_panels.php:34
+msgid "For a limited time save over 15% off Child Theme Configurator Pro."
+msgstr ""
+"U ograničenom vremenskom periodu, uštedite više od 15% za Child Theme Configurator Pro."
+
+#: includes/forms/addl_panels.php:35
+msgid "Upgrade Now"
+msgstr "Nadgradi sada"
+
+#: includes/forms/addl_panels.php:35
+msgid "Buy Now - Only $14.95 USD*"
+msgstr "Kupite sada - samo  $14.95 USD*"
+
+#: includes/forms/addl_panels.php:35
+msgid "*Prices subject to change."
+msgstr "*Cene su podložne promenama."
+
+#: includes/forms/addl_tabs.php:8
+msgid "Get CTC Pro"
+msgstr "Obezbedite CTC Pro"
+
+#: includes/forms/at-import.php:15 includes/forms/query-selector.php:85
+msgid "Save"
+msgstr "Sačuvaj"
+
+#: includes/forms/at-import.php:18
+msgid "@import Statements"
+msgstr "@uvezi izjave"
+
+#: includes/forms/backup.php:8
+msgid "Backup"
+msgstr "Backup"
+
+#: includes/forms/backups.php:10 includes/forms/parent-child.php:209
+msgid "Restore backup from"
+msgstr "Obnovi backup iz"
+
+#: includes/forms/fileform.php:8
+msgid "The Theme editor has been disabled. Template files must be edited offline."
+msgstr "Uređivač teme je deaktiviran. Datoteke šablona moraju se uređivati offline."
+
+#: includes/forms/fileform.php:12
+msgid "Click here to edit template files using the Theme Editor"
+msgstr "Kliknite ovde da biste uredili datoteke šablona uz pomoć uređivača teme"
+
+#: includes/forms/fileform.php:23
+msgid "Parent Templates"
+msgstr "Nadređeni šabloni"
+
+#: includes/forms/fileform.php:23
+msgid "Child Theme Files"
+msgstr "Datoteke podređene teme"
+
+#: includes/forms/fileform.php:28
+msgid "Copy PHP template files from the parent theme by selecting them here."
+msgstr "Kopirajte PHP datoteke šablona iz nadređene teme tako što ćete ih odabrati ovde. "
+
+#: includes/forms/fileform.php:31
+msgid ""
+"CAUTION: If your child theme is active, the child theme version of the file will be "
+"used instead of the parent immediately after it is copied."
+msgstr ""
+"PAŽNJA: Ako je vaša podređena tema aktivna, verzija podređene teme datoteke koristiće "
+"se umesto nadređene odmah nakon kopiranja."
+
+#: includes/forms/fileform.php:33
+msgid "The %s file is generated separately and cannot be copied here."
+msgstr "Datoteka %s je posebno generisana i ne može se kopirati ovde. "
+
+#: includes/forms/fileform.php:43
+msgid "Delete child theme templates by selecting them here."
+msgstr "Obrišite šablone podređene teme tako što ćete ih odabrati ovde."
+
+#: includes/forms/fileform.php:44
+msgid ""
+"Delete child theme templates or make them writable by selecting them here. Writable "
+"files are displayed in <span style=\"color:red\">red</span>."
+msgstr ""
+"Obrišite šablone podređene teme ili ih podesite za pisanje tako što ćete ih odabrati "
+"ovde. Datoteke za pisanje prikazane su  <span style=\"color:red\">crvenom bojom</span>."
+
+#: includes/forms/fileform.php:57
+msgid "Make Selected Writable"
+msgstr "Neka odabrano bude raspoloživo za pisanje"
+
+#: includes/forms/fileform.php:61
+msgid "Copy Selected to Child Theme"
+msgstr "Kopiraj odabrano u podređenu temu"
+
+#: includes/forms/fileform.php:61 includes/forms/images.php:21
+msgid "Delete Selected"
+msgstr "Obriši odabrano"
+
+#: includes/forms/files.php:15
+msgid "Upload New Child Theme Image"
+msgstr "Otpremi novu sliku podređene teme"
+
+#: includes/forms/files.php:18
+msgid ""
+"Theme images reside under the <code>images</code> directory in your child theme and are "
+"meant for stylesheet use only. Use the Media Library for content images."
+msgstr ""
+"Slike teme nalaze se u direktorijumu <code>slike</code> u vašoj podređenoj temi i "
+"napravljene su samo za upotrebu datoteke sa stilovima. Koristite biblioteku za slike "
+"sadržaja."
+
+#: includes/forms/files.php:25 includes/forms/files.php:51
+msgid "Upload"
+msgstr "Otpremi"
+
+#: includes/forms/files.php:32
+msgid "Child Theme Screenshot"
+msgstr "Snimak ekrana podređene teme"
+
+#: includes/forms/files.php:41
+msgid "Upload New Screenshot"
+msgstr "Otpremi novi snimak ekrana"
+
+#: includes/forms/files.php:44
+msgid ""
+"The theme screenshot should be a 4:3 ratio (e.g., 880px x 660px) JPG, PNG or GIF. It "
+"will be renamed <code>screenshot</code>."
+msgstr ""
+"Odnos teme i snimka ekrana treba da bude 4:3 (e.g., 880px x 660px) JPG, PNG or GIF. "
+"Naziv će biti promenjen <code>slika ekrana</code>."
+
+#: includes/forms/files.php:59
+msgid "Export Child Theme as Zip Archive"
+msgstr "Izvezi podređenu temu kao zip arhivu"
+
+#: includes/forms/files.php:64
+msgid "Export"
+msgstr "Izvezi"
+
+#: includes/forms/files.php:73
+msgid "Secure Child Theme"
+msgstr "Obezbedi podređenu temu"
+
+#: includes/forms/files.php:76
+msgid "Attempt to reset child theme permissions to user ownership and read-only access."
+msgstr ""
+"Pokušaj da poništiš dozvole podređene teme u vlasništvu korisnika i pristup samo za "
+"čitanje."
+
+#: includes/forms/files.php:82
+msgid "Make read-only"
+msgstr "Neka bude samo za čitanje"
+
+#: includes/forms/files.php:99
+msgid "Debug"
+msgstr "Otkloni greške"
+
+#: includes/forms/files.php:102
+msgid "Check the box to enable debugging output."
+msgstr "Štiklirajte polje da biste aktivirali otklanjanje grešaka"
+
+#: includes/forms/images.php:10
+msgid "Child Theme Images"
+msgstr "Slike podređene teme"
+
+#: includes/forms/images.php:13
+msgid "Delete child theme images by selecting them here."
+msgstr "Obrišite slike podređene teme tako što ćete ih odabrati ovde."
+
+#: includes/forms/main.php:23
+msgid "version"
+msgstr "verzija"
+
+#: includes/forms/parent-child.php:17
+msgid "Parent Theme"
+msgstr "Nadređena tema"
+
+#: includes/forms/parent-child.php:25
+msgid "Child Theme"
+msgstr "Podređena tema"
+
+#: includes/forms/parent-child.php:27
+msgid "(click to edit additional fields)"
+msgstr "(kliknite da biste uredili dodatna polja)"
+
+#: includes/forms/parent-child.php:34
+msgid "Create New Child Theme"
+msgstr "Kreiraj novu podređenu temu"
+
+#: includes/forms/parent-child.php:43
+msgid "Use Existing Child Theme"
+msgstr "Koristi postojeću podređenu temu"
+
+#: includes/forms/parent-child.php:48
+msgid "Theme Slug"
+msgstr "Slug teme"
+
+#: includes/forms/parent-child.php:59
+msgid "Child Theme Name"
+msgstr "Naziv podređene teme"
+
+#: includes/forms/parent-child.php:63
+msgid "Theme Name"
+msgstr "Naziv teme"
+
+#: includes/forms/parent-child.php:66 includes/forms/parent-child.php:70
+msgid "Theme Website"
+msgstr "Tema web site-a"
+
+#: includes/forms/parent-child.php:73 includes/forms/parent-child.php:77
+msgid "Author"
+msgstr "Autor"
+
+#: includes/forms/parent-child.php:81 includes/forms/parent-child.php:85
+msgid "Author Website"
+msgstr "Autor web site-a"
+
+#: includes/forms/parent-child.php:88
+msgid "Theme Description"
+msgstr "Opis teme"
+
+#: includes/forms/parent-child.php:91
+msgid "Description"
+msgstr "Opis"
+
+#: includes/forms/parent-child.php:94
+msgid "Theme Tags"
+msgstr "Oznake teme"
+
+#: includes/forms/parent-child.php:97
+msgid "Tags"
+msgstr "Oznake"
+
+#: includes/forms/parent-child.php:100 includes/forms/parent-child.php:104
+msgid "Version"
+msgstr "Verzija"
+
+#: includes/forms/parent-child.php:110
+msgid "Stylesheet handling"
+msgstr "Upravljanje datotekama sa stilovima"
+
+#: includes/forms/parent-child.php:113
+msgid "(click to view options)"
+msgstr "(kliknite da biste videli opcije)"
+
+#: includes/forms/parent-child.php:121
+msgid "Enqueue parent stylesheet (default)"
+msgstr "Dodaj nadređenu datoteku sa stilovima (podrazumevano)"
+
+#: includes/forms/parent-child.php:124
+msgid ""
+"Select this option if the parent theme enqueues the stylesheet but has no special "
+"handling for child themes. Start with this option if unsure."
+msgstr ""
+"Odaberite ovu opciju ako je nadređena tema dodala datoteku sa stilovima, ali nema "
+"poseban način upravljanja za podređene teme. Ako niste sigurni, počnite od ove opcije."
+
+#: includes/forms/parent-child.php:127
+msgid ""
+"<strong>NOTE: This theme links the stylesheet in the header template and should use the "
+"@import option to render correctly.</strong>"
+msgstr ""
+"<strong>NAPOMENA: Ova tema povezuje datoteku sa stilovima u zaglavlju šablona i treba "
+"koristiti opciju @uvezi da bi se ispravno prikazala.</strong>"
+
+#: includes/forms/parent-child.php:132
+msgid "<code>@import</code> parent stylesheet"
+msgstr "<code>@uvezi</code> nadređenu datoteku sa stilovima"
+
+#: includes/forms/parent-child.php:135
+msgid ""
+"Select this option if the parent theme links the stylesheet in the header template. "
+"Using <code>@import</code> is discouraged but necessary in this case unless you modify "
+"the header template."
+msgstr ""
+"Odaberite ovu opciju ako nadređena tema povezuje datoteku sa stilovima u zaglavlju "
+"šablona. Upotreba opcije <code>@uvezi</code>se ne preporučuje, ali u ovom slučaju je "
+"neophodna, osim ako izmenite zaglavlje šablona.  "
+
+#: includes/forms/parent-child.php:142
+msgid "Enqueue child stylesheet"
+msgstr "Dodaj datoteku sa stilovima"
+
+#: includes/forms/parent-child.php:145
+msgid ""
+"Select this option if the parent theme incorrectly loads the \"template\" stylesheet or "
+"does not load the \"style.css\" file at all. This is unusual but occurs in some themes."
+msgstr "Odaberite ovu opciju ako nadređena tema netačno učitava datoteku sa stilovima "
+
+#: includes/forms/parent-child.php:152
+msgid "None (handled by theme)"
+msgstr "Nijedan (rukovodi tema)"
+
+#: includes/forms/parent-child.php:156
+msgid ""
+"Select this option if all stylesheets are automatically loaded for child themes (e.g., "
+"\"Responsive\" by CyberChimps)."
+msgstr ""
+"Odaberite ovu opciju ako se sve datoteke sa stilovima automatski učitavaju za podređene "
+"teme (npr. \"Responsive\" čiji je autor CyberChimps)."
+
+#: includes/forms/parent-child.php:161
+msgid "Copy Parent Theme Menus, Widgets and other Options"
+msgstr "Kopiraj meni nadređene teme, widget-e i druge opcije"
+
+#: includes/forms/parent-child.php:168 includes/forms/parent-child.php:183
+msgid "NOTE:"
+msgstr "NAPOMENA:"
+
+#: includes/forms/parent-child.php:170
+msgid "This will overwrite child theme options you may have already set."
+msgstr "Ovim ćete poništiti opcije podređene teme koje ste možda već podesili."
+
+#: includes/forms/parent-child.php:176
+msgid "Backup current stylesheet"
+msgstr "Uradi backup za tekuću datoteku sa stilovima"
+
+#: includes/forms/parent-child.php:185
+msgid ""
+"This creates a copy of the current stylesheet before applying changes. You can remove "
+"old backup files using the Files tab."
+msgstr ""
+"Ovim se kreira kopija tekuće datoteke sa stilovima pre nego što se primene izmene. "
+"Možete ukloniti stare datoteke za podršku uz pomoć tabulatora ‘Datoteke’. "
+
+#: includes/forms/parent-child.php:190
+msgid "Reset/Restore from backup"
+msgstr "Poništi/Vrati iz backup-a"
+
+#: includes/forms/parent-child.php:196
+msgid "Leave unchanged"
+msgstr "Ostavi nepromenjeno"
+
+#: includes/forms/parent-child.php:202
+msgid "Reset all"
+msgstr "Poništi sve"
+
+#: includes/forms/parent-child.php:222
+msgid "Parse additional stylesheets"
+msgstr "Parsiraj dodatne datoteke sa stilovima"
+
+#: includes/forms/parent-child.php:245
+msgid "Generate/Rebuild Child Theme Files"
+msgstr "Generiši/Ponovo izgradi datoteke podređene teme"
+
+#: includes/forms/query-selector.php:13
+msgid "Query"
+msgstr "Upit"
+
+#: includes/forms/query-selector.php:24
+msgid "Selector"
+msgstr "Selektor"
+
+#: includes/forms/query-selector.php:37 includes/forms/rule-value.php:29
+msgid "Sample"
+msgstr "Primer"
+
+#: includes/forms/query-selector.php:45
+msgid "Save Child Values"
+msgstr "Sačuvaj podređene vrednosti"
+
+#: includes/forms/query-selector.php:52 includes/forms/rule-value.php:13
+msgid "Rule"
+msgstr "Pravilo"
+
+#: includes/forms/query-selector.php:55
+msgid "Parent Value"
+msgstr "Nadređena vrednost"
+
+#: includes/forms/query-selector.php:58
+msgid "Child Value"
+msgstr "Podređena vrednost"
+
+#: includes/forms/query-selector.php:64
+msgid "New Rule"
+msgstr "Novo pravilo"
+
+#: includes/forms/query-selector.php:74
+msgid "Order"
+msgstr "Nalog"
+
+#: includes/forms/query-selector.php:83
+msgid "Copy Selector"
+msgstr "Kopiraj selektor"
+
+#: includes/forms/query-selector.php:88
+msgid "Raw CSS"
+msgstr "Neobrađeni CSS"
+
+#: includes/forms/query-selector.php:90
+msgid "Use to enter shorthand CSS or new @media queries and selectors."
+msgstr "Koristite da biste uneli shorthand CSS ili nove @media upite i selektore."
+
+#: includes/forms/query-selector.php:90
+msgid ""
+"Values entered here are merged into existing child styles or added to the child "
+"stylesheet if they do not exist in the parent."
+msgstr ""
+"Ovde unete vrednosti spajaju se u postojeće podređene stilove ili se dodaju podređenoj "
+"datoteci sa stilovima ako ne postoje u nadređenoj datoteci. "
+
+#: includes/forms/related.php:1
+msgid "New user?"
+msgstr "Novi korisnik?"
+
+#: includes/forms/related.php:1
+msgid "Click help"
+msgstr "Kliknite za pomoć"
+
+#: includes/forms/related.php:1
+msgid "Get CTC Pro and other tools"
+msgstr "Obezbedite CTC Pro i druge alate"
+
+#: includes/forms/related.php:1
+msgid "Lilaea Media - Responsive Tools for a Mobile World"
+msgstr "Lilaea Media - odgovarajući alati za svet mobilnih "
+
+#: includes/forms/rule-value.php:26
+msgid "Value"
+msgstr "Vrednost"
+
+#: includes/forms/tabs.php:11
+msgid "Parent/Child"
+msgstr "Nadređeni/Podređeni"
+
+#: includes/forms/tabs.php:16
+msgid "Query/Selector"
+msgstr "Upit/Selektor"
+
+#: includes/forms/tabs.php:19
+msgid "Rule/Value"
+msgstr "Pravilo/Vrednost"
+
+#: includes/forms/tabs.php:22
+msgid "@import"
+msgstr "@uvezi"
+
+#: includes/forms/tabs.php:25
+msgid "Child CSS"
+msgstr "Podređeni CSS"
+
+#: includes/forms/tabs.php:28
+msgid "Parent CSS"
+msgstr "Nadređeni CSS"
+
+#: includes/forms/tabs.php:34
+msgid "Files"
+msgstr "Datoteke"
+
+#: includes/forms/themepreview.php:12
+msgid "Version: "
+msgstr "Verzija"
+
+#: includes/forms/themepreview.php:14
+msgid "By: "
+msgstr "Od:"
+
+#: includes/forms/themepreview.php:16
+msgid "Preview"
+msgstr "Pregled"
+
+#: includes/forms/themepreview.php:17
+msgid " in default Site"
+msgstr "na podrazumevanom site-u"
+
+#: includes/forms/themepreview.php:21
+msgid "Not Network Enabled"
+msgstr "Nema aktivirane mreže"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.lilaeamedia.com/plugins/child-theme-configurator/"
+msgstr "http://www.lilaeamedia.com/plugins/child-theme-configurator/"
+
+#. Description of the plugin/theme
+msgid ""
+"Create a Child Theme and customize the stylesheet and templates. Fast CSS editor lets "
+"you search, preview and modify by selector, rule or value."
+msgstr ""
+"Kreirajte podređenu temu i prilagodite datoteke sa stilovima i šablone. Brzi CSS "
+"uređivač omogućava vam pretragu, pregled i modifikovanje na osnovu selektora, pravila "
+"ili vrednosti."
+
+#. Author of the plugin/theme
+msgid "Lilaea Media"
+msgstr "Lilaea Media"
+
+#. Author URI of the plugin/theme
+msgid "http://www.lilaeamedia.com/"
+msgstr "http://www.lilaeamedia.com/"

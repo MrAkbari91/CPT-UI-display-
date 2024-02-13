@@ -330,3 +330,47 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require get_template_directory() . '/inc/icon-functions.php';
 
+
+
+
+function custom_menu_shortcode($atts)
+{
+	// Define default attributes for the shortcode
+	$atts = shortcode_atts(
+		array(
+			'menu_id' => '', // Default menu ID
+			'menu_name' => '', // Default menu name
+		),
+		$atts,
+		'custom_menu'
+	);
+
+	// Get menu ID or name from shortcode attributes
+	$menu_id = $atts['menu_id'];
+	$menu_name = $atts['menu_name'];
+
+	// Get the menu by ID or name
+	$menu = wp_nav_menu(array(
+		'menu' => $menu_name,
+		'menu_id' => $menu_id,
+		'echo' => false, // Return the menu as a string
+	));
+
+	ob_start(); ?>
+	<div class="nav" id="mobile-nav-menu">
+		<div class="mobile-navbar-menu">
+			<i class="fa fa-bars"></i>
+			<div class="nav-links">
+				<div class="sidebar">
+					<i class="fa fa-times"></i>
+				</div>
+				<?php echo $menu; ?>
+			</div>
+		</div>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+
+// Register the custom shortcode
+add_shortcode('custom_menu', 'custom_menu_shortcode');

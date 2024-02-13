@@ -1,0 +1,1590 @@
+# Copyright (C) 2017 Child Theme Configurator
+# This file is distributed under the same license as the Child Theme Configurator package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Child Theme Configurator 2.2.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/child-theme-configurator\n"
+"POT-Creation-Date: 2017-01-21 08:01+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-01-22 08:39+0100\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+
+#: includes/classes/Admin.php:395
+msgid "Zip file creation failed."
+msgstr "ZIP-Dateierstellung fehlgeschlagen."
+
+#: includes/classes/Admin.php:421
+msgid "The Functions file is required and cannot be deleted."
+msgstr "Die Funktionen-Datei wird benötigt und kann nicht entfernt werden."
+
+#: includes/classes/Admin.php:501
+msgid "You do not have permission to configure child themes."
+msgstr "Sie haben nicht die Berechtigung zur Konfiguration von Kindthemen."
+
+#: includes/classes/Admin.php:534
+msgid "%s does not exist. Please select a valid Parent Theme."
+msgstr "%s existiert nicht. Bitte wählen Sie ein gültiges Elternthema."
+
+#: includes/classes/Admin.php:537
+msgid "Please select a valid Parent Theme."
+msgstr "Bitte wählen Sie ein gültiges Elternthema."
+
+#: includes/classes/Admin.php:542
+msgid "Please select a valid Child Theme."
+msgstr "Bitte wählen Sie ein gültiges Kindthema."
+
+#: includes/classes/Admin.php:546
+msgid "Please enter a valid Child Theme directory name."
+msgstr "Bitte geben Sie ein gültiges Kindthema-Verzeichnis ein."
+
+#: includes/classes/Admin.php:551
+msgid ""
+"<strong>%s</strong> exists. Please enter a different Child Theme template "
+"name."
+msgstr ""
+"<strong>%s</strong> existiert. Bitte einen anderen Kindthema-Vorlagennamen "
+"eingeben."
+
+#: includes/classes/Admin.php:570
+msgid "Your theme directories are not writable."
+msgstr "Ihr Themen-Verzeichnis ist schreibgeschützt."
+
+#: includes/classes/Admin.php:651
+msgid "Could not upgrade child theme"
+msgstr "Konnte das Kindthema nicht aktualisieren."
+
+#: includes/classes/Admin.php:733
+msgid "Your stylesheet is not writable."
+msgstr "Ihre Formatvorlage kann nicht überschrieben werden."
+
+#: includes/classes/Admin.php:1317
+msgid "Could not set write permissions."
+msgstr "Konnte Schreibberechtigung nicht setzen."
+
+#: includes/classes/Admin.php:1418
+msgid "There were errors while resetting permissions."
+msgstr "Es traten beim Zurücksetzen der Berechtigungen Fehler auf."
+
+#: includes/classes/Admin.php:1492
+msgid "Could not upload file."
+msgstr "Konnte Datei nicht hochladen"
+
+#: includes/classes/Admin.php:1518
+msgid "Invalid theme root directory."
+msgstr "Ungültiges Themen-Hauptverzeichnis."
+
+#: includes/classes/Admin.php:1530
+msgid "No writable temp directory."
+msgstr "Fehler beim Schreiben ins temporäre Verzeichnis."
+
+#: includes/classes/Admin.php:1560
+msgid "PclZip returned zero bytes."
+msgstr "PclZip gab 0 Bytes zurück."
+
+#. Plugin Name of the plugin/theme
+#: includes/classes/Core.php:94 includes/classes/Core.php:105
+#: includes/forms/main.php:35
+msgid "Child Theme Configurator"
+msgstr "Child Theme Configurator"
+
+#: includes/classes/Core.php:95 includes/classes/Core.php:106
+#: includes/classes/Core.php:117
+msgid "Child Themes"
+msgstr "Kindthemen"
+
+#: includes/classes/Core.php:135
+msgid "Child Theme Configurator requires WordPress version %s or later."
+msgstr "Der Child Theme Configurator benötigt Wordpress-Version %s oder neuer."
+
+#: includes/classes/UI.php:35
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+
+#: includes/classes/UI.php:98
+msgid ""
+"The Theme editor has been disabled. Template files must be edited offline."
+msgstr ""
+"Der Themeneditor wurde deaktiviert. Formatvorlagen müssen offline bearbeitet "
+"werden."
+
+#: includes/classes/UI.php:102
+msgid "Click here to edit template files using the Theme Editor"
+msgstr ""
+"Hier für die Bearbeitung von Formatvorlagen mit dem Themeneditor klicken."
+
+#: includes/classes/UI.php:269
+msgid "URL/None"
+msgstr "URL/Kein(e)"
+
+#: includes/classes/UI.php:270
+msgid "Origin"
+msgstr "Quelle"
+
+#: includes/classes/UI.php:271
+msgid "Color 1"
+msgstr "Farbe 1"
+
+#: includes/classes/UI.php:272
+msgid "Color 2"
+msgstr "Farbe 2"
+
+#: includes/classes/UI.php:273
+msgid "Width/None"
+msgstr "Breite/Keine"
+
+#: includes/classes/UI.php:274
+msgid "Style"
+msgstr "Stil"
+
+#: includes/classes/UI.php:275
+msgid "Color"
+msgstr "Farbe"
+
+#: includes/classes/UI.php:277
+msgid ""
+"Are you sure you wish to RESET? This will destroy any work you have done in "
+"the Configurator."
+msgstr ""
+"Wollen Sie sicher ZURÜCKSETZEN? Dies wird alle Arbeiten überschreiben, die "
+"Sie in der Konfiguration vorgenommen haben."
+
+#: includes/classes/UI.php:278
+msgid "<span style=\"font-size:10px\">!</span>"
+msgstr "<span style=\"font-size:10px\">!</span>"
+
+#: includes/classes/UI.php:279 includes/forms/rule-value.php:33
+msgid "Selectors"
+msgstr "Selektoren"
+
+#: includes/classes/UI.php:280
+msgid "Close"
+msgstr "Schließen"
+
+#: includes/classes/UI.php:281
+msgid "Edit Selector"
+msgstr "Selektor bearbeiten"
+
+#: includes/classes/UI.php:282
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: includes/classes/UI.php:283
+msgid "Rename"
+msgstr "Umbenennen"
+
+#: includes/classes/UI.php:284
+msgid "The stylesheet cannot be displayed."
+msgstr "Die Formatvorlage kann nicht angezeigt werden."
+
+#: includes/classes/UI.php:285
+msgid "(Child Only)"
+msgstr "(Nur Kind)"
+
+#: includes/classes/UI.php:286
+msgid "Please enter a valid Child Theme."
+msgstr "Bitte ein gültiges Kindthema eingeben."
+
+#: includes/classes/UI.php:287
+msgid "Please enter a valid Child Theme name."
+msgstr "Bitte einen gültigen Namen eines Kindthemas eingeben."
+
+#: includes/classes/UI.php:288
+msgid "<strong>%s</strong> exists. Please enter a different Child Theme"
+msgstr "<strong>%s</strong> existiert. Bitte anderes Kindthema eingeben"
+
+#: includes/classes/UI.php:289
+msgid "The page could not be loaded correctly."
+msgstr "Die Seite konnte nicht korrekt geladen werden."
+
+#: includes/classes/UI.php:290
+msgid ""
+"Conflicting or out-of-date jQuery libraries were loaded by another plugin:"
+msgstr ""
+"Nicht mehr aktuelle oder in Konflikt stehende jQuery-Bibliotheken von "
+"anderem Plugin geladen:"
+
+#: includes/classes/UI.php:291
+msgid "Deactivating or replacing plugins may resolve this issue."
+msgstr ""
+"Das Deaktivieren oder Ersetzen des Plugins könnte dieses Problem lösen."
+
+#: includes/classes/UI.php:292
+msgid "%sWhy am I seeing this?%s"
+msgstr "%sWieso sehe ich das?%s"
+
+#: includes/classes/UI.php:295
+msgid "No Styles Available. Check Parent/Child settings."
+msgstr "Keine Stile verfügbar. Prüfen Sie die Eltern/Kind-Einstellungen."
+
+#: includes/classes/UI.php:296
+msgid "Updating"
+msgstr "Aktualisiere"
+
+#: includes/classes/UI.php:297
+msgid "Checking"
+msgstr "Überprüfe"
+
+#: includes/classes/UI.php:298
+msgid "The theme \"%s\" generated unexpected PHP debug output."
+msgstr "Das Thema \"%s\" generierte unerwartete PHP-Debug-Ausgaben."
+
+#: includes/classes/UI.php:299
+msgid ""
+"The theme \"%s\" could not be analyzed because the preview did not render "
+"correctly."
+msgstr ""
+"Das Thema \"%s\" konnte nicht untersucht werden, weil die Vorschau nicht "
+"korrekt angezeigt wird."
+
+#: includes/classes/UI.php:300
+msgid ""
+"<p>First, verify you can <a href=\"%s\">preview your home page with the "
+"Customizer</a> and try analyzing again.</p><p>If that does not work, try "
+"temporarily disabling plugins that <strong>minify CSS</strong> or that "
+"<strong>force redirects between HTTP and HTTPS</strong>.</p>"
+msgstr ""
+"<p>Prüfen Sie zuerst, ob die Voransicht <a href=\"%s\"> für Ihre Homepage "
+"mit dem Customizer</a> funktioniert und untersuchen Sie erneut. </p><p>Wenn "
+"es nicht geht, deaktivieren Sie vorübergehend Plugins, welche <strong>CSS "
+"herabsetzen (minify)</strong> oder <strong>Umleitungen zwischen HTTP und "
+"HTTPS erzwingen</strong>.</p>"
+
+#: includes/classes/UI.php:301
+msgid "Click to show/hide PHP debug output"
+msgstr "Klicken zum Anzeigen/Verbergen der PHP-Debug-Ausgabe"
+
+#: includes/classes/UI.php:302
+msgid ""
+"<p>Please contact this Theme's author and report the items inside the box "
+"above. You may or may not be able to use this Theme as a Child Theme while "
+"these conditions exist.</p><p>It is possible that this theme has specific "
+"requirements to work correctly as a child theme. Please make sure you are "
+"using the latest version of this theme and check your theme's documentation "
+"for more information.</p>"
+msgstr ""
+"<p>Bitte kontaktieren Sie diesen Themenautor und teilen Sie ihm die Elemente "
+"der Box oben mit. Das Thema wird eventuell als Kindthema funktionieren, "
+"solange dieser Zustand anhält.</p><p>Möglicherweise hat dieses Thema "
+"besondere Anforderungen, um als Kindthema richtig zu funktionieren. Bitte "
+"stellen Sie sicher, dass Sie die neueste Version des Themen verwenden und "
+"die Dokumentation für weitere Information konsultieren.</p>"
+
+#: includes/classes/UI.php:303
+msgid "Do Not Activate \"%s\"! A PHP FATAL ERROR has been detected."
+msgstr "Aktivieren Sie nicht \"%s\"! Ein PHP FATAL ERROR wurde entdeckt."
+
+#: includes/classes/UI.php:304
+msgid "This theme loads stylesheets after the wp_styles queue."
+msgstr "Dieses Thema lädt Formatvorlagen nach der wp_styles-Warteschlange."
+
+#: includes/classes/UI.php:305
+msgid ""
+"<p>This makes it difficult for plugins to override these styles. You can try "
+"to resolve this using the  \"Repair header template\" option (Step 6, "
+"\"Additional handling options\", below).</p>"
+msgstr ""
+"<p>Dies macht es schwierig für Plugins, diese Stile zu überschreiben. Sie "
+"können das lösen, indem Sie die \"Repariere Kopfvorlage\"-Option benutzen "
+"(Schritt 6, \"Zusätzliche Handling-Optionen\", unten).</p>"
+
+#: includes/classes/UI.php:306
+msgid ""
+"This theme loads the parent theme's <code>style.css</code> file outside the "
+"wp_styles queue."
+msgstr ""
+"Dieses Thema lädt die Elternthema <code>style.css</code>-Datei außerhalb der "
+"wp_style-Warteschlange."
+
+#: includes/classes/UI.php:307
+msgid ""
+"<p>This is common with older themes but requires the use of <code>@import</"
+"code>, which is no longer recommended. You can try to resolve this using the "
+"\"Repair header template\" option (see step 6, \"Additional handling options"
+"\", below).</p>"
+msgstr ""
+"<p>Dies ist häufig bei älteren Themen, aber benötigt die Benutzung von "
+"<code>@import</code>, was nicht mehr empfohlen ist. Sie können versuchen es "
+"zu lösen, indem Sie die \"Reparieren Kopfvorlage\"-Option benutzen (Schritt "
+"6, \"Zusätzliche Handling-Optionen\", unten).</p>"
+
+#: includes/classes/UI.php:308
+msgid "This child theme does not load a Configurator stylesheet."
+msgstr "Dieses Kindthema lädt keine Konfigurator-Formatvorlage."
+
+#: includes/classes/UI.php:309
+msgid ""
+"<p>If you want to customize styles using this plugin, please click "
+"\"Configure Child Theme\" again to add this to the settings.</p>"
+msgstr ""
+"<p>Wenn Sie Ihre Stile mit diesem Plugin anpassen möchten, klicken Sie bitte "
+"erneut auf \"Kindthema konfigurieren\", um diese Einstellung hinzuzufügen.</"
+"p>"
+
+#: includes/classes/UI.php:310
+msgid ""
+"This child theme uses the parent stylesheet but does not load the parent "
+"theme's <code>style.css</code> file."
+msgstr ""
+"Dieses Kindthema nutzt die Eltern-Formatvorlagen, aber lädt nicht die "
+"Elternthema <code>style.css</code>-Datei."
+
+#: includes/classes/UI.php:311
+msgid ""
+"<p>Please select a stylesheet handling method or check \"Ignore parent theme "
+"stylesheets\" (see step 6, below).</p>"
+msgstr ""
+"<p>Bitte wählen Sie eine Formatvorlagen-Handling-Methode aus oder wählen Sie "
+"\"Eltern-Formatvorlagen ignorieren\" (siehe Schritt 6 unten).</p>"
+
+#: includes/classes/UI.php:312
+msgid "This child theme appears to be functioning correctly."
+msgstr "Dieses Kindthema scheint korrekt zu funktionieren."
+
+#: includes/classes/UI.php:313
+msgid "This theme appears OK to use as a Child theme."
+msgstr "Dieses Thema schient als Kindthema in Ordnung zu sein."
+
+#: includes/classes/UI.php:314
+msgid "This Child Theme has not been configured for this plugin."
+msgstr "Dieses Kindthema wurde nicht für dieses Plugin konfiguriert."
+
+#: includes/classes/UI.php:315
+msgid ""
+"<p>The Configurator makes significant modifications to the child theme, "
+"including stylesheet changes and additional php functions. Please consider "
+"using the DUPLICATE child theme option (see step 1, above) and keeping the "
+"original as a backup.</p>"
+msgstr ""
+"<p>Der Konfigurator macht signifikante Änderungen am Kindthema, inklusive "
+"Formatvorlagenänderungen und zusätzliche PHP-Funktionen. Bitte ziehen Sie "
+"die Option DUPLICATE Kindthema in Betracht (siehe Schritt 1, oben) und "
+"behalten Sie das Original als Backup.</p>"
+
+#: includes/classes/UI.php:316
+msgid ""
+"This child theme uses <code>@import</code> to load the parent theme's "
+"<code>style.css</code> file."
+msgstr ""
+"Dieses Kindthema nutzt <code>@import</code>, um die Elternthema <code>style."
+"css</code>-Datei zu laden."
+
+#: includes/classes/UI.php:317
+msgid ""
+"<p>Please consider selecting \"Use the WordPress style queue\" for the "
+"parent stylesheet handling option (see step 6, below).</p>"
+msgstr ""
+"<p>Bitte ziehen Sie die Auswahl von \"Wordpress-Style-Queue benutzen\" für "
+"die Elternvorlagen-Handling-Option in Betracht (siehe Schritt 6, unten).</p>"
+
+#: includes/classes/UI.php:318
+msgid ""
+"This theme loads additional stylesheets after the <code>style.css</code> "
+"file:"
+msgstr ""
+"Dieses Thema lädt zusätzliche Formatvorlagen nach der <code>style.css</code>-"
+"Datei."
+
+#: includes/classes/UI.php:319
+msgid ""
+"<p>Consider saving new custom styles to a \"Separate stylesheet\" (see step "
+"5, below) so that you can customize these styles.</p>"
+msgstr ""
+"<p>Ziehen Sie in Betracht, neue angepasste Stile als \"Separate Formatvorlage"
+"\" zu speichern (siehe Schritt 5, unten), so dass Sie diese Stile anpassen "
+"können.</p>"
+
+#: includes/classes/UI.php:320
+msgid ""
+"The parent theme's <code>style.css</code> file is being loaded automatically."
+msgstr "Die Elternthema <code>style.css</code>-Datei wird automatisch geladen."
+
+#: includes/classes/UI.php:321
+msgid ""
+"<p>The Configurator selected \"Do not add any parent stylesheet handling\" "
+"for the \"Parent stylesheet handling\" option (see step 6, below).</p>"
+msgstr ""
+"<p>Der Konfigurator hat \"Kein Elternvorlagen-Handling hinzufügen\" für die "
+"\"Elternvorlagen-Handling\"-Option  ausgewählt (siehe Schritt 6, unten).</p>"
+
+#: includes/classes/UI.php:322
+msgid ""
+"This theme does not require the parent theme's <code>style.css</code> file "
+"for its appearance."
+msgstr ""
+"Dieses Thema benötigt keine Elternthema <code>style.css</code>-Datei für ihr "
+"Aussehen."
+
+#: includes/classes/UI.php:323
+msgid "This Child Theme was configured with an earlier version."
+msgstr "Dieses Kindthema wurde mit einer früheren Version konfiguriert."
+
+#: includes/classes/UI.php:324
+msgid ""
+"<p>The selected stylesheet handling method is no longer used. Please update "
+"the configuration using the \"Repair header template\" option (see step 6, "
+"\"Additional handling options\", below).</p>"
+msgstr ""
+"<p>Die gewählte Formatvorlagen-Handlingmethode ist nicht mehr in Gebrauch. "
+"Bitte aktualisieren Sie die Konfiguration mit der \"Reparieren Kopfvorlage\"-"
+"Option (siehe Schritt 6, \"Zusätzliche Handling-Optionen\", unten).</p>"
+
+#: includes/classes/UI.php:325
+msgid ""
+"Click to show/hide raw analysis data. Please include contents below with any "
+"support requests."
+msgstr ""
+"Klicken zur Anzeige/zum Verbergen von Rohanalyse-Daten. Bitte für alle "
+"Supportanfragen Inhalte unten anfügen."
+
+#: includes/classes/UI.php:326
+msgid ""
+"This child theme was configured using the CTC Pro \"Genesis stylesheet "
+"handling\" method."
+msgstr ""
+"Dieses Kindthema wurde mit der CTC-Pro-Methode \"Genesis Formatvorlagen-"
+"Handling\" konfiguriert."
+
+#: includes/classes/UI.php:327
+msgid ""
+"<p>This method has been replaced by the \"Separate stylesheet\" and \"Ignore "
+"Parent Theme\" options ( selected below ) for broader framework "
+"compatability.</p>"
+msgstr ""
+"<p>Diese Methode wurde durch \"Separate Formatvorlage\" und \"Elternthema "
+"ignorieren\"-Optionen ersetzt (unten ausgewählt), für eine breitere "
+"Framework-Kompatibilität.</p>"
+
+#: includes/classes/UI.php:328
+msgid "<p>%1Click Here%2 to view the theme as viewed by the Analyzer.</p>"
+msgstr "<p>%1Hier klicken%2 um das Thema wie im Analyzer anzuzeigen.</p>"
+
+#: includes/classes/Upgrade.php:60
+msgid "Enter your Update Key"
+msgstr "Geben Sie den Update-Schlüssel ein"
+
+#: includes/classes/Upgrade.php:61
+msgid ""
+"Sorry, we could not validate your Update Key. Please try again or, if you "
+"need assistance, please %s"
+msgstr ""
+"Wir konnten den Update-Schlüssel nicht verifizieren. Bitte nochmals "
+"probieren, falls Sie Hilfe brauchen, bitte %s"
+
+#: includes/classes/Upgrade.php:61
+msgid "contact us."
+msgstr "uns kontaktieren."
+
+#: includes/classes/Upgrade.php:67
+msgid "Child Theme Configurator Pro version %s"
+msgstr "Child Theme Configurator Pro Version %s"
+
+#: includes/classes/Upgrade.php:67
+msgid ""
+" is not compatible with the installed version of Child Theme Configurator "
+"and has been deactivated."
+msgstr ""
+" ist nicht kompatibel mit der installieren Version von Child Theme "
+"Configurator und wurde deaktiviert."
+
+#: includes/classes/Upgrade.php:69
+msgid ""
+"You can upgrade to the latest version by clicking the button below. After "
+"validating the Update Key from your order, WordPress will retrieve the "
+"plugin from our website and install it automatically. If you no longer wish "
+"to use the premium version, you can dismiss this notice by clicking the "
+"close icon (x) at the top right."
+msgstr ""
+"Sie können zur neuesten Version mit der Schaltfläche unten upgraden. Nach "
+"der Verifizierung des Update-Schlüssels Ihrer Bestellung wird WordPress das "
+"Plugin von unserer Webseite laden und es automatisch installieren. Wenn Sie "
+"die Premium-Version nicht mehr benutzen wollen, können Sie den Hinweis mit "
+"dem Klick auf das (x)-Symbol oben rechts wegklicken."
+
+#: includes/classes/Upgrade.php:70
+msgid "Upgrade Now"
+msgstr "Jetzt Upgraden"
+
+#: includes/classes/Upgrade.php:188
+msgid "Update Plugin"
+msgstr "Plugin Updaten"
+
+#: includes/forms/addl_css.php:7
+msgid "Parse additional stylesheets:"
+msgstr "Zusätzliche Formatvorlagen auslesen"
+
+#: includes/forms/addl_css.php:11
+msgid ""
+"Stylesheets that are currently being loaded by the parent theme are "
+"automatically selected below (except for Bootstrap stylesheets which add a "
+"large amount data to the configuration). To further reduce overhead, select "
+"only the additional stylesheets you wish to customize."
+msgstr ""
+"Formatvorlagen, die zurzeit vom Elternthema geladen werden, sind unten "
+"automatisch ausgewählt (ausgenommen für Bootstrap-Formatvorlagen welche eine "
+"große Datenmenge zur Konfiguration hinzufügen). Um weitere Überlastung zu "
+"vermindern, wählen Sie nur Formatvorlagen, die Sie anpassen wollen."
+
+#: includes/forms/addl_panels.php:9 includes/forms/addl_panels.php:39
+msgid "Use coupon code"
+msgstr "Rabatt-Code anwenden"
+
+#: includes/forms/addl_panels.php:9 includes/forms/addl_panels.php:39
+msgid "wordpress-org"
+msgstr "wordpress-org"
+
+#: includes/forms/addl_panels.php:9 includes/forms/addl_panels.php:39
+msgid "and get <strong>20% off entire order</strong>."
+msgstr "und bekommen Sie <strong>20% auf die ganze Bestellung</strong>."
+
+#: includes/forms/addl_panels.php:10 includes/forms/addl_panels.php:40
+msgid "Order Now"
+msgstr "Jetzt Bestellen"
+
+#: includes/forms/addl_panels.php:10 includes/forms/addl_panels.php:40
+msgid "*Prices and offers subject to change."
+msgstr "*Preise und Angebote können sich jederzeit ändern."
+
+#: includes/forms/addl_panels.php:11 includes/forms/addl_panels.php:12
+msgid "Learn more about IntelliWidget"
+msgstr "Erfahren Sie mehr über IntelliWidget"
+
+#: includes/forms/addl_panels.php:12
+msgid ""
+"IntelliWidget is a versatile widget manager that does the work of multiple "
+"plugins by combining custom page menus, featured posts, sliders and other "
+"dynamic content features into a single plugin that can display on a per-page "
+"or site-wide basis."
+msgstr ""
+"IntelliWidget ist ein ausgefeilter Widget-Manager, der die Arbeit vieler "
+"Plugins erledigt, indem es Seitenmenüs, Beliebte Beiträge (Featured Posts), "
+"Slider und anderen dynamischen Inhalt in ein einzelnes Plugin kombiniert, "
+"welches die Anzeige auf Seiten- oder Webseiten-Basis ermöglicht."
+
+#: includes/forms/addl_panels.php:13 includes/forms/addl_panels.php:16
+msgid "Learn more"
+msgstr "Mehr erfahren"
+
+#: includes/forms/addl_panels.php:14 includes/forms/addl_panels.php:15
+msgid "Learn more about IW Responsive Menu"
+msgstr "Mehr über IW Responsive Menu erfahren"
+
+#: includes/forms/addl_panels.php:15
+msgid ""
+"IntelliWidget Responsive Menu lets you break free from your theme’s built-in "
+"responsive menu options and gives you complete control over the user "
+"experience."
+msgstr ""
+"IntelliWidget Responsive Menu ermöglicht Ihnen das Ausbrechen aus den "
+"starren, eingebauten Thema-Menüoptionen und gibt Ihnen vollständige "
+"Kontrolle über die Nutzererfahrung."
+
+#: includes/forms/addl_panels.php:19
+msgid "Learn more about CTC Pro"
+msgstr "Mehr über CTC Pro erfahren"
+
+#: includes/forms/addl_panels.php:20
+msgid "Customizing WordPress just got even easier."
+msgstr "Es ist jetzt noch einfacher, WordPress anzupassen."
+
+#: includes/forms/addl_panels.php:21
+msgid ""
+"Thousands of users have already seen the benefits of using Child Theme "
+"Configurator. If you spend any amount of time customizing WordPress, CTC Pro "
+"will help maximize your productivity."
+msgstr ""
+"Tausende Benutzer haben schon die Vorteile des Child Theme Configurator "
+"erkannt. Wenn Sie Zeit für die Anpassung von WordPress aufwenden, wird CTC "
+"Pro Ihre Produktivität maximieren."
+
+#: includes/forms/addl_panels.php:22
+msgid "Designed by Developers Who Use It Every Day."
+msgstr "Entworfen von Entwicklern, die es täglich verwenden."
+
+#: includes/forms/addl_panels.php:23
+msgid ""
+"We've packed in more features to make design work quicker and easier with "
+"<strong>Child Theme Configurator Pro.</strong>"
+msgstr ""
+"Wir haben noch mehr Funktionen hineingepackt, um die Entwurfs-Arbeit noch "
+"schneller und einfacher zu gestalten mit <strong>Child Theme Configurator "
+"Pro.<strong>"
+
+#: includes/forms/addl_panels.php:25
+msgid "Customize Plugin Stylesheets"
+msgstr "Plugin-Formatvorlagen anpassen"
+
+#: includes/forms/addl_panels.php:26
+msgid ""
+"Apply the power of CTC's top-rated interface to your site's plugin styles. "
+"All new design makes it much easier to get the results you want."
+msgstr ""
+"Benutze die Macht der ausgezeichnet bewerteten Schnittstelle von CTC für "
+"deine Plugin-Stile. Alle neuen Designs machen es noch einfacher, die "
+"gewünschten Resultate zu erhalten."
+
+#: includes/forms/addl_panels.php:27
+msgid "Quick Preview"
+msgstr "Schnell-Vorschau"
+
+#: includes/forms/addl_panels.php:27
+msgid "Preview your child theme with a single click."
+msgstr "Voransicht des Kindthemas mit nur einem Klick."
+
+#: includes/forms/addl_panels.php:28
+msgid "Color Palettes"
+msgstr "Farbpaletten"
+
+#: includes/forms/addl_panels.php:28
+msgid ""
+"Keep the colors you select just a click away. No more searching for hex "
+"codes and RGB values."
+msgstr ""
+"Behalten Sie die Farben nur einen Klick entfernt weg. Kein umständliches "
+"Suchen für Hex-Codes und RGB-Werte."
+
+#: includes/forms/addl_panels.php:29
+msgid "Find related styles"
+msgstr "Finde ähnliche Stile"
+
+#: includes/forms/addl_panels.php:29
+msgid ""
+"Use the \"All Styles\" panel to edit groups of selectors from a single "
+"combined list."
+msgstr ""
+"Nutzen Sie das \"Alle Stile\"-Bedienungsfeld, um Gruppen von Selektoren aus "
+"einer einzigen kombinierten Liste zu bearbeiten."
+
+#: includes/forms/addl_panels.php:30
+msgid "Find styles by Nav Menu"
+msgstr "Finde Stile mittels Nav-Menü"
+
+#: includes/forms/addl_panels.php:30
+msgid "Tweak menus quickly and easily."
+msgstr "Passe Menüs schnell und einfach an."
+
+#: includes/forms/addl_panels.php:31
+msgid "Most recent edits"
+msgstr "Letzte Bearbeitungen"
+
+#: includes/forms/addl_panels.php:31
+msgid "Return to recently edited selectors from a toggleable sidebar."
+msgstr ""
+"Kehre zu kürzlich bearbeiteten Selektoren mittels umschaltbarer Seitenleiste "
+"zurück."
+
+#: includes/forms/addl_panels.php:32
+msgid "Add Child Theme Files"
+msgstr "Fügen Sie Kindthemen-Dateien hinzu"
+
+#: includes/forms/addl_panels.php:33
+msgid "Create new template and script files right from the admin."
+msgstr ""
+"Erstellen Sie neue Vorlagen- und Skriptdateien direkt aus der Admin-"
+"Oberfläche."
+
+#: includes/forms/addl_panels.php:34
+msgid "Top-rated Online Support"
+msgstr "Top-bewerteter Online-Support"
+
+#: includes/forms/addl_panels.php:35
+msgid "Online Documentation"
+msgstr "Online-Dokumentation"
+
+#: includes/forms/addl_panels.php:36
+msgid "Tutorial Videos"
+msgstr "Tutorial-Videos"
+
+#: includes/forms/addl_tabs.php:8
+msgid "Upgrade"
+msgstr "Aktualisieren"
+
+#: includes/forms/backup.php:8
+msgid "Backup"
+msgstr "Sicherung"
+
+#: includes/forms/backups.php:10
+msgid "Restore backup from"
+msgstr "Sicherung wiederherstellen vom"
+
+#: includes/forms/current-theme.php:6
+msgid "Currently loaded"
+msgstr "Derzeit geladen"
+
+#: includes/forms/debug-toggle.php:8
+msgid "Debug"
+msgstr "Fehlersuche"
+
+#: includes/forms/file-form-buttons.php:9
+msgid "Make Selected Writable"
+msgstr "Auswahl beschreibbar machen"
+
+#: includes/forms/file-form-buttons.php:13
+msgid "Copy Selected to Child Theme"
+msgstr "Auswahl in das Kindthema kopieren"
+
+#: includes/forms/file-form-buttons.php:13 includes/forms/images.php:21
+msgid "Delete Selected"
+msgstr "Auswahl löschen"
+
+#: includes/forms/fileform.php:9
+msgid "Parent Templates"
+msgstr "Eltern-Vorlagen"
+
+#: includes/forms/fileform.php:9
+msgid "Child Theme Files"
+msgstr "Kindthema-Dateien"
+
+#: includes/forms/fileform.php:14
+msgid ""
+"Copy PHP templates from the parent theme by selecting them here. The "
+"Configurator defines a template as a Theme PHP file having no PHP functions "
+"or classes. Other PHP files cannot be safely overridden by a child theme."
+msgstr ""
+"Kopieren von PHP-Vorlagendateien des Elternthemen, indem Sie diese hier "
+"auswählen. Der Konfigurator definiert eine Vorlage als eine Themen-PHP-Datei "
+"ohne PHP-Funktionen oder -Klassen. Andere PHP-Dateien können von einem "
+"Kindthema nicht sicher überschrieben werden."
+
+#: includes/forms/fileform.php:17
+msgid ""
+"CAUTION: If your child theme is active, the child theme version of the file "
+"will be used instead of the parent immediately after it is copied."
+msgstr ""
+"ACHTUNG: Wenn Ihr Kindthema aktiv ist, wird nach dem Kopiervorgang sofort "
+"die Kindthema-Version der Datei anstatt der Eltern-Datei benutzt."
+
+#: includes/forms/fileform.php:19
+msgid "The %s file is generated separately and cannot be copied here."
+msgstr ""
+"Die %s Datei wird getrennt erstellt und kann nicht hierher kopiert werden."
+
+#: includes/forms/fileform.php:29
+msgid "Delete child theme templates by selecting them here."
+msgstr "Löschen von Kindthema-Vorlagen, indem Sie sie hier auswählen."
+
+#: includes/forms/fileform.php:30
+msgid ""
+"Delete child theme templates or make them writable by selecting them here. "
+"Writable files are displayed in <span style=\"color:red\">red</span>."
+msgstr ""
+"Löschen Sie Kindthema-Vorlagen oder setzen Sie sie schreibbar, indem Sie sie "
+"hier auswählen. Schreibbare Dateien sind in <span style=\"color:red\">red</"
+"span> angezeigt."
+
+#: includes/forms/files.php:15
+msgid "Upload New Child Theme Image"
+msgstr "Neues Kindthema-Bild hochladen"
+
+#: includes/forms/files.php:18
+msgid ""
+"Theme images reside under the <code>images</code> directory in your child "
+"theme and are meant for stylesheet use only. Use the Media Library for "
+"content images."
+msgstr ""
+"Diese Bilder befinden sich unter dem <code>Images</code>-Verzeichnis in "
+"Ihrem Kindthema-Verzeichnis und sind nur für Formatvorlagen vorgesehen. "
+"Benutzen Sie die Medienbibliothek für Inhaltsbilder."
+
+#: includes/forms/files.php:25 includes/forms/files.php:51
+msgid "Upload"
+msgstr "Hochladen"
+
+#: includes/forms/files.php:32
+msgid "Child Theme Screenshot"
+msgstr "Kindthema Screenshot"
+
+#: includes/forms/files.php:41
+msgid "Upload New Screenshot"
+msgstr "Neuen Screenshot hochladen"
+
+#: includes/forms/files.php:44
+msgid ""
+"The theme screenshot should be a 4:3 ratio (e.g., 880px x 660px) JPG, PNG or "
+"GIF. It will be renamed <code>screenshot</code>."
+msgstr ""
+"Der Thema-Screenshot sollte ein 4:3-Verhältnis aufweisen (z.Bsp, 880px x "
+"660px) JPG, PNG oder GIF. Es wird in <code>screenshot</code> umbenannt."
+
+#: includes/forms/files.php:57
+msgid "Export Child Theme as Zip Archive"
+msgstr "Kindthema als ZIP-Archiv exportieren"
+
+#: includes/forms/files.php:58
+msgid ""
+"Click \"Export Zip\" to save a backup of the currently loaded child theme. "
+"You can export any of your themes from the Parent/Child tab."
+msgstr ""
+"Klicken Sie auf \"Export Zip\", um eine Sicherung des aktuellen Kindthemas "
+"zu erstellen. Sie können jedes Thema auf Ihrer Eltern/Kind-Registerkarte "
+"exportieren."
+
+#: includes/forms/files.php:68
+msgid "Secure Child Theme"
+msgstr "Kindthema schützen"
+
+#: includes/forms/files.php:71
+msgid ""
+"Attempt to reset child theme permissions to user ownership and read-only "
+"access."
+msgstr ""
+"Versucht, die Kindthema-Berechtigungen auf Besitz und Lese-Modus-Zugriff "
+"zurückzusetzen."
+
+#: includes/forms/files.php:77
+msgid "Make read-only"
+msgstr "Auf \"Nur Lesen\" setzen"
+
+#: includes/forms/images.php:10
+msgid "Child Theme Images"
+msgstr "Kindthema-Bilder"
+
+#: includes/forms/images.php:13
+msgid "Delete child theme images by selecting them here."
+msgstr "Löschen Sie Kindthema-Bilder, indem Sie sie hier auswählen."
+
+#: includes/forms/main.php:35
+msgid "version"
+msgstr "Version"
+
+#: includes/forms/notices.php:12
+msgid ""
+"The child theme is in read-only mode and Child Theme Configurator cannot "
+"apply changes. Click to see options"
+msgstr ""
+"Das Kindthema ist im Lesemodus und der Child Theme Configurator kann keine "
+"Änderungen anwenden. Klicken Sie für Optionen"
+
+#: includes/forms/notices.php:20
+msgid ""
+"<li>Temporarily set write permissions by clicking the button below. When you "
+"are finished editing, revert to read-only by clicking \"Make read-only\" "
+"under the \"Files\" tab.</li>"
+msgstr ""
+"<li>Vorübergehend Schreibberechtigung setzen, indem Sie die Schaltfläche "
+"unten anklicken. Ist die Bearbeitung beendet, kehren Sie zu \"Auf Nur Lesen "
+"setzen\" zurück (unter der Dateien-Registerkarte.</li>"
+
+#: includes/forms/notices.php:24
+msgid "Make files writable"
+msgstr "Dateien beschreibbar machen"
+
+#: includes/forms/notices.php:27
+msgid ""
+"<li><a target=\"_blank\"  href=\"http://codex.wordpress.org/Editing_wp-"
+"config.php#WordPress_Upgrade_Constants\" title=\"Editin wp-config.php\">Add "
+"your FTP/SSH credentials to the WordPress config file</a>.</li>"
+msgstr ""
+"<li><a target=\"_blank\"  href=\"http://codex.wordpress.org/Editing_wp-"
+"config.php#WordPress_Upgrade_Constants\" title=\"Editin wp-config.php"
+"\">Hinzufügen von FTP/SSH-Berechtigungen zur Wordpress-Konfigurationsdatei</"
+"a>.</li>"
+
+#: includes/forms/notices.php:29
+msgid ""
+"<li><a target=\"_blank\" href=\"http://technet.microsoft.com/en-us/library/"
+"cc771170\" title=\"Setting Application Pool Identity\">Assign WordPress to "
+"an application pool that has write permissions</a> (Windows IIS systems).</"
+"li>"
+msgstr ""
+"<li><a target=\"_blank\" href=\"http://technet.microsoft.com/en-us/library/"
+"cc771170\" title=\"Setting Application Pool Identity\">WordPress zu einem "
+"Applikations-Pool mit Schreibberechtigung zuweisen</a> (Windows IIS-Systeme)."
+"</li>"
+
+#: includes/forms/notices.php:30
+msgid ""
+"<li><a target=\"_blank\" href=\"http://codex.wordpress.org/"
+"Changing_File_Permissions\" title=\"Changing File Permissions\">Set write "
+"permissions on the server manually</a> (not recommended).</li>"
+msgstr ""
+"<li><a target=\"_blank\" href=\"http://codex.wordpress.org/"
+"Changing_File_Permissions\" title=\"Changing File Permissions\">Auf einem "
+"Server Schreibberechtigung manuell setzen</a> (nicht empfohlen).</li>"
+
+#: includes/forms/notices.php:32
+msgid "<li>Run PHP under Apache with suEXEC (contact your web host).</li>"
+msgstr ""
+"<li>PHP unter Apache mit suEXEC ausführen (bitte Webprovider kontaktieren).</"
+"li>"
+
+#: includes/forms/notices.php:45
+msgid ""
+"This Child Theme has incorrect ownership permissions. Child Theme "
+"Configurator will attempt to correct this when you click the button below."
+msgstr ""
+"Dieses Kindthema hat ungültige Besitzerberechtigungen. Child Theme "
+"Configurator kann mit dem Klicken auf die Schaltfläche unten versuchen, dies "
+"zu beheben."
+
+#: includes/forms/notices.php:51
+msgid "Correct Child Theme Permissions"
+msgstr "Kindthema-Berechtigungen korrigieren"
+
+#: includes/forms/notices.php:60
+msgid ""
+"Child Theme Configurator needs to update its internal data. Please set your "
+"preferences below and click \"Generate Child Theme Files\" to update your "
+"configuration."
+msgstr ""
+"Child Theme Configurator muss seine internen Daten aktualisieren. Bitte "
+"setzen Sie unten Ihre Voreinstellungen und klicken Sie auf \"Erzeugen "
+"Kindthema-Dateien\", um Ihre Konfiguration zu aktualisieren."
+
+#: includes/forms/notices.php:68
+msgid ""
+"<strong>However, some styles could not be parsed due to memory limits.</"
+"strong> Try deselecting \"Additional Stylesheets\" below and click "
+"\"Generate/Rebuild Child Theme Files\". %sWhy am I seeing this?%s"
+msgstr ""
+"<strong>Allerdings konnten einige Stile wegen Speicherlimiten nicht "
+"ausgelesen werden</strong> Versuchen Sie es mit der Deaktivierung von "
+"\"Zusätzliche Formatvorlagen\" unten und klicken Sie auf \"Erstellen/"
+"Neuaufbau Kindthema-Dateien\". %sWieso sehe ich das?%s"
+
+#: includes/forms/notices.php:76
+msgid ""
+"Child Theme Configurator did not detect any configuration data because a "
+"previously configured Child Theme has been removed. Please follow the steps "
+"for \"CONFIGURE an existing Child Theme\" under the \"Parent/Child\" Tab."
+msgstr ""
+"Child Theme Configurator entdeckte keine Konfigurationsdaten, weil ein "
+"vorher konfiguriertes Kindthema entfernt wurde. Bitte befolgen Sie die "
+"Schritte für \"Bestehendes Kindthema KONFIGURIEREN\" unter der \"Eltern-Kind"
+"\"-Registerkarte."
+
+#: includes/forms/notices.php:84
+msgid ""
+"Your stylesheet has changed since the last time you used the Configurator. "
+"Please follow the steps for \"CONFIGURE an existing Child Theme\" under the "
+"\"Parent/Child\" Tab or you will lose these changes."
+msgstr ""
+"Ihre Formatvorlage hat sich seit der letzten Benutzung des Konfigurators "
+"geändert. Bitte befolgen Sie die Schritte für \"Bestehendes Kindthema "
+"KONFIGURIEREN\" unter der \"Eltern-Kind\"-Registerkarte, oder Sie werden die "
+"Änderungen verlieren."
+
+#: includes/forms/notices.php:97
+msgid "Thank you for installing Child Theme Configurator."
+msgstr "Danke für die Installation des Child Theme Configurators."
+
+#: includes/forms/notices.php:100
+msgid ""
+"A lot of time and testing has gone into this release but there may be edge "
+"cases. If you have any questions, please"
+msgstr ""
+"Viel Zeit und Testaufwand wurde in diese Version gesteckt, aber es kann auch "
+"Grenzfälle geben. Wenn Sie Fragen haben, bitte"
+
+#: includes/forms/notices.php:102
+msgid "Contact Us."
+msgstr "Kontaktieren Sie uns."
+
+#: includes/forms/notices.php:105
+msgid "For more information, please open the Help tab at the top right or "
+msgstr ""
+"Für weitere Informationen öffnen Sie bitte die Hilfe-Registerkarte oben "
+"rechts oder "
+
+#: includes/forms/notices.php:107
+msgid "click here to view the latest videos."
+msgstr "klicken Sie hier, um die neuesten Videos zu sehen."
+
+#: includes/forms/notices.php:111
+msgid ""
+"It is a good idea to save a Zip Archive of your Child Theme before using CTC "
+"for the first time. Click the \"save backup\" link ( see Step 2, below ) to "
+"export your themes."
+msgstr ""
+"Es ist eine gute Idee, ein ZIP-Archiv Ihres Kindthemas zu sichern, bevor Sie "
+"CTC das erste Mal benutzen. Klicken Sie auf die \"Backup sichern\"-"
+"Verknüpfung (siehe Schritt 2, unten), um die Themen zu exportieren."
+
+#: includes/forms/parent-child.php:22
+msgid "Select an action:"
+msgstr "Aktion auswählen:"
+
+#: includes/forms/parent-child.php:30
+msgid "CREATE a new Child Theme"
+msgstr "Neues Kindthema ERSTELLEN"
+
+#: includes/forms/parent-child.php:33
+msgid ""
+"Install a new customizable child theme using an installed theme as a parent."
+msgstr ""
+"Ein neues anpassbares Kindthema installieren mit Hilfe eines installierten "
+"Themas als Eltern."
+
+#: includes/forms/parent-child.php:46
+msgid "CONFIGURE an existing Child Theme"
+msgstr "Bestehendes Kindthema KONFIGURIEREN"
+
+#: includes/forms/parent-child.php:49
+msgid ""
+"Set up a previously installed child theme for use with the Configurator or "
+"to modify current settings."
+msgstr ""
+"Ein vorher installiertes Kindthema für den Gebrauch mit dem Konfigurator "
+"aufsetzen oder um Einstellungen zu ändern."
+
+#: includes/forms/parent-child.php:60
+msgid "DUPLICATE an existing Child Theme"
+msgstr "Bestehendes Kindthema DUPLIZIEREN"
+
+#: includes/forms/parent-child.php:63
+msgid ""
+"Make a complete copy of an existing Child Theme in a new directory, "
+"including any menus, widgets and other Customizer settings. The option to "
+"copy the Parent Theme settings (step 8, below) is disabled with this action."
+msgstr ""
+"Eine komplette Kopie eines bestehenden Kindthemas in einem neuen Ordner "
+"erstellen, inkl. aller Menüs, Widgets und anderer Customizer-Einstellungen. "
+"Die Option zum Kopieren der Elternthema-Einstellungen (Schritt 8, unten) ist "
+"bei dieser Aktion deaktiviert."
+
+#: includes/forms/parent-child.php:74
+msgid ""
+"RESET an existing Child Theme (this will destroy any work you have done in "
+"the Configurator)"
+msgstr ""
+"Ein bestehendes Kindthema ZURÜCKSETZEN (wird alle gemachten Arbeiten im "
+"Konfigurator zerstören)"
+
+#: includes/forms/parent-child.php:77
+msgid ""
+"Revert the Child theme stylesheet and functions files to their state before "
+"the initial configuration or last reset. Additional child theme files will "
+"not be removed, but you can delete them under the Files tab."
+msgstr ""
+"Setzt die Kindthema-Vorlagen und -Funktionen auf ihren Anfangszustand oder "
+"letzte Zurücksetzung zurück. Zusätzliche Kindthemen-Dateien werden nicht "
+"entfernt, aber Sie können diese unter der Dateien-Registerkarte löschen."
+
+#: includes/forms/parent-child.php:88
+msgid "Select a Parent Theme:"
+msgstr "Elternthema auswählen:"
+
+#: includes/forms/parent-child.php:92 includes/forms/parent-child.php:120
+msgid "Click here to save a backup of the selected theme."
+msgstr "Hier klicken, um eine Sicherung des gewählten Themas zu erstellen."
+
+#: includes/forms/parent-child.php:98 includes/forms/parent-child.php:126
+msgid "Analyze"
+msgstr "Untersuchen"
+
+#: includes/forms/parent-child.php:102
+msgid "Analyze Parent Theme"
+msgstr "Elternthema untersuchen"
+
+#: includes/forms/parent-child.php:105 includes/forms/parent-child.php:133
+msgid ""
+"Click \"Analyze\" to determine stylesheet dependencies and other potential "
+"issues."
+msgstr ""
+"Klicken Sie auf \"Untersuchen\", um Formatvorlagen-Abhängigkeiten und andere "
+"mögliche Probleme zu finden."
+
+#: includes/forms/parent-child.php:116
+msgid "Select a Child Theme:"
+msgstr "Kindthema auswählen:"
+
+#: includes/forms/parent-child.php:130
+msgid "Analyze Child Theme"
+msgstr "Kindthema untersuchen"
+
+#: includes/forms/parent-child.php:145
+msgid "Name the new theme directory:"
+msgstr "Neuen Ordner benennen:"
+
+#: includes/forms/parent-child.php:149
+msgid "Directory Name"
+msgstr "Ordnername"
+
+#: includes/forms/parent-child.php:153 includes/forms/parent-child.php:402
+msgid "NOTE:"
+msgstr "HINWEIS:"
+
+#: includes/forms/parent-child.php:155
+msgid ""
+"This is NOT the name of the Child Theme. You can customize the name, "
+"description, etc. in step 7, below."
+msgstr ""
+"Das ist NICHT der Name des Kindthemas. Sie können den Namen, Beschreibung "
+"etc. in Schritt 7 unten anpassen."
+
+#: includes/forms/parent-child.php:162
+msgid "Verify Child Theme directory:"
+msgstr "Kindthemen-Ordner überprüfen:"
+
+#: includes/forms/parent-child.php:172
+msgid ""
+"For verification only (you cannot modify the directory of an existing Child "
+"Theme)."
+msgstr ""
+"Nur für die Überprüfung (Sie können den Ordner eines bestehenden Kindthemas "
+"nicht ändern)."
+
+#: includes/forms/parent-child.php:185
+msgid "Select where to save new styles:"
+msgstr "Auswählen, wo neue Stile gespeichert werden:"
+
+#: includes/forms/parent-child.php:194
+msgid "Primary Stylesheet (style.css)"
+msgstr "Primäre Formatvorlage (style.css)"
+
+#: includes/forms/parent-child.php:197
+msgid ""
+"Save new custom styles directly to the Child Theme primary stylesheet, "
+"replacing the existing values. The primary stylesheet will load in the order "
+"set by the theme."
+msgstr ""
+"Sichern von neuen Formatvorlagenstilen direkt in die Formatvorlage des "
+"Kindthemas (ersetzt vorhandene Werte). Die primäre Formatvorlage wird in der "
+"vom Thema gesetzten Reihenfolge geladen."
+
+#: includes/forms/parent-child.php:209
+msgid "Separate Stylesheet"
+msgstr "Separate Formatvorlage"
+
+#: includes/forms/parent-child.php:212
+msgid ""
+"Save new custom styles to a separate stylesheet and combine any existing "
+"child theme styles with the parent to form baseline. Select this option if "
+"you want to preserve the existing child theme styles instead of overwriting "
+"them. This option also allows you to customize stylesheets that load after "
+"the primary stylesheet."
+msgstr ""
+"Sichern von neuen Formatvorlagenstilen in eine separate Formatvorlage und "
+"Kombinieren von bestehenden Kind- und Elternthemavorlagen zu einer Basis. "
+"Diese Option wählen, wenn Sie bestehende Kindthemastile behalten wollen, "
+"anstatt sie zu überschreiben. Diese Option erlaubt auch die Anpassung von "
+"Formatvorlagen nach dem Laden der primären Vorlage."
+
+#: includes/forms/parent-child.php:220
+msgid "Click to expand"
+msgstr "Zum Erweitern klicken"
+
+#: includes/forms/parent-child.php:222
+msgid "Select Parent Theme stylesheet handling:"
+msgstr "Elternthema-Formatvorlagen-Handling auswählen:"
+
+#: includes/forms/parent-child.php:236
+msgid "Use the WordPress style queue."
+msgstr "Die WordPress Stil-Warteschlange benutzen."
+
+#: includes/forms/parent-child.php:242
+msgid ""
+"Let the Configurator determine the appropriate actions and dependencies and "
+"update the functions file automatically."
+msgstr ""
+"Den Konfigurator die richtigen Aktionen und Abhängigkeiten finden lassen und "
+"die Funktionendatei automatisch aktualisieren."
+
+#: includes/forms/parent-child.php:248
+msgid "Use <code>@import</code> in the child theme stylesheet."
+msgstr "Benutzung von <code>@import</code> in Kindthema-Vorlage."
+
+#: includes/forms/parent-child.php:254
+msgid ""
+"Only use this option if the parent stylesheet cannot be loaded using the "
+"WordPress style queue. Using <code>@import</code> is not recommended."
+msgstr ""
+"Diese Option nur benutzen, wenn die Eltern-Formatvorlage mit der Wordpress "
+"Stil-Warteschlange nicht geladen werden kann. Das Benutzen von "
+"<code>@import</code> ist nicht empfohlen."
+
+#: includes/forms/parent-child.php:260
+msgid "Do not add any parent stylesheet handling."
+msgstr "Kein Elternthema-Formatvorlagen-Handling hinzufügen."
+
+#: includes/forms/parent-child.php:263
+msgid ""
+"Select this option if this theme already handles the parent theme stylesheet "
+"or if the parent theme's <code>style.css</code> file is not used for its "
+"appearance."
+msgstr ""
+"Diese Option auswählen, wenn das Thema die Elternthema-Vorlage bereits "
+"behandelt oder wenn die Elternthema <code>style.css</code>-Datei nicht für "
+"die Darstellung benutzt wird."
+
+#: includes/forms/parent-child.php:270
+msgid "Advanced handling options"
+msgstr "Erweiterte Handling-Optionen"
+
+#: includes/forms/parent-child.php:277
+msgid "Ignore parent theme stylesheets."
+msgstr "Elternthema-Vorlagen ignorieren."
+
+#: includes/forms/parent-child.php:278
+msgid ""
+"Do not load or parse the parent theme styles. Only use this option if the "
+"Child Theme uses a Framework like Genesis and only uses child theme "
+"stylesheets for its appearance."
+msgstr ""
+"Elternthema-Stile nicht laden oder auslesen. Diese Option nur benutzen, wenn "
+"das Kindthema ein Framework wie Genesis nutzt und nur die Kindthema-"
+"Formatvorlagen für die Darstellung verwendet."
+
+#: includes/forms/parent-child.php:288
+msgid "Repair the header template in the child theme."
+msgstr "Die Kopfvorlage im Kindthema reparieren."
+
+#: includes/forms/parent-child.php:289
+msgid ""
+"Let the Configurator (try to) resolve any stylesheet issues listed above. "
+"This can fix many, but not all, common problems."
+msgstr ""
+"Den Konfigurator oben erwähnteVorlagenprobleme versuchen lösen zu lassen. "
+"Das kann viele gängige, aber nicht alle Probleme beheben"
+
+#: includes/forms/parent-child.php:299
+msgid "Remove stylesheet dependencies"
+msgstr "Vorlagen-Abhängigkeiten entfernen"
+
+#: includes/forms/parent-child.php:302
+msgid ""
+"By default, the order of stylesheets that load prior to the primary "
+"stylesheet is preserved by treating them as dependencies. In some cases, "
+"stylesheets are detected in the preview that are not used site-wide. If "
+"necessary, dependency can be removed for specific stylesheets below."
+msgstr ""
+"Normalerweise wird die Reihenfolge der Vorlagen, die vor der primären "
+"Formatvorlage laden, behalten, indem sie als Abhängigkeiten behandelt "
+"werden. In einigen Fällen werden Vorlagen in der Voransicht erkannt, welche "
+"nicht seitenweit verwendet werden. Falls nötig kann die Abhängigkeit für "
+"bestimmte Vorlagen unten entfernt werden."
+
+#: includes/forms/parent-child.php:312
+msgid "Customize the Child Theme Name, Description, Author, Version, etc.:"
+msgstr "Kindthema-Name, Beschreibung, Autor, Version usw. anpassen:"
+
+#: includes/forms/parent-child.php:316
+msgid "Show/Hide Child Theme Attributes"
+msgstr "Zeigen/Verbergen von Kindthema-Attributen"
+
+#: includes/forms/parent-child.php:316
+msgid "Click to toggle form"
+msgstr "Klicken, um Formular umzuschalten"
+
+#: includes/forms/parent-child.php:321
+msgid "Child Theme Name"
+msgstr "Kindthema-Name"
+
+#: includes/forms/parent-child.php:325
+msgid "Theme Name"
+msgstr "Themen-Name"
+
+#: includes/forms/parent-child.php:331 includes/forms/parent-child.php:335
+msgid "Theme Website"
+msgstr "Themen-Webseite"
+
+#: includes/forms/parent-child.php:341 includes/forms/parent-child.php:345
+msgid "Author"
+msgstr "Autor"
+
+#: includes/forms/parent-child.php:351 includes/forms/parent-child.php:355
+msgid "Author Website"
+msgstr "Autoren-Webseite"
+
+#: includes/forms/parent-child.php:361
+msgid "Theme Description"
+msgstr "Themen-Beschreibung"
+
+#: includes/forms/parent-child.php:365
+msgid "Description"
+msgstr "Beschreibung"
+
+#: includes/forms/parent-child.php:371
+msgid "Theme Tags"
+msgstr "Themen-Schlagwörter"
+
+#: includes/forms/parent-child.php:375
+msgid "Tags"
+msgstr "Schlagwörter"
+
+#: includes/forms/parent-child.php:381 includes/forms/parent-child.php:385
+msgid "Version"
+msgstr "Version"
+
+#: includes/forms/parent-child.php:394
+msgid ""
+"Copy Menus, Widgets and other Customizer Settings from the Parent Theme to "
+"the Child Theme:"
+msgstr ""
+"Menüs, Widgets und andere Customizer-Einstellungen vom Eltern- zum Kindthema "
+"kopieren:"
+
+#: includes/forms/parent-child.php:404
+msgid ""
+"This option replaces the Child Theme's existing Menus, Widgets and other "
+"Customizer Settings with those from the Parent Theme. You should only need "
+"to use this option the first time you configure a Child Theme."
+msgstr ""
+"Diese Option ersetzt die bestehenden Menüs, Widgets und andere Customizer-"
+"Einstellungen im Kindthema mit denen des Elternthemas. Sie sollten diese "
+"Option nur bei der Erstkonfiguration des Kindthemas verwenden."
+
+#: includes/forms/parent-child.php:415 includes/forms/parent-child.php:467
+msgid "Click to run the Configurator:"
+msgstr "Klicken, um den Konfiguration zu starten:"
+
+#: includes/forms/parent-child.php:419
+msgid "Configure Child Theme"
+msgstr "Kindthema konfigurieren"
+
+#: includes/forms/parent-child.php:441
+msgid "Parse Plugin stylesheets:"
+msgstr "Plugin-Formatvorlagen auslesen:"
+
+#: includes/forms/parent-child.php:446
+msgid "Select the plugin stylesheets you wish to customize below."
+msgstr "Wählen Sie unten die Plugin-Formatvorlagen, die Sie anpassen möchten."
+
+#: includes/forms/parent-child.php:471
+msgid "Configure Plugin Styles"
+msgstr "Plugin-Stile konfigurieren"
+
+#: includes/forms/query-selector.php:9
+msgid ""
+"To find and edit specific selectors within @media query blocks, first choose "
+"the query, then the selector. Use the \"base\" query to edit all other "
+"selectors."
+msgstr ""
+"Um bestimmte Selektoren in @media-Abfrageblöcken zu finden und zu "
+"bearbeiten, wählen Sie zuerst die Abfrage, dann den Selektor. Benutzen Sie "
+"die \"base\"-Abfrage, um alle andere Selektoren zu bearbeiten."
+
+#: includes/forms/query-selector.php:14
+msgid "@media Query"
+msgstr "@media Query"
+
+#: includes/forms/query-selector.php:15
+msgid "( or \"base\" )"
+msgstr "( oder \"base\" )"
+
+#: includes/forms/query-selector.php:25
+msgid "Selector"
+msgstr "Selektor"
+
+#: includes/forms/query-selector.php:38 includes/forms/rule-value.php:30
+msgid "Sample"
+msgstr "Muster"
+
+#: includes/forms/query-selector.php:46
+msgid "Save Child Values"
+msgstr "Kindwerte speichern"
+
+#: includes/forms/query-selector.php:47
+msgid "Delete Child Values"
+msgstr "Kindwerte löschen"
+
+#: includes/forms/query-selector.php:54 includes/forms/rule-value.php:14
+msgid "Property"
+msgstr "Eigenschaft"
+
+#: includes/forms/query-selector.php:57
+msgid "Baseline Value"
+msgstr "Basiswert"
+
+#: includes/forms/query-selector.php:60
+msgid "Child Value"
+msgstr "Kindwert"
+
+#: includes/forms/query-selector.php:66
+msgid "New Property"
+msgstr "Neue Eigenschaft"
+
+#: includes/forms/query-selector.php:76
+msgid "Order"
+msgstr "Reihenfolge"
+
+#: includes/forms/query-selector.php:85
+msgid "Copy Selector"
+msgstr "Selektor kopieren"
+
+#: includes/forms/query-selector.php:87 includes/forms/webfonts.php:15
+msgid "Save"
+msgstr "Speichern"
+
+#: includes/forms/query-selector.php:90
+msgid "Raw CSS"
+msgstr "Rohes CSS"
+
+#: includes/forms/query-selector.php:92
+msgid "Use to enter shorthand CSS or new @media queries and selectors."
+msgstr ""
+"Benutzen, um Shorthand-CSS oder neue @media-Queries und Selektoren "
+"einzugeben."
+
+#: includes/forms/query-selector.php:92
+msgid ""
+"Values entered here are merged into existing child styles or added to the "
+"child stylesheet if they do not exist in the parent."
+msgstr ""
+"Hier eingegebene Werte werden in bestehende Kind-Stile eingefügt oder "
+"hinzugefügt, falls sie im Eltern-Stil nicht bestehen sollten."
+
+#: includes/forms/related.php:1
+msgid "New user?"
+msgstr "Neuer Benutzer?"
+
+#: includes/forms/related.php:1
+msgid "Click help"
+msgstr "Klicken Sie auf Hilfe"
+
+#: includes/forms/related.php:1
+msgid "Get CTC Pro and other tools"
+msgstr "CTC Pro und andere Tools erhalten"
+
+#: includes/forms/related.php:1
+msgid "Lilaea Media - Responsive Tools for a Mobile World"
+msgstr "Lilaea Media - Responsive Tools für eine Mobile Welt"
+
+#: includes/forms/rule-value.php:9
+msgid ""
+"To find and edit selectors containing specific values for a given property, "
+"first choose the property (e.g., \"color\"), then click \"Selectors\" for "
+"any resulting value. A dialog panel will open with the corresponding "
+"selectors, grouped by media query."
+msgstr ""
+"Um Selektoren mit bestimmten Werten für eine Eigenschaft zu finden und zu "
+"bearbeiten, wählen Sie zuerst die Eigenschaft (z.Bsp. \"Farbe\") und klicken "
+"Sie dann \"Selektoren\" für resultierende Werte. Ein Dialogfeld wird mit den "
+"entsprechenden Selektoren erscheinen, gruppiert nach Media-Abfragen."
+
+#: includes/forms/rule-value.php:27
+msgid "Value"
+msgstr "Wert"
+
+#: includes/forms/settings-errors.php:20
+msgid ""
+"Child Theme <strong>%s</strong> has been reset. Please configure it using "
+"the settings below."
+msgstr ""
+"Kindthema <strong>%s</strong> wurde zurückgesetzt. Bitte mit den "
+"Einstellungen unten konfigurieren."
+
+#: includes/forms/settings-errors.php:24
+msgid "Update Key saved successfully."
+msgstr "Update-Schlüssel erfolgreich gespeichert."
+
+#: includes/forms/settings-errors.php:29
+msgid "Child Theme files modified successfully."
+msgstr "Kindthema-Dateien erfolgreich geändert."
+
+#: includes/forms/settings-errors.php:32
+msgid "Child Theme <strong>%s</strong> has been generated successfully."
+msgstr "Kindthema <strong>%s</strong> wurde erfolgreich erstellt."
+
+#: includes/forms/settings-errors.php:36
+msgid "IMPORTANT:"
+msgstr "WICHTIG:"
+
+#: includes/forms/settings-errors.php:39
+msgid "You must %sNetwork enable%s your child theme."
+msgstr "Sie müssen Ihr Kindthema %sNetzwerk-aktivieren%s."
+
+#: includes/forms/settings-errors.php:42 includes/forms/themepreview.php:20
+msgid "Go to Themes"
+msgstr "Zu Themen gehen"
+
+#: includes/forms/settings-errors.php:46
+msgid "%sPreview your child theme%s before activating."
+msgstr "%sPrüfen Sie Ihr Kindthema in der Voransicht% vor der Aktivierung."
+
+#: includes/forms/settings-errors.php:49 includes/forms/themepreview.php:18
+msgid "Live Preview"
+msgstr "Live-Vorschau"
+
+#: includes/forms/tabs.php:11
+msgid "Parent/ Child"
+msgstr "Eltern/Kind"
+
+#: includes/forms/tabs.php:14
+msgid "Query/ Selector"
+msgstr "Abfrage/Selektor"
+
+#: includes/forms/tabs.php:17
+msgid "Property/ Value"
+msgstr "Eigenschaft/Wert"
+
+#: includes/forms/tabs.php:22
+msgid "Web Fonts"
+msgstr "Webschriftarten"
+
+#: includes/forms/tabs.php:26
+msgid "Baseline Styles"
+msgstr "Basis-Stile"
+
+#: includes/forms/tabs.php:29
+msgid "Child Styles"
+msgstr "Kind-Stile"
+
+#: includes/forms/tabs.php:33
+msgid "Files"
+msgstr "Dateien"
+
+#: includes/forms/themepreview.php:12
+msgid "Version: "
+msgstr "Version: "
+
+#: includes/forms/themepreview.php:14
+msgid "By: "
+msgstr "Von:"
+
+#: includes/forms/themepreview.php:16
+msgid "Preview"
+msgstr "Vorschau"
+
+#: includes/forms/themepreview.php:17
+msgid " in default Site"
+msgstr " in Standard-Seite"
+
+#: includes/forms/themepreview.php:21
+msgid "Not Network Enabled"
+msgstr "Nicht Netzwerk-aktiviert"
+
+#: includes/forms/webfonts.php:18
+msgid "Linked Stylesheets"
+msgstr "Verknüpfte Formatvorlagen"
+
+#: includes/forms/webfonts.php:20
+msgid ""
+"Use <code>@import url( [path] );</code> to link additional stylesheets. "
+"Child Theme Configurator uses the <code>@import</code> keyword to identify "
+"them and convert them to <code>&lt;link&gt;</code> tags. <strong>Example:</"
+"strong>"
+msgstr ""
+"Benutze <code>@import url( [path] );</code>, um zusätzliche Formatvorlagen "
+"zu verknüpfen. CTC benutzt das <code>@import</code> Schlüsselwort, um sie zu "
+"identifizieren und sie in <code>&lt;link&gt;</code> Tags zu konvertieren. "
+"<strong>Beispiel:</strong>"
+
+#: includes/forms/zipform.php:6
+msgid "Export Child Theme"
+msgstr "Kindthema exportieren"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.childthemeconfigurator.com"
+msgstr "http://www.childthemeconfigurator.com"
+
+#. Description of the plugin/theme
+msgid ""
+"When using the Customizer is not enough - Create child themes and customize "
+"styles, templates, functions and more."
+msgstr ""
+"Wenn der Customizer nicht genug sein sollte - Erzeugen Sie Kindthemen und "
+"passen Sie Stile, Vorlagen, Funktionen und mehr an."
+
+#. Author of the plugin/theme
+msgid "Lilaea Media"
+msgstr "Lilaea Media"
+
+#. Author URI of the plugin/theme
+msgid "http://www.lilaeamedia.com"
+msgstr "http://www.lilaeamedia.com"

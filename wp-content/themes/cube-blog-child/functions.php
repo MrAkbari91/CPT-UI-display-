@@ -87,26 +87,25 @@ function custom_slider_section_callback()
                                 $counter++;
                             }
                             ?>
+                        </div>
+                    </div>
 
 
 
-
-                            <div class="screenshot-container no-accent">
-                                <div>
-                                    <div class="top-accent lozad sal-animate" data-background-image="" data-sal="zoom-in"
-                                        data-sal-duration="300" data-sal-delay="200" data-loaded="true"></div>
-                                    <div class="screenshot-frame">
-                                        <div class="screenshot lozad sal-animate" data-background-image="" data-sal="slide-left"
-                                            data-sal-once="false" data-sal-duration="300" data-sal-delay="200"
-                                            data-loaded="true"
-                                            style="background-image: url(&quot;&quot;); opacity: 1; transform: none;">
-                                        </div>
-                                    </div>
-                                    <div class="bottom-accent lozad sal-animate" data-background-image="" data-sal="zoom-in"
-                                        data-sal-duration="300" data-sal-delay="200"
-                                        style="background-image: url(&quot;&quot;);" data-loaded="true"></div>
+                    <div class="screenshot-container no-accent">
+                        <div>
+                            <div class="top-accent lozad sal-animate" data-background-image="" data-sal="zoom-in"
+                                data-sal-duration="300" data-sal-delay="200" data-loaded="true"></div>
+                            <div class="screenshot-frame">
+                                <div class="screenshot lozad sal-animate" data-background-image="" data-sal="slide-left"
+                                    data-sal-once="false" data-sal-duration="300" data-sal-delay="200" data-loaded="true"
+                                    style="background-image: url(&quot;http://localhost/wp-cptui/wp-content/uploads/2024/01/ai-generated-lion-feline-8493395.jpg&quot;); opacity: 1; transform: none;">
                                 </div>
                             </div>
+                            <div class="bottom-accent lozad sal-animate" data-background-image="" data-sal="zoom-in"
+                                data-sal-duration="300" data-sal-delay="200"
+                                style="background-image: url(&quot;http://localhost/wp-cptui/wp-content/uploads/2024/01/ai-generated-lion-feline-8493395.jpg&quot;);"
+                                data-loaded="true"></div>
                         </div>
                     </div>
                 </div>
@@ -244,7 +243,7 @@ function custom_slider_section_callback()
 
                         </div>
                     </div>
-
+                    <!-- 
                     <div class="module-img">
                         <div class="screenshot-container">
                             <div>
@@ -257,7 +256,7 @@ function custom_slider_section_callback()
                                     style="transform: none; background-image: url(&quot;https://www.agorapulse.com/assets/social-media-publishing/Inbox_Assign_EN_1.png&quot;); opacity: 1;"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -268,3 +267,42 @@ function custom_slider_section_callback()
 
 
 
+add_shortcode("custom_file_info", "custom_file_info");
+function custom_file_info($post)
+{
+    $attechment = get_field('pdf_file');
+    $pdf_pages = get_field('pdf_pages');
+    $file_size = size_format($attechment['filesize']);
+    $file_name = $attechment['filename'];
+    $file = $attechment['url'];
+    $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+    $contents = "";
+    //open the file for reading
+    if ($ext == "pdf") {
+        $icon = "fa fa-file-pdf-o red";
+    } else if ($ext == "docx") {
+        $icon = "fa fa-file-word-o blue";
+    } else if ($ext == "doc") {
+        $icon = "fa fa-file-word-o blue";
+    }
+
+    ob_start();
+    ?>
+    <div class="file-info">
+        <ul>
+            <li>File type:<i class="<?php echo $icon; ?>"></i>
+                (<?php echo $ext; ?>)
+            </li>
+            <li>File Size:
+                <?php echo $file_size; ?>
+            </li>
+            <li>total pages:
+                <?php echo $pdf_pages; ?>
+            </li>
+
+        </ul>
+    </div>
+    <?php
+
+    return ob_get_clean();
+}

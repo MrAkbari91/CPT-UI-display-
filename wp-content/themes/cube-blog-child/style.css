@@ -489,7 +489,7 @@ body.sal-disabled [data-sal|='slide'] {
 
 
 
-#home-featured{
+#home-featured {
     margin: 80px 0;
 }
 
@@ -1097,4 +1097,13 @@ input.hs-button.hero-button:hover,
 button.button.hero-button:hover,
 a.button.hero-button:hover {
     opacity: 0.8;
+}
+
+
+.red {
+    color: #f40f02;
+}
+
+.blue {
+    color: #331625;
 }
